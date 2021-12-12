@@ -1,0 +1,17 @@
+2021-11-11 06:25:55.289 JST [66115] LOG:  starting PostgreSQL 14.0 on x86_64-apple-darwin20.6.0, compiled by Apple clang version 13.0.0 (clang-1300.0.29.3), 64-bit
+2021-11-11 06:25:55.294 JST [66115] LOG:  listening on IPv6 address "::1", port 5432
+2021-11-11 06:25:55.294 JST [66115] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2021-11-11 06:25:55.299 JST [66115] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2021-11-11 06:25:55.307 JST [66116] LOG:  database system was shut down at 2021-11-11 06:25:45 JST
+2021-11-11 06:25:55.314 JST [66115] LOG:  database system is ready to accept connections
+2021-11-11 06:26:22.772 JST [66177] FATAL:  database "language_community_development" does not exist
+2021-11-11 14:54:28.586 JST [73156] FATAL:  database "language_community_development" does not exist
+2021-11-11 14:55:14.054 JST [73184] FATAL:  database "language_community_development" does not exist
+2021-11-11 14:55:42.005 JST [73243] FATAL:  database "language_community_development" does not exist
+2021-11-11 15:13:27.129 JST [74882] FATAL:  database "ago_navi_development" does not exist
+2021-11-11 15:15:09.710 JST [74981] FATAL:  database "ago_navi_development" does not exist
+2021-11-11 15:15:49.096 JST [75059] FATAL:  database "ago_navi_development" does not exist
+2021-11-16 18:03:45.759 JST [66115] LOG:  received smart shutdown request
+2021-11-16 18:03:45.761 JST [66115] LOG:  background worker "logical replication launcher" (PID 66122) exited with exit code 1
+2021-11-16 18:03:45.761 JST [66117] LOG:  shutting down
+2021-11-16 18:03:45.779 JST [66115] LOG:  database system is shut down

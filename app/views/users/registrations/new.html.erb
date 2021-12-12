@@ -1,0 +1,47 @@
+<div row>
+  <div class="col-md-6">
+    <div class="card worksheet-basic-setting">
+      <h3 class="card-header worksheet-bg"><%= t('activerecord.attributes.user.sign_up') %></h3>
+        <div class="card-body">
+
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+            <%= devise_error_messages %>
+
+            <div class="field">
+              <%= f.label :ja_name, t('activerecord.attributes.ja_name') %><br />
+              <%= f.text_field :ja_name, class: "form-control" %>
+            </div>
+            
+            <div class="field">
+              <%= f.label :en_name, t('activerecord.attributes.en_name')  %><br />
+              <%= f.text_field :en_name, class: "form-control" %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :email %><br />
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control" %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :password %>
+              <% if @minimum_password_length %>
+              <em>(<%= @minimum_password_length %> characters minimum)</em>
+              <% end %><br />
+              <%= f.password_field :password, autocomplete: "new-password", class:"form-control" %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :password_confirmation %><br />
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control"  %>
+            </div>
+
+            <div class="actions">
+              <%= f.submit "Sign up", class:"btn btn-info" %>
+            </div>
+          <% end %>
+          <br>
+          <%= link_to t('activerecord.attributes.user.login'), new_user_session_path %>
+        </div>
+    </div>
+  </div>
+</div>

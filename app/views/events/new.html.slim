@@ -1,0 +1,10 @@
+div.col-md-12
+  div class="card"
+    div class="card-header text-white bg-secondary text-center" 
+      h4 = t('activerecord.attributes.event.create')
+    div class="card-body"
+      == render 'shared/errors', obj: @event
+      = form_for @event do |f|
+        == render 'events/form', f: f
+        = f.hidden_field :user_id, value: current_user.id
+        = f.submit  t('activerecord.attributes.button.create'), class:"btn btn-info"

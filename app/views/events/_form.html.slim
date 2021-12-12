@@ -1,0 +1,17 @@
+div.form-group
+  = f.label :title
+  = f.text_field :title, class:"form-control"
+
+div.form-group
+  = f.label :date
+  = f.datetime_select :date, default: Time.now, :start_hour => 9, :end_hour => 23, :start_year => Time.now.year - 1, :end_year => Time.now.year + 1, :minute_step => 5, class:"form-control"
+div.form-group
+  = f.label :content
+  = f.text_field :content, class:"form-control"
+
+div.form-group
+  = f.label :location
+  span = "( Zoom URL )"
+  = f.text_field :location, class:"form-control"
+
+  

@@ -1,0 +1,30 @@
+<% if current_user.present? %>
+  <%= link_to t('activerecord.attributes.event.create'), new_event_path, class:"btn btn-info" %>
+<% end %>
+<br>
+<br>
+<div class="row">
+  <div col-md-12>
+    <table class="table">
+      <thead class="thead-dark table-active">
+        <tr>
+          <th scope="col"><%= t('activerecord.attributes.event.date') %></th>
+          <th scope="col"><%= t('activerecord.attributes.event.title') %></th>
+          <th scope="col"><%= t('activerecord.attributes.event.organizer') %></th>
+          <th scope="col">詳細</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @events.each do |e| %>
+          <tr>
+            <th scope="row"><%= "#{e.date.strftime("%Y/%m/%d (%a) %H:%M")}" %></th>
+            <td><%= e.title %></td>
+            <td><%= User.find(e.user_id).translated_name %></td>
+            <td> <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id), class:"btn btn-success btn-sm " %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
