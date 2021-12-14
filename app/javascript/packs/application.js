@@ -9,8 +9,8 @@ import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
 // JavaScript/CSSのインポート
-import '../javascripts/application.js'
-import '../stylesheets/application.css'
+// import '../javascripts/application.js'
+// import '../stylesheets/application.css'
 
 // 画像のインポート（コメントアウトを外す）
 // const images = require.context('../images', true)
