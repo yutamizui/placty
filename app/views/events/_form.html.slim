@@ -1,17 +1,30 @@
-div.form-group
-  = f.label :title
-  = f.text_field :title, class:"form-control"
+div.col-md-12
+  div.form-group
+    = f.label :title
+    = f.text_field :title, class:"form-control"
+  
+  div.form-group
+    = f.label :content
+    = f.text_area :content, size:"10x10", class:"form-control"
 
-div.form-group
-  = f.label :date
-  = f.datetime_select :date, default: Time.now, :start_hour => 9, :end_hour => 23, :start_year => Time.now.year - 1, :end_year => Time.now.year + 1, :minute_step => 5, class:"form-control"
-div.form-group
-  = f.label :content
-  = f.text_field :content, class:"form-control"
+  div.form-group.col-md-5
+    br
+    = f.label :date
+    = f.datetime_select :date, default: Time.now, :start_hour => 9, :end_hour => 23, :start_year => Time.now.year - 1, :end_year => Time.now.year + 1, :minute_step => 5, class:"form-control"
 
-div.form-group
-  = f.label :location
-  span = "( Zoom URL )"
-  = f.text_field :location, class:"form-control"
+
+  div.form-group.col-md-3
+    = f.label :length
+    = f.select :length, {'10分': 10, '15分': 15, '20分': 20, '25分': 25, '30分': 30, '40分': 40, '50分': 50, '60分': 60, '70分': 70, '80分': 80, '90分': 90, '120分': 120 }, { include_blank: '選択してください'}, { class: 'form-control' , required: true } 
+
+  div.form-group.col-md-3
+    = f.label :point
+    = f.number_field :point, class:"form-control"
+
+div.col-md-12
+  div.form-group
+    = f.label :location
+    span = "( Zoom URL )"
+    = f.text_field :location, class:"form-control"
 
   

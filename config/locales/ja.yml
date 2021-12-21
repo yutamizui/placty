@@ -50,6 +50,9 @@ ja:
         sign_up: 新規登録
 
       event:
+        page_title: イベント
+        list: イベント一覧
+        joining: 参加予定
         create: イベントを作成する
         edit: イベントを編集する
         title: イベント名

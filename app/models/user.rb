@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_many :tickets
+
   def translated_name
     if I18n.locale == :ja
       "#{ja_name}"

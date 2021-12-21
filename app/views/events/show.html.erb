@@ -1,5 +1,5 @@
 <div class="jumbotron">
-  <h1 class="display-4"><%= @event.title %></h1>
+  <h2 class="display-4"><%= @event.title %></h1>
   <p class="lead"><%= @event.content %></p>
   <hr class="my-4">
   <p><%= t('activerecord.attributes.event.date') + ": " + "#{@event.date.strftime("%Y/%m/%d (%a) %H:%M")}" %></p>

@@ -2,10 +2,16 @@ class EventsController < ApplicationController
   before_action :find_event, only: [:show, :edit, :update, :destroy]
 
   def index
-    @events = Event.where('date >= ?', Time.now).order(date: "DESC")
+    @events = Event.where('date >= ?', Time.now).order(date: "ASC")
   end
 
   def show
+  end
+
+  def joining 
+    if current_user.present? && current_user.tickets.count > 0
+      @events = Event.where(id: current_user.tickets.pluck(:event_id)).where('date >= ?', Time.now).order(date: "ASC")
+    end
   end
 
   def new

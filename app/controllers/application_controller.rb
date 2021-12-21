@@ -2,7 +2,13 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :set_locale
   before_action :configure_permitted_parameters, if: :devise_controller?
- 
+  
+  # begin
+  #   File.delete(File.expand_path('../../tmp/pids/server.pid',  __FILE__))
+  # rescue
+  #   # Do nothing
+  # end
+
   def locale
     if ["ja", "en"].include?(params[:locale])
       cookies[:locale] = params[:locale]

@@ -47,6 +47,9 @@ en:
         sign_up: Sign Up
 
       event:
+        page_title: Event
+        joining: Joining
+        list: Event List
         create: Create Event
         edit: Edit Event
         title: Event Name

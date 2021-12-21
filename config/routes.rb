@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
   scope '(:locale)', locale: /#{I18n.available_locales.map(&:to_s).join('|')}/ do 
     root to: 'events#index'
-    resources :events
+    resources :events do
+      collection do
+        get :joining
+      end
+    end
+    
 
     devise_for :users, controllers: {
       sessions:      'users/sessions',
