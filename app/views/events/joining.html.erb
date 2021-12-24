@@ -1,3 +1,6 @@
+<% if current_user.present? %>
+  <%= link_to t('activerecord.attributes.event.create'), new_event_path, class:"btn btn-info" %>
+<% end %>
 <%= link_to t('activerecord.attributes.event.list'), events_path, class:"btn btn-acuamarine" %>
 <%= link_to t('activerecord.attributes.event.joining'), joining_events_path, class:"btn btn-tomato" %>
 <br>
@@ -28,5 +31,5 @@
     </div>
   </div>
 <% else %>
-<h3>You are not joining any events at the moment</h3>
+  <h3>You are not joining any events at the moment</h3>
 <% end %>
