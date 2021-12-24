@@ -1,0 +1,48 @@
+- @page_title = "レッスンポイント購入"
+div.row
+  div.col-md-6
+    h2 class="alert alert-info" role="alert"
+      span 現在のポイント 
+      span.pink = "#{current_user.points.count} pt"
+    
+  div.col-md-6.frame
+    - if current_user.customer_id == nil
+      .panel.panel-success
+        .panel-heading
+          h3.panel-title
+            | 決済用カードのご登録が必要です。
+        .panel-body
+          | 下記のボタンをクリックして、決済用のカード情報をご登録ください。
+          br
+          br
+          = form_tag(action: :customer_registration, method: :post) do
+            script.payjp-button[src="https://checkout.pay.jp" data-key="#{ENV.fetch("PAYJP_PUBLIC_KEY")}" data-text="カード情報を登録する"]
+    - else
+      = form_tag(payments_charge_path, method: "post") do
+        = select_tag 'number_of_buying_points', options_for_select({'20pt': 20, '30pt': 30, '50pt': 50, '100pt': 100, '300pt': 300, '500pt': 500}, 20), class:"form-control"
+        = hidden_field_tag 'product_type_id', 1
+        br
+        = submit_tag "20ポイントを購入する", name:"purchase_point", data: {confirm:"本当にポイントを購入しますか？"}, class:"btn btn-success btn-block point_remind"
+
+      div.col-md-12.frame
+        br
+        h6 １pt：１００円
+        h6 期限：購入日より１ヶ月
+        
+        = form_tag(action: :payjpcard_update, method: :post) do
+          script.payjp-button[src="https://checkout.pay.jp" data-key="#{ENV.fetch("PAYJP_PUBLIC_KEY")}" data-text="カードの変更はこちら" data-submit-text="このカードに変更する"]
+
+br
+br
+= link_to t('devise.shared.links.back'), root_path, class:"btn btn-secondary button-margin-sm float-left"
+br
+br
+
+javascript:
+  $('#number_of_buying_points').on('change', function(){
+    var e = document.getElementById("number_of_buying_points");
+    var target_price = e.options[e.selectedIndex].value;
+    $('input[type="submit"][name="purchase_point"]').val( target_price + "ポイントを購入する");
+  });
+
+  

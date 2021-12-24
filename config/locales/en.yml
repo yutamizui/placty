@@ -5,6 +5,8 @@ en:
       en_name: English Name
       main_title: Placty
       home: Home
+      account: Account
+
       button:
         create: Create
         show: Detail
@@ -57,11 +59,10 @@ en:
         content: What to do
         organizer: Organizer
         location: Location
-    
-    models:
-      user:
-        one: User
-        other: Users
+
+      point:
+        title: Point
+
   devise:
     confirmations:
       confirmed: Your email address has been successfully confirmed.

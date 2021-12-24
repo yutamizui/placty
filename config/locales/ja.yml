@@ -5,6 +5,7 @@ ja:
       en_name: 英語名
       main_title: プラクティー
       home: ホーム
+      account: アカウント
 
       button: 
         create: 作成する
@@ -61,9 +62,9 @@ ja:
         organizer: 主催者
         location: 開催場所
 
-    models:
-      user: ユーザー
-      event: イベント
+      point:
+        title: ポイント
+    
 
   devise:
     confirmations:
