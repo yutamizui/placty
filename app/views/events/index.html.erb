@@ -1,7 +1,8 @@
 <% if current_user.present? %>
   <%= link_to t('activerecord.attributes.event.create'), new_event_path, class:"btn btn-info" %>
 <% end %>
-<%= link_to t('activerecord.attributes.event.list'), events_path, class:"btn btn-acuamarine" %>
+<%= link_to t('activerecord.attributes.event.list'), events_path(type: "public"), class:"btn btn-acuamarine" %>
+<%= link_to t('activerecord.attributes.event.list'), events_path(type: "host"), class:"btn btn-acuamarine" %>
 <%= link_to t('activerecord.attributes.event.joining'), joining_events_path, class:"btn btn-tomato" %>
 <br>
 <br>

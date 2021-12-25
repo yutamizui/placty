@@ -2,7 +2,11 @@ class EventsController < ApplicationController
   before_action :find_event, only: [:show, :edit, :update, :destroy]
 
   def index
-    @events = Event.where('date >= ?', Time.now).order(date: "ASC")
+    if params[:type] == "host"
+      @events = current_user.events.where('date >= ?', Time.now).order(date: "ASC")
+    else
+      @events = Event.where('date >= ?', Time.now).order(date: "ASC")
+    end
   end
 
   def show
@@ -54,7 +58,7 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:title, :content, :date, :location, :user_id)
+    params.require(:event).permit(:title, :content, :date, :location, :user_id, :length, :point)
   end
 end
 
