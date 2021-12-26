@@ -14,7 +14,11 @@ class EventsController < ApplicationController
   end
 
   def show
-    @tickets = Ticket.where(user_id: current_user.id).where(event_id: @event.id)
+    if current_user.present? 
+      @tickets = Ticket.where(user_id: current_user.id).where(event_id: @event.id)
+    else
+      redirect_to events_path, alert:"ユーザー登録、ログインをしてください"
+    end
   end
 
   def joining 

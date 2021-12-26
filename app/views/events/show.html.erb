@@ -10,6 +10,7 @@
     <p><%= t('activerecord.attributes.event.number_of_point') + ": " + "#{@event.point}" + " pt" %></p>
   <% end %>
   <p><%= t('activerecord.attributes.event.organizer') + ": " + User.find(@event.user_id).translated_name %></p>
+
   <p class="card-text">
     <!-- イベント参加を中止する -->
     <% if @tickets.present? %>
