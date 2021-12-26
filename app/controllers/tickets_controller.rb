@@ -24,7 +24,7 @@ class TicketsController < ApplicationController
       )
       redirect_to events_path(id: params[:event_id]), notice: "このイベントに参加予定です"
     else
-      redirect_to events_path(id: params[:public]), alert: "ポイントが不足しています"
+      redirect_to events_path(id: params[:public]), alert: "ポイントが不足しています。アカウントよりポイントを追加してください"
     end
   end
 
