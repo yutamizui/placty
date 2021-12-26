@@ -65,6 +65,8 @@ ja:
         organizer: 主催者
         location: 開催場所
         number_of_point: 必要ポイント数
+        length: 開催時間
+        
 
       point:
         title: ポイント

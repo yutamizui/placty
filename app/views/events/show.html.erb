@@ -3,6 +3,7 @@
   <p class="lead"><%= @event.content %></p>
   <hr class="my-4">
   <p><%= t('activerecord.attributes.event.date') + ": " + "#{@event.date.strftime("%Y/%m/%d (%a) %H:%M")}" %></p>
+  <p><%= t('activerecord.attributes.event.length') + ": " + "#{@event.length}分" %></p>
   <% if @event.point == 0 %>
     <p><%= t('activerecord.attributes.event.number_of_point') + ": " + "無料" %></p>
   <% else %>
