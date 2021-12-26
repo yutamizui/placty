@@ -139,6 +139,31 @@ footer ul.quicklinks {
     border-color: #adadad;
 }
 
+
+
+.btn-dark-green {
+  color: #fff;
+  font-weight: bolder;
+  background-color: #649934;
+  border-color: #ccc;
+
+}
+.btn-dark-green:focus {
+    color: #fff;
+    background-color: #88cf47;
+    border-color: #8c8c8c;
+}
+.btn-dark-green:hover {
+    color: #fff;
+    background-color:#88cf47;
+    border-color: #adadad;
+}
+.btn-dark-green:active {
+    color: #fff;
+    background-color: #88cf47;
+    border-color: #adadad;
+}
+
 /*######################################### button end ############################################### */
 
 .pink {

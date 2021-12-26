@@ -52,8 +52,11 @@ ja:
 
       event:
         page_title: イベント
-        list: イベント一覧
+        all: すべて
         joining: 参加予定
+        hosting: 主催予定
+        join: 参加する
+        cancel: 参加をやめる
         create: イベントを作成する
         edit: イベントを編集する
         title: イベント名
@@ -61,6 +64,7 @@ ja:
         content: 内容
         organizer: 主催者
         location: 開催場所
+        number_of_point: 必要ポイント数
 
       point:
         title: ポイント

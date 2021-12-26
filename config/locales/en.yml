@@ -50,8 +50,11 @@ en:
 
       event:
         page_title: Event
+        all: All
         joining: Joining
-        list: Event List
+        hosting: Hosting
+        join: Join 
+        cancel: Cancel
         create: Create Event
         edit: Edit Event
         title: Event Name
@@ -59,7 +62,7 @@ en:
         content: What to do
         organizer: Organizer
         location: Location
-
+        number_of_point: Required points
       point:
         title: Point
 

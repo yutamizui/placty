@@ -3,9 +3,9 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  has_many :events
-  has_many :tickets
-  has_many :points
+  has_many :events, dependent: :destroy
+  has_many :tickets, dependent: :destroy
+  has_many :points, dependent: :destroy
 
   def translated_name
     if I18n.locale == :ja

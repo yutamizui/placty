@@ -2,14 +2,19 @@ class EventsController < ApplicationController
   before_action :find_event, only: [:show, :edit, :update, :destroy]
 
   def index
-    if params[:type] == "host"
+    if params[:type] == "joining"
+      @events = Event.where(id: current_user.tickets.pluck(:event_id)).where('date >= ?', Time.now).order(date: "ASC")
+    elsif params[:type] == "hosting"
       @events = current_user.events.where('date >= ?', Time.now).order(date: "ASC")
+    elsif current_user.present?
+      @events = Event.where('date >= ?', Time.now).order(date: "ASC") - current_user.events.where('date >= ?', Time.now) - Event.where(id: current_user.tickets.pluck(:event_id)).where('date >= ?', Time.now)
     else
       @events = Event.where('date >= ?', Time.now).order(date: "ASC")
     end
   end
 
   def show
+    @tickets = Ticket.where(user_id: current_user.id).where(event_id: @event.id)
   end
 
   def joining 

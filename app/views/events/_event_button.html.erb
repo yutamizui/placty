@@ -1,0 +1,11 @@
+<% if current_user.present? %>
+  <%= link_to t('activerecord.attributes.event.create'), new_event_path, class:"btn btn-info" %>
+  <%= link_to t('activerecord.attributes.event.all'), events_path(type: "public"), class:"btn btn-acuamarine" %>
+  <%= link_to t('activerecord.attributes.event.joining'), events_path(type: "joining"), class:"btn btn-tomato" %>
+  <%= link_to t('activerecord.attributes.event.hosting'), events_path(type: "hosting"), class:"btn btn-dark-green" %>
+<% else %>
+  <%= link_to t('activerecord.attributes.event.all'), events_path(type: "public"), class:"btn btn-acuamarine" %>
+<% end %>
+
+<br>
+<br>
