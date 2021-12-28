@@ -237,6 +237,12 @@ GEM
     nokogiri (1.12.5)
       mini_portile2 (~> 2.6.1)
       racc (~> 1.4)
+    nokogiri (1.12.5-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.12.5-x86_64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.12.5-x86_64-linux)
+      racc (~> 1.4)
     oauth2 (1.4.7)
       faraday (>= 0.8, < 2.0)
       jwt (>= 1.0, < 3.0)
@@ -414,7 +420,7 @@ DEPENDENCIES
   axlsx_rails
   bcrypt (~> 3.1.7)
   bootstrap-datepicker-rails
-  bootstrap-sass (~> 3.3.6)
+  bootstrap-sass
   carrierwave
   carrierwave-i18n
   chart-js-rails
@@ -430,7 +436,7 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   jquery-rails
   letter_opener
-  lightbox-bootstrap-rails (= 5.1.0.1)
+  lightbox-bootstrap-rails
   listen (~> 3.0.5)
   mini_magick
   momentjs-rails

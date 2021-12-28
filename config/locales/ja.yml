@@ -6,12 +6,16 @@ ja:
       main_title: プラクティー
       home: ホーム
       account: アカウント
+      account_information: アカウント情報
 
       button: 
         create: 作成する
         show: 詳細
         edit: 編集する
+        update: 更新する
+        delete: 削除する
         click: こちらをクリック
+        are_you_sure_to_delete: 本当によろしい削除しますか？
       notification:
         created: 作成しました
         edited: 編集しました
@@ -49,9 +53,11 @@ ja:
         login: ログイン
         logout: ログアウト
         sign_up: 新規登録
+        edit: 登録情報変更
 
       event:
         page_title: イベント
+        event_details: イベント内容
         all: すべて
         joining: 参加予定
         hosting: 主催予定
@@ -66,13 +72,15 @@ ja:
         location: 開催場所
         number_of_point: 必要ポイント数
         length: 開催時間
-        
+        point: ポイント
 
       point:
         title: ポイント
-    
 
   devise:
+    password_length: 文字以上
+    blank_for_no_change: もしパスワードを変更しない場合は空欄にしてください。
+
     confirmations:
       confirmed: メールアドレスが確認できました。
       new:

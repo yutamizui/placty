@@ -1,12 +1,14 @@
 div.row
   div.col-md-12
     div class="card"
-      h5 class="card-header text-white bg-secondary mb-3" = t('activerecord.attributes.community.title')
+      div class="card-header text-white bg-secondary mb-3" 
+        h4  = t('activerecord.attributes.event.event_details')
       div class="card-body"
         == render 'shared/errors', obj: @event
         = form_for @event, url: event_path do |f|
           == render 'events/form', f: f
           = f.submit  t('activerecord.attributes.button.edit'), class:"btn btn-info"
-
+br
+br
 = link_to :back do 
   button class="btn btn-secondary" 戻る

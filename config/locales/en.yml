@@ -6,12 +6,16 @@ en:
       main_title: Placty
       home: Home
       account: Account
+      account_information: Account Information
 
       button:
         create: Create
         show: Detail
         edit: Edit
+        delete: Delete
+        update: Update
         click: Click here
+        are_you_sure_to_delete: Are you sure to delete this?
       notification:
         created: Created successfully
         edited: Edited successfully
@@ -47,9 +51,12 @@ en:
         login: Login
         logout: Logout
         sign_up: Sign Up
+        edit: Update registered information
+
 
       event:
         page_title: Event
+        event_details: Event details
         all: All
         joining: Joining
         hosting: Hosting
@@ -64,11 +71,15 @@ en:
         location: Location
         number_of_point: Required points
         length: Opening hours
+        point: Point
         
       point:
         title: Point
 
   devise:
+    password_length: characters minimum
+    blank_for_no_change: Leave blank if you don't want to change it
+
     confirmations:
       confirmed: Your email address has been successfully confirmed.
       new:
