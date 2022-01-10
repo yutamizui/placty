@@ -3,9 +3,9 @@ class EventsController < ApplicationController
 
   def index
     if params[:type] == "joining"
-      @events = Event.where(id: current_user.tickets.pluck(:event_id)).where('date >= ?', Time.now).order(date: "ASC")
+      @events = Event.where(id: current_user.tickets.pluck(:event_id)).where('date >= ?', Time.now + 60*10).order(date: "ASC")
     elsif params[:type] == "hosting"
-      @events = current_user.events.where('date >= ?', Time.now).order(date: "ASC")
+      @events = current_user.events.where('date >= ?', Time.now + 60*10).order(date: "ASC")
     elsif current_user.present?
       @events = Event.where('date >= ?', Time.now).order(date: "ASC") - current_user.events.where('date >= ?', Time.now) - Event.where(id: current_user.tickets.pluck(:event_id)).where('date >= ?', Time.now)
     else
@@ -23,7 +23,7 @@ class EventsController < ApplicationController
 
   def joining 
     if current_user.present? && current_user.tickets.count > 0
-      @events = Event.where(id: current_user.tickets.pluck(:event_id)).where('date >= ?', Time.now).order(date: "ASC")
+      @events = Event.where(id: current_user.tickets.pluck(:event_id)).where('date >= ?', Time.now + 60*10).order(date: "ASC")
     end
   end
 
