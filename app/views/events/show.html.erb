@@ -1,5 +1,5 @@
 <div class="jumbotron">
-  <h2 class="display-4"><%= @event.title %></h1>
+  <h2 class="display-4"><%= @event.title %></h2>
   <p class="lead"><%= @event.content %></p>
   <hr class="my-4">
   <p><%= t('activerecord.attributes.event.date') + ": " + "#{@event.date.strftime("%Y/%m/%d (%a) %H:%M")}" %></p>
@@ -24,7 +24,19 @@
       <%= link_to t('activerecord.attributes.button.click'), "#{@event.location}", class:"btn btn-primary btn-lg" %>
     <% end %>
   </p>
+  <% if current_user.id == @event.user_id %>
+    <hr class="my-4">
+    <h3 class="display-5 orange-letter">
+      <span><%= "~" %></span>
+      <%= t('activerecord.attributes.event.participant') %>
+      <span><%= "~" %></span>
+    </h3>
+    <% @event.tickets.each do |t| %>
+      <%= User.find(t.user_id).translated_name %>
+    <% end %>
+  <% end %>
 </div>
+
 
 <%= link_to :back do %>
   <%= link_to t('devise.shared.links.back') ,events_path(type: "joining"),class:"btn btn-secondary"  %>

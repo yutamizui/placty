@@ -1,4 +1,5 @@
 class Event < ApplicationRecord
+   has_many :tickets
    validates :title, presence: true
    validates :content, presence: true
    validates :location, presence: true

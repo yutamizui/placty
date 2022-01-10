@@ -89,6 +89,10 @@ footer ul.quicklinks {
   margin: 20px;
 }
 
+.orange-letter {
+  color: rgb(201, 72, 12);
+}
+
 
 
 /*######################################### button start ############################################### */
@@ -167,8 +171,47 @@ footer ul.quicklinks {
 .button-right {
   float: right;
 }
+
+.button-margin {
+  margin: 5px 5px 5px 5px;
+}
 /*######################################### button end ############################################### */
 
 .pink {
   color: rgb(241, 72, 101);
+}
+
+.display_point {
+  width: 100%;
+  height: 100px;
+  text-align: right;
+  color: 	#228B22;
+  font-weight: bolder;
+  font-style: italic;
+  font-size: 20px;
+  padding: 0.5em 1em;
+  font-weight: bold;
+  border: solid 3px #6091d3;
+  border-radius: 10px;
+  margin: 0 5px 18px auto;
+}
+
+.display_point span {
+  color: 	#CD5C5C;
+  font-weight: bolder;
+  font-style: italic;
+  font-size: 30px;
+}
+
+@media screen and (min-width: 992px) { /*ウィンドウ幅が992px以上の場合に適用*/
+  .display_point{
+    width: 30%;
+  }
+}
+
+@media screen and (max-width: 991px) { /*ウィンドウ幅が991px以下　の場合に適用*/
+  .display_point{
+    width: 90%;
+    margin: 10px 10px 0 10px;
+  }
 }

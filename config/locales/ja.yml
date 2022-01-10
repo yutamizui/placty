@@ -58,9 +58,11 @@ ja:
       event:
         page_title: イベント
         event_details: イベント内容
-        all: すべて
-        joining: 参加予定
-        hosting: 主催予定
+        all: すべてのイベント
+        joining: 参加イベント
+        hosting: 主催イベント
+        number: 参加者数
+        participant: 参加者
         join: 参加する
         cancel: 参加をやめる
         create: イベントを作成する

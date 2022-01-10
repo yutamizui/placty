@@ -57,10 +57,12 @@ en:
       event:
         page_title: Event
         event_details: Event details
-        all: All
-        joining: Joining
-        hosting: Hosting
+        all: All events
+        joining: Joining events
+        hosting: Hosting events
         join: Join 
+        number: Participants
+        participant: Participants
         cancel: Cancel
         create: Create Event
         edit: Edit Event

@@ -1,12 +1,25 @@
 <%= render "event_button" %>
 <div class="row">
   <div col-md-12>
+    <% if params[:type] == "public" %>
+      <%= t('activerecord.attributes.event.all') %>
+    <% elsif params[:type] == "joining" %>
+      <%= t('activerecord.attributes.event.joining') %>
+    <% else %>
+      <%= t('activerecord.attributes.event.hosting') %>
+    <% end %>
+  </div>
+  <div col-md-12>
     <table class="table">
       <thead class="thead-dark table-active">
         <tr>
           <th scope="col"><%= t('activerecord.attributes.event.date') %></th>
           <th scope="col"><%= t('activerecord.attributes.event.title') %></th>
-          <th scope="col"><%= t('activerecord.attributes.event.organizer') %></th>
+          <% if params[:type] == "hosting" %>
+            <th scope="col"><%= t('activerecord.attributes.event.number') %></th>
+          <% else %>
+            <th scope="col"><%= t('activerecord.attributes.event.organizer') %></th>
+          <% end %>
           <th scope="col"><%= t('activerecord.attributes.button.show') %></th>
         </tr>
       </thead>
@@ -15,7 +28,11 @@
           <tr>
             <th scope="row"><%= "#{e.date.strftime("%Y/%m/%d (%a) %H:%M")}" %></th>
             <td><%= e.title %></td>
+          <% if params[:type] == "hosting" %>
+            <td><%= e.tickets.count %></td>
+          <% else %>
             <td><%= User.find(e.user_id).translated_name %></td>
+          <% end %>
             <td> <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id), class:"btn btn-success btn-sm " %></td>
           </tr>
         <% end %>
