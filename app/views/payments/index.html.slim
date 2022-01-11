@@ -27,7 +27,7 @@ div.row
       div.col-md-12.frame
         br
         h6 １pt：１００円
-        h6 期限：購入日より１ヶ月
+        h6 期限：購入日より１年
         
         = form_tag(action: :payjpcard_update, method: :post) do
           script.payjp-button[src="https://checkout.pay.jp" data-key="#{ENV.fetch("PAYJP_PUBLIC_KEY")}" data-text="カードの変更はこちら" data-submit-text="このカードに変更する"]

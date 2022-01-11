@@ -63,6 +63,7 @@ en:
         join: Join 
         number: Participants
         participant: Participants
+        receiving_point: Receiving Point
         cancel: Cancel
         create: Create Event
         edit: Edit Event

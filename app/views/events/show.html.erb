@@ -37,9 +37,8 @@
   <% end %>
 </div>
 
-
 <%= link_to :back do %>
-  <%= link_to t('devise.shared.links.back') ,events_path(type: "joining"),class:"btn btn-secondary"  %>
+  <%= link_to t('devise.shared.links.back'), events_path(type: params[:type]),class:"btn btn-secondary"  %>
 <% end %>
 
 

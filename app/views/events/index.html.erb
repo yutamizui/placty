@@ -1,13 +1,15 @@
 <%= render "event_button" %>
 <div class="row">
   <div col-md-12>
-    <% if params[:type] == "public" %>
-      <%= t('activerecord.attributes.event.all') %>
-    <% elsif params[:type] == "joining" %>
-      <%= t('activerecord.attributes.event.joining') %>
-    <% else %>
-      <%= t('activerecord.attributes.event.hosting') %>
-    <% end %>
+    <h3>
+      <% if params[:type] == "public" %>
+        <%= t('activerecord.attributes.event.all') %>
+      <% elsif params[:type] == "joining" %>
+        <%= t('activerecord.attributes.event.joining') %>
+      <% else %>
+        <%= t('activerecord.attributes.event.hosting') %>
+      <% end %>
+    </h3>
   </div>
   <div col-md-12>
     <table class="table">
@@ -17,26 +19,52 @@
           <th scope="col"><%= t('activerecord.attributes.event.title') %></th>
           <% if params[:type] == "hosting" %>
             <th scope="col"><%= t('activerecord.attributes.event.number') %></th>
+            <th scope="col"><%= t('activerecord.attributes.event.receiving_point') %></th>
           <% else %>
             <th scope="col"><%= t('activerecord.attributes.event.organizer') %></th>
           <% end %>
           <th scope="col"><%= t('activerecord.attributes.button.show') %></th>
         </tr>
       </thead>
+      
       <tbody>
+        <% participant_number = [] %>
+        <% total_point = [] %>
+
         <% @events.each do |e| %>
           <tr>
             <th scope="row"><%= "#{e.date.strftime("%Y/%m/%d (%a) %H:%M")}" %></th>
             <td><%= e.title %></td>
           <% if params[:type] == "hosting" %>
             <td><%= e.tickets.count %></td>
+            <td><%= e.tickets.count * e.point.to_i %><%= "pt" %></td>
           <% else %>
             <td><%= User.find(e.user_id).translated_name %></td>
           <% end %>
-            <td> <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id), class:"btn btn-success btn-sm " %></td>
+            <td> <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type]), class:"btn btn-success btn-sm " %></td>
           </tr>
+          <% participant_number << e.tickets.count %>
+          <% total_point << e.point * e.tickets.count %>
         <% end %>
       </tbody>
+      <% if params[:type] == "hosting" %>
+        <thead class="thead-dark table-active"> 
+          <tr>
+            <th></th>
+            <th></th>
+            <th><%= "合計参加人数" %></th>
+            <th><%= "合計ポイント" %></th>
+            <th><%= "取得予定金額" %></th>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td><%= participant_number.sum %></td>
+            <td><%= total_point.sum %><%= "pt" %></td>
+            <td><%= (total_point.sum * 100 * 0.9).floor %><%= "円" %></td>
+          </tr>
+        </thead>
+      <% end %>
     </table>
   </div>
 </div>
