@@ -61,7 +61,7 @@
             <td></td>
             <td><%= participant_number.sum %></td>
             <td><%= total_point.sum %><%= "pt" %></td>
-            <td><%= (total_point.sum * 100 * 0.9).floor %><%= "円" %></td>
+            <td><%= (total_point.sum * 100).floor %><%= "円" %></td>
           </tr>
         </thead>
       <% end %>
