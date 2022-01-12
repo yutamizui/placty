@@ -76,6 +76,9 @@ ja:
         number_of_point: 必要ポイント数
         length: 開催時間
         point: ポイント
+        sales_management: 売上管理
+        sale: 売上
+        transfer_status: 振込状況
 
       point:
         title: ポイント

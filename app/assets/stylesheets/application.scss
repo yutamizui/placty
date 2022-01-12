@@ -143,8 +143,6 @@ footer ul.quicklinks {
     border-color: #adadad;
 }
 
-
-
 .btn-dark-green {
   color: #fff;
   font-weight: bolder;
@@ -167,6 +165,32 @@ footer ul.quicklinks {
     background-color: #88cf47;
     border-color: #adadad;
 }
+
+.btn-sienna {
+  color: #fff;
+  font-weight: bolder;
+  background-color: #A0522D;
+  border-color: #ccc;
+
+}
+.btn-sienna:focus {
+    color: #fff;
+    background-color: #CD853F;
+    border-color: #8c8c8c;
+}
+.btn-sienna:hover {
+    color: #fff;
+    background-color:#CD853F;
+    border-color: #adadad;
+}
+.btn-sienna:active {
+    color: #fff;
+    background-color: #CD853F;
+    border-color: #adadad;
+}
+
+
+
 
 .button-right {
   float: right;

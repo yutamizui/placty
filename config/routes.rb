@@ -3,7 +3,12 @@ Rails.application.routes.draw do
   get 'payments/customer_registration'
   scope '(:locale)', locale: /#{I18n.available_locales.map(&:to_s).join('|')}/ do 
     root to: 'events#index'
-    resources :events 
+    resources :events do
+      collection do
+        get :sales_management
+      end
+    end
+
     resources :tickets do
       collection do
         
