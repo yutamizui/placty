@@ -1,0 +1,29 @@
+<%= render "events/event_button" %>
+ <div class="row">
+   <h3><%= t('activerecord.attributes.event.sales_management') %></h3>
+ </div>
+ <div></div>
+ <div col-md-12>
+  <table class="table">
+    <thead class="thead-dark table-active">
+      <tr>
+        <th scope="col"><%= t('activerecord.attributes.invoice.creation_day') %></th>
+        <th scope="col"><%= t('activerecord.attributes.invoice.status') %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% current_user.invoices.order(created_at: :desc).each do |i| %>
+        <tr>
+          <td><%= i.note %></td>
+          <% if i.status == true %>
+            <td><button class="true-status-button button" disabled><%= "#{i.status}" %></button></td>
+          <% else %>
+            <td><button class="false-status-button button" disabled><%= "#{i.status}" %></button></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+

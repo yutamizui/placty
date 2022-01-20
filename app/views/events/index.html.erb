@@ -16,7 +16,7 @@
       <thead class="thead-dark table-active">
         <tr>
           <th scope="col"><%= t('activerecord.attributes.event.date') %></th>
-          <th scope="col"><%= t('activerecord.attributes.event.title') %></th>
+          <th colspan="2" scope="col"><%= t('activerecord.attributes.event.title') %></th>
           <% if params[:type] == "hosting" %>
             <th scope="col"><%= t('activerecord.attributes.event.number') %></th>
             <th scope="col"><%= t('activerecord.attributes.event.receiving_point') %></th>
@@ -30,11 +30,10 @@
       <tbody>
         <% participant_number = [] %>
         <% total_point = [] %>
-
         <% @events.each do |e| %>
           <tr>
             <th scope="row"><%= "#{e.date.strftime("%Y/%m/%d (%a) %H:%M")}" %></th>
-            <td><%= e.title %></td>
+            <td colspan="2"><%= e.title %></td>
           <% if params[:type] == "hosting" %>
             <td><%= e.tickets.count %></td>
             <td><%= e.tickets.count * e.point.to_i %><%= "pt" %></td>
@@ -52,6 +51,7 @@
           <tr>
             <th></th>
             <th></th>
+            <th><%= "イベント数" %></th>
             <th><%= "合計参加人数" %></th>
             <th><%= "合計ポイント" %></th>
             <th><%= "取得予定金額" %></th>
@@ -59,6 +59,7 @@
           <tr>
             <td></td>
             <td></td>
+            <td><%= @events.count %></td>
             <td><%= participant_number.sum %></td>
             <td><%= total_point.sum %><%= "pt" %></td>
             <td><%= (total_point.sum * 100).floor %><%= "円" %></td>
@@ -66,6 +67,12 @@
         </thead>
       <% end %>
     </table>
+    <% if params[:type] == "hosting" %>
+      <p class="pull-right"><%= link_to t('activerecord.attributes.event.transfer_request'), 
+        invoices_path(type: "event", event_number: @events.count, participant_number: participant_number.sum, total_point: total_point.sum, sales: (total_point.sum * 100).floor  ), 
+        method: :post, data: {confirm:"こちらの内容の振込を依頼しますか？（このページでの内容は削除され、抜粋された内容が売上管理ページに表示されます。"}, class:"btn btn-warning" %>
+      </p>
+    <% end %>
   </div>
 </div>
 

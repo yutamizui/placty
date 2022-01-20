@@ -60,9 +60,7 @@ class EventsController < ApplicationController
     redirect_to events_path(type: "hosting"), notice: t('activerecord.attributes.notification.deleted')
   end
 
-  def sales_management
-  end
-
+  
   private
 
   def find_event

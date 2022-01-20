@@ -3,9 +3,7 @@
   <%= link_to t('activerecord.attributes.event.all'), events_path(type: "public"), class:"btn btn-acuamarine button-margin" %>
   <%= link_to t('activerecord.attributes.event.joining'), events_path(type: "joining"), class:"btn btn-tomato button-margin" %>
   <%= link_to t('activerecord.attributes.event.hosting'), events_path(type: "hosting"), class:"btn btn-dark-green button-margin" %>
-  <% if current_user.id == User.first.id %>
-  　<%= link_to t('activerecord.attributes.event.sales_management'), sales_management_events_path, class:"btn btn-sienna button-margin" %>
-  <% end %>
+  <%= link_to t('activerecord.attributes.event.sales_management'), invoices_path, class:"btn btn-sienna button-margin" %>
   <div class="row">
     <div class="display_point">
       <%= "現在のポイント" %>

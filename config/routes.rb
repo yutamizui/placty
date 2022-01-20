@@ -1,13 +1,15 @@
 Rails.application.routes.draw do
+  get 'invoices/index'
+  get 'invoices/events'
+  get 'invoices/create'
+  get 'invoices/delete'
   get 'tickets/create'
   get 'payments/customer_registration'
   scope '(:locale)', locale: /#{I18n.available_locales.map(&:to_s).join('|')}/ do 
     root to: 'events#index'
-    resources :events do
-      collection do
-        get :sales_management
-      end
-    end
+    resources :events 
+
+    resources :invoices 
 
     resources :tickets do
       collection do

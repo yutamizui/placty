@@ -78,6 +78,16 @@ en:
         sales_management: Sales management
         sale: Sale
         transfer_status: Transfer Status
+        transfer_request: Transfer Request
+        transfer_request_day: Transfer Request date
+      
+      invoice:
+        creation_day: Created date
+        participant_number: Number of Participants
+        event_number: Number of Events
+        point_number: Number of Points
+        sales: Sales
+        yen: yen
         
       point:
         title: Point
