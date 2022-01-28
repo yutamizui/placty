@@ -76,14 +76,14 @@ ja:
         number_of_point: 必要ポイント数
         length: 開催時間
         point: ポイント
-        sales_management: 売上管理
+        point_management: ポイント精算
         sale: 売上
         transfer_status: 振込状況
         transfer_request: 振込依頼
         transfer_request_day: 振込依頼日
       
       invoice:
-        creation_day: 請求書作成日
+        creation_day: 精算請求日
         participant_number: 参加者数
         event_number: イベント数
         point_number: ポイント数

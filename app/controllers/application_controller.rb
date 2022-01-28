@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :set_locale
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :authenticate_user!
 
   def locale
     if ["ja", "en"].include?(params[:locale])
@@ -14,6 +15,14 @@ class ApplicationController < ActionController::Base
     if ["ja", "en"].include?(cookies[:locale])
       I18n.locale = cookies[:locale]
     end
+  end
+
+  def after_sign_in_path_for(resource)
+    events_path # ログイン後に遷移するpathを設定
+  end
+
+  def after_sign_out_path_for(resource)
+    events_path # ログアウト後に遷移するpathを設定
   end
 
   protected

@@ -2,7 +2,7 @@
 <div class="row">
   <div col-md-12>
     <h3>
-      <%= t('activerecord.attributes.event.all') %>
+      <%= t('activerecord.attributes.event.joining') %>
     </h3>
   </div>
   <div col-md-12>
@@ -10,20 +10,13 @@
       <thead class="thead-dark table-active">
         <tr>
           <th scope="col"><%= t('activerecord.attributes.event.date') %></th>
-          <th colspan="2" scope="col"><%= t('activerecord.attributes.event.title') %></th>
-          <% if params[:type] == "hosting" %>
-            <th scope="col"><%= t('activerecord.attributes.event.number') %></th>
-            <th scope="col"><%= t('activerecord.attributes.event.receiving_point') %></th>
-          <% else %>
-            <th scope="col"><%= t('activerecord.attributes.event.organizer') %></th>
-          <% end %>
+          <th colspan="2" scope="col"><%= t('activerecord.attributes.event.title') %></th>  
+          <th scope="col"><%= t('activerecord.attributes.event.organizer') %></th>
           <th scope="col"><%= t('activerecord.attributes.button.show') %></th>
         </tr>
       </thead>
       
       <tbody>
-        <% participant_number = [] %>
-        <% total_point = [] %>
         <% @events.each do |e| %>
           <tr>
             <th scope="row"><%= "#{e.date.strftime("%Y/%m/%d (%a) %H:%M")}" %></th>
@@ -36,8 +29,6 @@
           <% end %>
             <td> <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type]), class:"btn btn-success btn-sm " %></td>
           </tr>
-          <% participant_number << e.tickets.count %>
-          <% total_point << e.point * e.tickets.count %>
         <% end %>
       </tbody>
     </table>

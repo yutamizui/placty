@@ -2,7 +2,13 @@
 <div class="row">
   <div col-md-12>
     <h3>
-      <%= t('activerecord.attributes.event.all') %>
+      <% if params[:type] == "public" %>
+        <%= t('activerecord.attributes.event.all') %>
+      <% elsif params[:type] == "joining" %>
+        <%= t('activerecord.attributes.event.joining') %>
+      <% else %>
+        <%= t('activerecord.attributes.event.hosting') %>
+      <% end %>
     </h3>
   </div>
   <div col-md-12>
@@ -40,7 +46,33 @@
           <% total_point << e.point * e.tickets.count %>
         <% end %>
       </tbody>
+      <% if params[:type] == "hosting" %>
+        <thead class="thead-dark table-active"> 
+          <tr>
+            <th></th>
+            <th></th>
+            <th><%= "イベント数" %></th>
+            <th><%= "合計参加人数" %></th>
+            <th><%= "合計ポイント" %></th>
+            <th><%= "取得予定金額" %></th>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td><%= @events.count %></td>
+            <td><%= participant_number.sum %></td>
+            <td><%= total_point.sum %><%= "pt" %></td>
+            <td><%= (total_point.sum * 100).floor %><%= "円" %></td>
+          </tr>
+        </thead>
+      <% end %>
     </table>
+    <% if params[:type] == "hosting" %>
+      <p class="pull-right"><%= link_to t('activerecord.attributes.event.transfer_request'), 
+        invoices_path(type: "event", event_number: @events.count, participant_number: participant_number.sum, total_point: total_point.sum, sales: (total_point.sum * 100).floor  ), 
+        method: :post, data: {confirm:"こちらの内容の振込を依頼しますか？（このページでの内容は削除され、抜粋された内容が売上管理ページに表示されます。"}, class:"btn btn-warning" %>
+      </p>
+    <% end %>
   </div>
 </div>
 

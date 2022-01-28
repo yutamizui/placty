@@ -7,15 +7,16 @@ Rails.application.routes.draw do
   get 'payments/customer_registration'
   scope '(:locale)', locale: /#{I18n.available_locales.map(&:to_s).join('|')}/ do 
     root to: 'events#index'
-    resources :events 
-
-    resources :invoices 
-
-    resources :tickets do
+    resources :events do
       collection do
-        
+        get :joining
+        get :hosting
       end
     end
+
+
+    resources :invoices 
+    resources :tickets 
     
 
     devise_for :users, controllers: {

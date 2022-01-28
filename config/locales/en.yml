@@ -75,7 +75,7 @@ en:
         number_of_point: Required points
         length: Opening hours
         point: Point
-        sales_management: Sales management
+        point_management: Point Calculation
         sale: Sale
         transfer_status: Transfer Status
         transfer_request: Transfer Request

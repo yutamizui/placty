@@ -2,15 +2,19 @@ class EventsController < ApplicationController
   before_action :find_event, only: [:show, :edit, :update, :destroy]
 
   def index
-    if params[:type] == "joining"
-      @events = Event.where(id: current_user.tickets.pluck(:event_id)).where('date >= ?', Time.now + 60*10).order(date: "ASC")
-    elsif params[:type] == "hosting"
-      @events = current_user.events.order(date: "DESC")
-    elsif current_user.present?
+    if current_user.present?
       @events = Event.where('date >= ?', Time.now).order(date: "ASC") - current_user.events.where('date >= ?', Time.now) - Event.where(id: current_user.tickets.pluck(:event_id)).where('date >= ?', Time.now)
     else
       @events = Event.where('date >= ?', Time.now).order(date: "ASC")
     end
+  end
+
+  def joining 
+    @events = Event.where(id: current_user.tickets.pluck(:event_id)).where('date >= ?', Time.now + 60*10).order(date: "ASC") 
+  end
+
+  def hosting 
+    @events = current_user.events.order(date: "DESC")
   end
 
   def show
@@ -18,12 +22,6 @@ class EventsController < ApplicationController
       @tickets = Ticket.where(user_id: current_user.id).where(event_id: @event.id)
     else
       redirect_to events_path, alert:"ユーザー登録、ログインをしてください"
-    end
-  end
-
-  def joining 
-    if current_user.present? && current_user.tickets.count > 0
-      @events = Event.where(id: current_user.tickets.pluck(:event_id)).where('date >= ?', Time.now + 60*10).order(date: "ASC")
     end
   end
 
