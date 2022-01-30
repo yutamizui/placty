@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_29_020706) do
+ActiveRecord::Schema.define(version: 2022_01_30_145316) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,23 @@ ActiveRecord::Schema.define(version: 2022_01_29_020706) do
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "status", default: false
     t.index ["user_id"], name: "index_invoices_on_user_id"
+  end
+
+  create_table "languages", force: :cascade do |t|
+    t.string "ja_name"
+    t.string "en_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "notice_boards", force: :cascade do |t|
+    t.bigint "language_id"
+    t.bigint "user_id"
+    t.text "note", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["language_id"], name: "index_notice_boards_on_language_id"
+    t.index ["user_id"], name: "index_notice_boards_on_user_id"
   end
 
   create_table "points", force: :cascade do |t|
@@ -68,4 +85,6 @@ ActiveRecord::Schema.define(version: 2022_01_29_020706) do
   end
 
   add_foreign_key "invoices", "users"
+  add_foreign_key "notice_boards", "languages"
+  add_foreign_key "notice_boards", "users"
 end

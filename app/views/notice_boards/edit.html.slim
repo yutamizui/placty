@@ -1,0 +1,14 @@
+div.row
+  div.col-md-12
+    div class="card"
+      div class="card-header text-white bg-secondary mb-3" 
+        h4  = t('activerecord.attributes.notice_board.edit')
+      div class="card-body"
+        == render 'shared/errors', obj: @notice_board
+        = form_for @notice_board, url: notice_board_path do |f|
+          == render 'notice_boards/form', f: f
+          = f.submit  t('activerecord.attributes.button.edit'), class:"btn btn-info"
+br
+br
+= link_to :back do 
+  button class="btn btn-secondary" 戻る

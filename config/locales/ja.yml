@@ -66,7 +66,7 @@ ja:
         receiving_point: 取得予定ポイント
         join: 参加する
         cancel: 参加をやめる
-        create: イベントを作成する
+        create: イベント作成
         edit: イベントを編集する
         title: イベント名
         date: 日時
@@ -81,8 +81,18 @@ ja:
         point_management: ポイント精算
         sale: 売上
         transfer_status: 振込状況
-        
         transfer_request_day: 振込依頼日
+
+      notice_board:
+        request: リクエスト
+        create: リクエスト作成
+        note: あなたのリクエスト
+        request_content: リクエスト内容
+        user_name: ユーザー名
+        created_at: 作成日
+
+      language:
+        name: 言語
       
       invoice:
         creation_day: 精算請求日
@@ -94,7 +104,6 @@ ja:
 
       point:
         management: ポイント管理
-        title: ポイント
 
   devise:
     password_length: 文字以上

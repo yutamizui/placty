@@ -1,0 +1,8 @@
+div.col-md-12
+  div.form-group
+    = f.collection_select :language_id, Language.all,:id,:translated_name
+  div.form-group
+    = f.label :note
+    = f.text_area :note, size:"10x10", class:"form-control"
+
+

@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :tickets, dependent: :destroy
   has_many :points, dependent: :destroy
   has_many :invoices, dependent: :destroy
+  has_many :notice_boards, dependent: :destroy
 
   def update_without_current_password(params, *options)
 
@@ -25,11 +26,4 @@ class User < ApplicationRecord
     result
   end
 
-  def translated_name
-    if I18n.locale == :ja
-      "#{ja_name}"
-    elsif I18n.locale == :en
-      "#{en_name}"
-    end
-  end
 end

@@ -1,0 +1,43 @@
+<%= render "events/event_button" %>
+<div class="row">
+  <div col-md-12>
+    <h3>
+      <%= t('activerecord.attributes.notice_board.request') %>
+    </h3>
+  </div>
+  <div col-md-12>
+    <table class="table table-bordered">
+      <thead class="thead-dark table-active">
+        <tr>
+          <th scope="col"><%= t('activerecord.attributes.notice_board.created_at') %></th>
+          <th scope="col"><%= t('activerecord.attributes.language.name') %></th>
+          <th scope="col"><%= t('activerecord.attributes.notice_board.request_content') %></th>
+          <th scope="col"><%= t('activerecord.attributes.notice_board.user_name') %></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @notice_boards.each_with_index do |n, i| %>
+          <% if i.even? %> 
+            <tr>
+          <% else %>
+            <tr style="background-color:#D3D3D3;">
+          <% end %>
+            <td><%= n.language.created_at.strftime("%Y/%m/%d (%a)") %></td>
+            <td><%= n.language.translated_name %></td>
+            <td><%= simple_format(n.note) %></td>
+            <td><%= n.user.translated_name %></td>
+            <% if current_user.id == n.user_id %>
+              <td>
+                <%= link_to t('activerecord.attributes.button.edit'), edit_notice_board_path(id: n.id), class:"btn btn-warning button-margin" %>
+                <%= link_to t('activerecord.attributes.button.delete'), notice_board_path(id: n.id), method: :delete, 
+                  data: {confirm:"本当にこのリクエストを削除しますか？"}, class:"btn btn-danger button-margin" %>
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+

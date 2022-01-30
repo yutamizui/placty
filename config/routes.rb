@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'notice_boards/index'
   get 'invoices/index'
   get 'invoices/events'
   get 'invoices/create'
@@ -15,6 +16,7 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :notice_boards
     resources :invoices 
     resources :tickets 
     
