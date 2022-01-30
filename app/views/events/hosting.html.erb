@@ -2,13 +2,7 @@
 <div class="row">
   <div col-md-12>
     <h3>
-      <% if params[:type] == "public" %>
-        <%= t('activerecord.attributes.event.all') %>
-      <% elsif params[:type] == "joining" %>
-        <%= t('activerecord.attributes.event.joining') %>
-      <% else %>
-        <%= t('activerecord.attributes.event.hosting') %>
-      <% end %>
+      <%= t('activerecord.attributes.event.hosting') %>
     </h3>
   </div>
   <div col-md-12>
@@ -17,62 +11,52 @@
         <tr>
           <th scope="col"><%= t('activerecord.attributes.event.date') %></th>
           <th colspan="2" scope="col"><%= t('activerecord.attributes.event.title') %></th>
-          <% if params[:type] == "hosting" %>
-            <th scope="col"><%= t('activerecord.attributes.event.number') %></th>
-            <th scope="col"><%= t('activerecord.attributes.event.receiving_point') %></th>
-          <% else %>
-            <th scope="col"><%= t('activerecord.attributes.event.organizer') %></th>
-          <% end %>
+          <th scope="col"><%= t('activerecord.attributes.event.number') %></th>
+          <th scope="col"><%= t('activerecord.attributes.event.receiving_point') %></th>
           <th scope="col"><%= t('activerecord.attributes.button.show') %></th>
+          <th scope="col"></th>
         </tr>
       </thead>
       
       <tbody>
-        <% participant_number = [] %>
-        <% total_point = [] %>
         <% @events.each do |e| %>
+          <% if e.point == 0 %>
+            <% actual_point = 0 %>
+          <% elsif e.point >= 4 && e.point <= 15 %>
+            <% actual_point = e.point - 2 %>
+          <% elsif e.point >= 16 && e.point <= 25 %>
+            <% actual_point = e.point - 3 %>
+          <% elsif e.point >= 26 && e.point <= 35 %>
+            <% actual_point = e.point - 4 %>
+          <% elsif e.point >= 36 && e.point <= 45 %>
+            <% actual_point = e.point - 5 %>
+          <% elsif e.point >= 46 && e.point <= 55 %>
+            <% actual_point = e.point - 6 %>
+          <% elsif e.point >= 56 && e.point <= 65 %>
+            <% actual_point = e.point - 7 %>
+          <% elsif e.point >= 66 && e.point <= 75 %>
+            <% actual_point = e.point - 8 %>
+          <% elsif e.point >= 76 && e.point <= 85 %>
+            <% actual_point = e.point - 9 %>
+          <% elsif e.point >= 86 %>
+            <% actual_point = e.point - 10 %>
+          <% end %>
+
           <tr>
             <th scope="row"><%= "#{e.date.strftime("%Y/%m/%d (%a) %H:%M")}" %></th>
             <td colspan="2"><%= e.title %></td>
-          <% if params[:type] == "hosting" %>
             <td><%= e.tickets.count %></td>
-            <td><%= e.tickets.count * e.point.to_i %><%= "pt" %></td>
-          <% else %>
-            <td><%= User.find(e.user_id).translated_name %></td>
-          <% end %>
-            <td> <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type]), class:"btn btn-success btn-sm " %></td>
+            <td><%= e.tickets.count * actual_point.to_i %><%= "pt" %></td>
+            <td><%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type]), class:"btn btn-success btn-sm " %></td>
+            <% if e.point_process == false %>
+              <td><%= link_to t('activerecord.attributes.event.add_point'), add_point_events_path(id: e.id, giving_point: e.tickets.count * actual_point.to_i), method: :post, class:"btn btn-warning btn-sm " %></td>
+            <% else %>
+              <td><%= link_to t('activerecord.attributes.event.proccessed'), hosting_events_path, class:"btn btn-secondary btn-sm disabled " %></td>
+            <% end %>
           </tr>
-          <% participant_number << e.tickets.count %>
-          <% total_point << e.point * e.tickets.count %>
         <% end %>
       </tbody>
-      <% if params[:type] == "hosting" %>
-        <thead class="thead-dark table-active"> 
-          <tr>
-            <th></th>
-            <th></th>
-            <th><%= "イベント数" %></th>
-            <th><%= "合計参加人数" %></th>
-            <th><%= "合計ポイント" %></th>
-            <th><%= "取得予定金額" %></th>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td><%= @events.count %></td>
-            <td><%= participant_number.sum %></td>
-            <td><%= total_point.sum %><%= "pt" %></td>
-            <td><%= (total_point.sum * 100).floor %><%= "円" %></td>
-          </tr>
-        </thead>
-      <% end %>
     </table>
-    <% if params[:type] == "hosting" %>
-      <p class="pull-right"><%= link_to t('activerecord.attributes.event.transfer_request'), 
-        invoices_path(type: "event", event_number: @events.count, participant_number: participant_number.sum, total_point: total_point.sum, sales: (total_point.sum * 100).floor  ), 
-        method: :post, data: {confirm:"こちらの内容の振込を依頼しますか？（このページでの内容は削除され、抜粋された内容が売上管理ページに表示されます。"}, class:"btn btn-warning" %>
-      </p>
-    <% end %>
   </div>
 </div>
 

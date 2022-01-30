@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :find_event, only: [:show, :edit, :update, :destroy]
+  before_action :find_event, only: [:show, :edit, :update, :destroy, :add_point]
 
   def index
     if current_user.present?
@@ -32,7 +32,7 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     if @event.save
-      redirect_to events_path, notice: "Created the community"
+      redirect_to hosting_events_path, notice: "Created the community"
     else
       flash.now[:alert] = t('activerecord.attirbutes.activity.failed_to_create')
       render 'new'
@@ -58,7 +58,21 @@ class EventsController < ApplicationController
     redirect_to events_path(type: "hosting"), notice: t('activerecord.attributes.notification.deleted')
   end
 
-  
+  def add_point
+    @giving_point = params[:giving_point].to_i
+    @giving_point.times do
+      Point.create(
+        user_id: current_user.id,
+        expired_at: Date.today.next_year,
+      )
+    end
+    @event.update(
+      point_process: true
+    )
+    redirect_to hosting_events_path, notice: "Sucessfully added"
+  end
+
+
   private
 
   def find_event

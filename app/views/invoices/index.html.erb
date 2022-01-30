@@ -14,7 +14,6 @@
     <tbody>
       <% current_user.invoices.order(created_at: :desc).each do |i| %>
         <tr>
-          <td><%= i.note %></td>
           <% if i.status == true %>
             <td><button class="true-status-button button" disabled><%= "#{i.status}" %></button></td>
           <% else %>

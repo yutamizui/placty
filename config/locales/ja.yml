@@ -63,7 +63,7 @@ ja:
         hosting: 主催イベント
         number: 参加者数
         participant: 参加者
-        receiving_point: 獲得ポイント
+        receiving_point: 取得予定ポイント
         join: 参加する
         cancel: 参加をやめる
         create: イベントを作成する
@@ -76,10 +76,12 @@ ja:
         number_of_point: 必要ポイント数
         length: 開催時間
         point: ポイント
+        add_point: ポイント追加
+        proccessed: 追加済
         point_management: ポイント精算
         sale: 売上
         transfer_status: 振込状況
-        transfer_request: 振込依頼
+        
         transfer_request_day: 振込依頼日
       
       invoice:
@@ -90,8 +92,8 @@ ja:
         sales: 売上
         yen: 円
 
-
       point:
+        management: ポイント管理
         title: ポイント
 
   devise:

@@ -11,9 +11,9 @@ Rails.application.routes.draw do
       collection do
         get :joining
         get :hosting
+        post :add_point
       end
     end
-
 
     resources :invoices 
     resources :tickets 

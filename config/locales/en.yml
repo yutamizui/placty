@@ -76,9 +76,10 @@ en:
         length: Opening hours
         point: Point
         point_management: Point Calculation
+        proccessed: Already handled
         sale: Sale
         transfer_status: Transfer Status
-        transfer_request: Transfer Request
+        add_point: Add points
         transfer_request_day: Transfer Request date
       
       invoice:
@@ -90,7 +91,7 @@ en:
         yen: yen
         
       point:
-        title: Point
+         management: Point management
 
   devise:
     password_length: characters minimum

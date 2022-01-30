@@ -16,7 +16,7 @@ class TicketsController < ApplicationController
         user_id: @user.id,
         event_id: @event.id,
       )
-      redirect_to events_path(id: params[:event_id]), notice: "このイベントに参加予定です"
+      redirect_to joining_events_path(id: params[:event_id]), notice: "このイベントに参加予定です"
     elsif @event.point == 0
       Ticket.create(
         user_id: @user.id,
@@ -28,6 +28,7 @@ class TicketsController < ApplicationController
     end
   end
 
+  ## イベントを不参加にしたときの処理
   def destroy
     @ticket = Ticket.find(params[:ticket_id])
     @event = Event.find(@ticket.event_id)
