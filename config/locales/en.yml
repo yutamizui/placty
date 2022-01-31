@@ -77,6 +77,7 @@ en:
         point: Point
         point_management: Point Calculation
         proccessed: Already handled
+        preparing: Preparing
         sale: Sale
         transfer_status: Transfer Status
         add_point: Add points

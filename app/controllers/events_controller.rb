@@ -45,7 +45,7 @@ class EventsController < ApplicationController
   def update
     @event.update(event_params)
     if @event.update(event_params)
-      redirect_to events_path, notice: t('activerecord.attributes.notification.edited')
+      redirect_to hosting_events_path, notice: t('activerecord.attributes.notification.edited')
     else
       flash[:notice] = t('activerecord.attributes.link.failed_to_create')
       render 'events/edit'
@@ -53,8 +53,18 @@ class EventsController < ApplicationController
   end
 
   def destroy
+    if @event.tickets.count > 0
+      @event.tickets.each do |t|
+        @event.point.times do
+          Point.create(
+            user_id: t.user_id,
+            expired_at: Date.today.next_year
+          )
+        end
+      end
+    end
     @event.destroy
-    redirect_to events_path(type: "hosting"), notice: t('activerecord.attributes.notification.deleted')
+    redirect_to hosting_events_path(type: "hosting"), notice: t('activerecord.attributes.notification.deleted')
   end
 
   def add_point

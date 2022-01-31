@@ -251,3 +251,38 @@ footer ul.quicklinks {
     margin: 10px 10px 0 10px;
   }
 }
+
+#all-event-table > thead > tr > th:nth-of-type(2) {
+  width: 30%;
+}
+
+#all-event-table > thead > tr > th {
+  width: 7%;
+}
+
+#hosting-event-table > thead > tr > th {
+  width: 7%;
+}
+
+#hosting-event-table > thead > tr > th:nth-of-type(2) {
+  width: 15%;
+}
+
+
+#event-table > thead > tr > th:nth-of-type(4) {
+  width: 30%;
+}
+
+#small-display-event-table > tbody > tr > th {
+  width: 30%;
+  background-color: #f0ecec;
+}
+
+.background-gray {
+  background-color: #8f8888;
+}
+
+
+
+
+

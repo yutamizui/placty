@@ -77,7 +77,8 @@ ja:
         length: 開催時間
         point: ポイント
         add_point: ポイント追加
-        proccessed: 追加済
+        proccessed: 処理済
+        preparing: 準備中
         point_management: ポイント精算
         sale: 売上
         transfer_status: 振込状況
