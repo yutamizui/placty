@@ -1,0 +1,19 @@
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h3>レッスンの予約を承りました。</h3>
+    詳細は下記の内容になります。
+
+    <div class="container">
+      <ul>
+        <li>生徒名： <%= @student.last_name %><%= @student.first_name %></li>
+        <li>レッスン名: <%= @lesson.name %></li>
+        <li>レッスン日: <%= @lesson.lesson_date.strftime("%Y年 %m月%d日 (#{%w(日 月 火 水 木 金 土)[@lesson.lesson_date.wday]})") %></li>
+        <li>レッスン時間: <%= @lesson.start_time.strftime("%H:%M") %>〜<%= @lesson.end_time.strftime("%H:%M") %></li>
+      </ul>
+    </div>
+    <%= link_to "予約の確認はこちらから", 'https://www.ago-navi.com/' %>
+  </body>
+</html>

@@ -1,0 +1,39 @@
+div class="row"
+  div class="dropdown"
+    button class="btn btn-primary dropdown-toggle button-margin" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" 全てのノート 
+    div class="dropdown-menu" aria-labelledby  ="dropdownMenuButton"
+      - @notes.each do |n| 
+        = link_to n.title, note_path(id: n.id), class:"dropdown-item" 
+
+div.col-md-12
+  div class="card"
+    div class="card-header"
+      h5 class="card-title"
+        - if @note != @notes.first
+          = link_to "削除する", note_path(id: @note.id), method: :delete, data: {confirm:"本当にこのノートを削除しますか？"}, class:"btn btn-danger button-margin float-right"
+
+        button id="chicken" class="btn btn-warning button-margin dropdown-toggle float-right" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+          span 複製する
+
+        div class="dropdown-menu" aria-labelledby="chicken"
+          form action="/notes/duplicate" method="post" class="note_duplicate" onSubmit="return checkSubmit()"
+            h4 マイノートの名前
+            input type="text" id="note_title" name="note_title" value="#{current_user.ja_name}さんのマイノート"
+            input type="hidden" name="id" value="#{@note.id}"
+            input type="hidden" name="user_id" value="#{@note.user_id}"
+            br
+            input type="submit" value="複製する" class="button-margin-sm"
+
+      div class="card-body"
+        = form_for @note, url: note_path(id: @note, user_id: current_user.id), html: {method: "patch"} do |f|
+          div.note_setting
+            h3 = @note.title
+            div.form-group
+              p 学習内容をメモしていきましょう！
+              hr
+              = f.text_area :content, cols: "15", rows: "10", class:"form-control"
+          div.actions
+          = f.submit t('activerecord.attributes.button.update'), class:"btn btn-info"
+
+= link_to :back do 
+  button class="btn btn-secondary button-margin" 戻る

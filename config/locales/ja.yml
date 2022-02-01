@@ -102,6 +102,11 @@ ja:
         point_number: ポイント数
         sales: 売上
         yen: 円
+      
+      note:
+        note: ノート
+        title: ノート名
+        content: 内容
 
       point:
         management: ポイント管理

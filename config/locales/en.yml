@@ -102,6 +102,11 @@ en:
         point_number: Number of Points
         sales: Sales
         yen: yen
+      
+      note:
+        note: Note
+        title: Note name
+        content: Content
         
       point:
          management: Point management

@@ -1,63 +1,60 @@
 <%= render "event_button" %>
-<div class="row">
-  <div col-md-12>
-    <h3>
-      <%= t('activerecord.attributes.event.joining') %>
-    </h3>
-  </div>
-  <div col-md-12>
-    <%# 画面サイズが md lg xlの時に表示%>
-    <table class="table table-bordered d-none d-sm-block d-sm-none d-md-block" id="all-event-table"">
-      <thead class="thead-dark table-active">
-        <tr>
-          <th scope="col"><%= t('activerecord.attributes.event.date') %></th>
-          <th colspan="2" scope="col"><%= t('activerecord.attributes.event.title') %></th>  
-          <th scope="col"><%= t('activerecord.attributes.event.organizer') %></th>
-          <th scope="col"><%= t('activerecord.attributes.button.show') %></th>
-        </tr>
-      </thead>
-      
-      <tbody>
-        <% @events.each do |e| %>
-          <tr>
-            <th scope="row"><%= "#{e.date.strftime("%Y/%m/%d (%a) %H:%M")}" %></th>
-            <td colspan="2"><%= e.title %></td>
-          <% if params[:type] == "hosting" %>
-            <td><%= e.tickets.count %></td>
-            <td><%= e.tickets.count * e.point.to_i %><%= "pt" %></td>
-          <% else %>
-            <td><%= User.find(e.user_id).translated_name %></td>
-          <% end %>
-            <td> <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type]), class:"btn btn-success btn-sm " %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
 
-
-    <%# 画面サイズがxs sm の時に表示%>
-    <table class="table d-md-none d-lg-block d-lg-none d-xl-block d-xl-none" id="small-display-event-table"">
-      <% @events.each do |e| %>
-        <tbody>
-          <tr>
-            <th scope="col"><%= t('activerecord.attributes.event.date') %></th>
-            <td scope="row"><%= "#{e.date.strftime("%Y/%m/%d (%a) %H:%M")}" %></td>
-          </tr>
-          <tr>
-            <th scope="col"><%= t('activerecord.attributes.event.title') %></th>  
-            <td><%= e.title %></td>
-          </tr>
-          <tr>
-            <th scope="col"><%= t('activerecord.attributes.event.organizer') %></th>
-            <td><%= User.find(e.user_id).translated_name %></td>
-          </tr>
-          <tr>
-            <th scope="col"><%= t('activerecord.attributes.button.show') %></th>
-            <td> <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type]), class:"btn btn-success btn-sm " %></td>
-          </tr>
-        </tbody>
+<h3>
+  <%= t('activerecord.attributes.event.joining') %>
+</h3>
+  
+<%# 画面サイズが md lg xlの時に表示%>
+<table class="table table-bordered d-none d-md-block" id="all-event-table">
+  <thead class="thead-dark table-active">
+    <tr>
+      <th scope="col"><%= t('activerecord.attributes.event.date') %></th>
+      <th colspan="2" scope="col"><%= t('activerecord.attributes.event.title') %></th>  
+      <th scope="col"><%= t('activerecord.attributes.event.organizer') %></th>
+      <th scope="col"><%= t('activerecord.attributes.button.show') %></th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    <% @events.each do |e| %>
+      <tr>
+        <th scope="row"><%= "#{e.date.strftime("%Y/%m/%d (%a) %H:%M")}" %></th>
+        <td colspan="2"><%= e.title %></td>
+      <% if params[:type] == "hosting" %>
+        <td><%= e.tickets.count %></td>
+        <td><%= e.tickets.count * e.point.to_i %><%= "pt" %></td>
+      <% else %>
+        <td><%= User.find(e.user_id).translated_name %></td>
       <% end %>
-    </table>
-  </div>
+        <td> <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type]), class:"btn btn-success btn-sm " %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<%# 画面サイズがxs sm の時に表示%>
+<table class="table table-bordered d-xs-block d-md-none" id="small-display-event-table">
+  <% @events.each do |e| %>
+    <tbody>
+      <tr>
+        <th scope="col"><%= t('activerecord.attributes.event.date') %></th>
+        <td scope="row"><%= "#{e.date.strftime("%Y/%m/%d (%a) %H:%M")}" %></td>
+      </tr>
+      <tr>
+        <th scope="col"><%= t('activerecord.attributes.event.title') %></th>  
+        <td><%= e.title %></td>
+      </tr>
+      <tr>
+        <th scope="col"><%= t('activerecord.attributes.event.organizer') %></th>
+        <td><%= User.find(e.user_id).translated_name %></td>
+      </tr>
+      <tr>
+        <th scope="col"><%= t('activerecord.attributes.button.show') %></th>
+        <td> <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type]), class:"btn btn-success btn-sm " %></td>
+      </tr>
+    </tbody>
+  <% end %>
+</table>
 </div>
 

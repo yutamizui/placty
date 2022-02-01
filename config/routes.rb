@@ -1,11 +1,4 @@
 Rails.application.routes.draw do
-  get 'notice_boards/index'
-  get 'invoices/index'
-  get 'invoices/events'
-  get 'invoices/create'
-  get 'invoices/delete'
-  get 'tickets/create'
-  get 'payments/customer_registration'
   scope '(:locale)', locale: /#{I18n.available_locales.map(&:to_s).join('|')}/ do 
     root to: 'events#index'
     resources :events do
@@ -19,15 +12,18 @@ Rails.application.routes.draw do
     resources :notice_boards
     resources :invoices 
     resources :tickets 
+    resources :notes do
+      collection do
+        post :duplicate
+      end
+    end
     
-
     devise_for :users, controllers: {
       sessions:      'users/sessions',
       passwords:     'users/passwords',
       registrations: 'users/registrations'
     }
   end
-
 
   get "locale" => "application#locale", as: "locale"
   post "payments/customer_registration"

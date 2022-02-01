@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :points, dependent: :destroy
   has_many :invoices, dependent: :destroy
   has_many :notice_boards, dependent: :destroy
+  has_many :notes, dependent: :destroy
 
   def update_without_current_password(params, *options)
 
