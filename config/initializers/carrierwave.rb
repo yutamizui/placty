@@ -10,12 +10,12 @@ CarrierWave.configure do |config|
     config.fog_provider = 'fog/aws'
     config.fog_credentials = {
       provider: 'AWS',
-      aws_access_key_id: Rails.application.credentials.aws[:access_key_id],
-      aws_secret_access_key: Rails.application.credentials.aws[:secret_access_key],
+      aws_access_key_id: Rails.application.credentials.aws[:AWS_ACCESS_KEY_ID],
+      aws_secret_access_key: Rails.application.credentials.aws[:AWS_SECRET_ACCESS_KEY],
 # credentials下にaws_access_key_idとaws_secret_access_keyはあるよ
       region: 'ap-northeast-1'
     }
-    config.fog_directory  = ENV['S3_BUCKET_NAME']
+    config.fog_directory  = 'placty'
     config.asset_host = 'https://s3-ap-northeast-1.amazonaws.com/placty'
   end
 end
