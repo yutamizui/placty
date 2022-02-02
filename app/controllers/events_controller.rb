@@ -81,6 +81,19 @@ class EventsController < ApplicationController
     redirect_to hosting_events_path, notice: "Sucessfully added"
   end
 
+  def memo 
+    @event = Event.find(params[:id])
+    @users_id = @event.tickets.pluck(:user_id)
+    @users = User.where(id: @users_id)
+    @users.each do |u|
+      u.notes.first.update(
+        content: params[:memo_content] + "\n" + u.notes.first.content 
+      )
+    end
+    redirect_to event_path(id: @event.id), notice: "イベントメモを共有しました！"
+    return
+  end
+
 
   private
 

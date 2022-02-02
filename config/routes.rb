@@ -6,6 +6,7 @@ Rails.application.routes.draw do
         get :joining
         get :hosting
         post :add_point
+        post :memo
       end
     end
 

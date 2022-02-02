@@ -82,6 +82,9 @@ en:
         transfer_status: Transfer Status
         add_point: Add points
         transfer_request_day: Transfer Request date
+        send: Send
+        shared_memo: Shared memo with participants
+        how_to_use_memo: Please leave the event's memo you would like to share with the participants here.
 
       notice_board:
         request: Request

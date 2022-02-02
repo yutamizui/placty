@@ -83,6 +83,9 @@ ja:
         sale: 売上
         transfer_status: 振込状況
         transfer_request_day: 振込依頼日
+        send: 送信する
+        shared_memo: 参加者との共有メモ
+        how_to_use_memo: こちらに参加者と共有したいイベント内容のメモを記載してください。
 
       notice_board:
         request: リクエスト

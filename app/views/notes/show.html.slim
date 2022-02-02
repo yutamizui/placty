@@ -17,12 +17,12 @@ div.col-md-12
 
         div class="dropdown-menu" aria-labelledby="chicken"
           form action="/notes/duplicate" method="post" class="note_duplicate" onSubmit="return checkSubmit()"
-            h4 マイノートの名前
-            input type="text" id="note_title" name="note_title" value="#{current_user.ja_name}さんのマイノート"
+            h4 ノートの名前
+            input type="text" id="note_title" name="note_title" required="required"
             input type="hidden" name="id" value="#{@note.id}"
             input type="hidden" name="user_id" value="#{@note.user_id}"
             br
-            input type="submit" value="複製する" class="button-margin-sm"
+            input type="submit" value="複製する" class="btn btn-success button-margin"
 
       div class="card-body"
         = form_for @note, url: note_path(id: @note, user_id: current_user.id), html: {method: "patch"} do |f|
@@ -37,3 +37,5 @@ div.col-md-12
 
 = link_to :back do 
   button class="btn btn-secondary button-margin" 戻る
+
+
