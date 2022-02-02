@@ -5,15 +5,15 @@ default: &default
 
 development:
   <<: *default
-  database: language_community_development
+  database: placty_development
   host: localhost
 
 test:
   <<: *default
-  database: language_community_test
+  database: placty_test
 
 production:
   <<: *default
-  database: language_community_production
-  username: language_community
-  password: <%= ENV['LANGUAGE_COMMUNITY_DATABASE_PASSWORD'] %>
+  database: _production
+  username: placty
+  password: <%= ENV['PLACTY_DATABASE_PASSWORD'] %>
