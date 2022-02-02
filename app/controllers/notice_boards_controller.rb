@@ -12,9 +12,9 @@ class NoticeBoardsController < ApplicationController
   def create
     @notice_board = NoticeBoard.new(notice_board_params)
     if @notice_board.save
-      redirect_to notice_boards_path, notice: "Your notice has been created. successfully"
+      redirect_to notice_boards_path, notice: t('activerecord.attributes.notification.requested')
     else
-      flash.now[:alert] = t('activerecord.attirbutes.activity.failed_to_create')
+      flash.now[:alert] = t('activerecord.attributes.activity.failed_to_create')
       render 'new'
     end
   end

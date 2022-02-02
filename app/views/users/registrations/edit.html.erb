@@ -5,10 +5,21 @@
         <h3><%= t('activerecord.attributes.user.edit') %></h3>
       </div>
         <div class="card-body">
-
           <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
             <%= devise_error_messages %>
-  
+            <div>
+              <%= f.label :image, t('activerecord.attributes.user.image') %>
+              <%= f.file_field :image, onchange: 'previewImage()' %>
+              <%= f.hidden_field :image_cache %>
+              <% if resource.image.url.present? %>
+                <%= image_tag resource.image.url, class: 'rounded-circle mt-3', id: 'preview', size: '100x100' %>
+              <% else %>
+                <%= image_tag asset_path("avatar.png"), size: '100x100', class:"button-margin" %>
+              <% end %>
+            
+            </div>
+            <br>
+
             <div class="form-group">
               <%= f.label :ja_name, t('activerecord.attributes.ja_name') %><br />
               <%= f.text_field :ja_name, class: "form-control" %>
@@ -47,4 +58,21 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  function previewImage() {
+    const target = this.event.target;
+    const file = target.files[0];
+    const reader  = new FileReader();
+    reader.onloadend = function () {
+      const preview = document.querySelector("#preview")
+      if(preview) {
+          preview.src = reader.result;
+      }
+    }
+    if (file) {
+        reader.readAsDataURL(file);
+    }
+  }
+</script>
 

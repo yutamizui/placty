@@ -12,14 +12,19 @@ en:
         create: Create
         show: Detail
         edit: Edit
+        save: Save
         delete: Delete
         update: Update
         click: Click here
         are_you_sure_to_delete: Are you sure to delete this?
+
       notification:
         created: Created successfully
         edited: Edited successfully
+        updated: Updated successfully
         deleted: Deleted successfully
+        requested: Requested successfully
+
       language:
         language: Language
         japanese: Japanese
@@ -52,6 +57,7 @@ en:
         logout: Logout
         sign_up: Sign Up
         edit: Update registered information
+        image: Profile Image
 
 
       event:
@@ -85,6 +91,7 @@ en:
         send: Send
         shared_memo: Shared memo with participants
         how_to_use_memo: Please leave the event's memo you would like to share with the participants here.
+        no_event: There are no events scheduled at this time.
 
       notice_board:
         request: Request

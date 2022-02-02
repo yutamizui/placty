@@ -22,7 +22,7 @@ class NotesController < ApplicationController
 
   def update
     if @note.update(note_params)
-      redirect_to note_path(id: @note), notice: t('activerecord.attributes.notification.edited')
+      redirect_to note_path(id: @note), notice: t('activerecord.attributes.notification.updated')
     else
       flash[:notice] = t('activerecord.attributes.link.failed_to_create')
       render 'notes/edit' 
