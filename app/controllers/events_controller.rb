@@ -32,7 +32,7 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     if @event.save
-      redirect_to hosting_events_path, notice: "Created the community"
+      redirect_to hosting_events_path, notice: t('activerecord.attributes.notification.created')
     else
       flash.now[:alert] = t('activerecord.attirbutes.activity.failed_to_create')
       render 'new'
