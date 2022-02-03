@@ -100,6 +100,7 @@ en:
         request_content: Request contents
         user_name: User name
         created_at: Created day
+        no_request: There are no requests at this time
 
       
       language:
