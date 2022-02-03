@@ -61,6 +61,7 @@ gem 'rubyzip'
 gem 'axlsx'
 gem 'axlsx_rails'
 gem 'webpacker'
+gem 'sendgrid-ruby'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -86,6 +87,9 @@ group :production, :staging do
   gem 'pg'
   gem 'rails_12factor'
   gem 'aws-sdk', '~> 3'
+  # gem 'capistrano',                 '3.11.2'
+  # gem 'capistrano-rails',           '1.4.0'
+  # gem 'capistrano-rbenv',           '2.1.4 '
 end
 
 
