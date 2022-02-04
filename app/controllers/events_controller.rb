@@ -3,7 +3,6 @@ class EventsController < ApplicationController
 
   def index
     if current_user.present?
-      SendEmail.test_email
       @events = Event.where('date >= ?', Time.now).order(date: "ASC") - current_user.events.where('date >= ?', Time.now) - Event.where(id: current_user.tickets.pluck(:event_id)).where('date >= ?', Time.now)
     else
       @events = Event.where('date >= ?', Time.now).order(date: "ASC")
