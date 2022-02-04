@@ -60,6 +60,8 @@ ja:
         edit: 登録情報変更
         image: プロファイル写真
         image_extension_allowed: (jpg jpeg gif png形式のみ)
+        registration_message: ユーザー登録後にイベントへの参加が可能になります
+        guide_to_user_registration: ユーザー登録はこちらから
 
       event:
         page_title: イベント

@@ -1,5 +1,6 @@
 <div class="jumbotron">
   <h2 class="display-4"><%= @event.title %></h2>
+  <hr>
   <p class="lead"><%= @event.content %></p>
   <hr class="my-4">
   <p><%= t('activerecord.attributes.event.date') + ": " + "#{@event.date.strftime("%Y/%m/%d (%a) %H:%M")}" %></p>
@@ -9,15 +10,29 @@
   <% else %>
     <p><%= t('activerecord.attributes.event.number_of_point') + ": " + "#{@event.point}" + " pt" %></p>
   <% end %>
-  <p><%= t('activerecord.attributes.event.organizer') + ": " + User.find(@event.user_id).translated_name %></p>
-
+  <p>
+    <%= t('activerecord.attributes.event.organizer') + ": " + User.find(@event.user_id).translated_name %>
+  </p>
+  <% if User.find(@event.user_id).image.file != nil %>
+   <%= image_tag (User.find(@event.user_id).image.url), size:"100x100" %>
+  <% else %>
+    <%= image_tag 'avatar.png', size:"100x100" %>
+  <% end %>
+  <hr>
   <p class="card-text">
     <!-- イベント参加を中止する -->
-    <% if @tickets.present? && current_user.id != @event.user_id %>
+    <% if current_user.present? && @tickets.present? && current_user.id != @event.user_id %>
       <%= link_to t('activerecord.attributes.event.cancel'), ticket_path(ticket_id: @tickets.first.id), method: :delete,  class:"btn btn-danger btn-lg" %>
-    <% elsif current_user.id != @event.user_id %>
+    <% elsif current_user.present? && current_user.id != @event.user_id %>
     <!-- イベントに参加する -->
       <%= link_to t('activerecord.attributes.event.join'), tickets_path(event_id: @event.id, user_id: current_user.id), method: :post, class:"btn btn-success btn-lg" %>
+    <% end %>
+
+    <!-- ユーザー登録をしていない場合のメッセージ表示　-->
+    <% unless current_user.present? %>
+      <h3><%= t('activerecord.attributes.user.registration_message') %></h3>
+      <%= link_to t('activerecord.attributes.user.guide_to_user_registration'), new_user_registration_path, class:"btn btn-primary" %>
+
     <% end %>
 
     <% if current_user.present? && Event.where(id: current_user.tickets.pluck(:event_id)).select { |e| e[:id] == @event.id}.count != 0 %>

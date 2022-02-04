@@ -59,7 +59,8 @@ en:
         edit: Update registered information
         image: Profile Image
         image_extension_allowed: (Only jpg jpeg gif png)
-
+        registration_message: After registering as a user, you will be able to participate in the event
+        guide_to_user_registration: Click here to register
 
       event:
         page_title: Event
