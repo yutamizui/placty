@@ -59,6 +59,7 @@ ja:
         sign_up: 新規登録
         edit: 登録情報変更
         image: プロファイル写真
+        image_extension_allowed: (jpg jpeg gif png形式のみ)
 
       event:
         page_title: イベント

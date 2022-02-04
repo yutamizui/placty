@@ -58,6 +58,7 @@ en:
         sign_up: Sign Up
         edit: Update registered information
         image: Profile Image
+        image_extension_allowed: (Only jpg jpeg gif png)
 
 
       event:

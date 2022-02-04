@@ -39,7 +39,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # end
 
   def extension_allowlist
-    %w(jpg jpeg gif png heic)
+    %w(jpg jpeg gif png)
   end
 
   # Override the filename of the uploaded files:

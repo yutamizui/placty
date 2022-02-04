@@ -9,6 +9,7 @@
             <%= devise_error_messages %>
             <div>
               <%= f.label :image, t('activerecord.attributes.user.image') %>
+              <%= t('activerecord.attributes.user.image_extension_allowed') %>
               <%= f.file_field :image, onchange: 'previewImage()' %>
               <%= f.hidden_field :image_cache %>
               <% if resource.image.url.present? %>
