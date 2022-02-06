@@ -61,6 +61,7 @@ class EventsController < ApplicationController
         end
       end
     end
+    ## イベント削除と共にチケットも削除される
     @event.destroy
     redirect_to hosting_events_path(type: "hosting"), notice: t('activerecord.attributes.notification.deleted')
   end
@@ -78,6 +79,10 @@ class EventsController < ApplicationController
     )
     redirect_to hosting_events_path, notice: "Sucessfully added"
   end
+
+  def duplicate
+  end
+  
 
   def memo 
     @event = Event.find(params[:id])
