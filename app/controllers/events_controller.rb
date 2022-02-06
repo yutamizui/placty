@@ -14,7 +14,7 @@ class EventsController < ApplicationController
   end
 
   def hosting 
-    @events = current_user.events.order(date: "DESC")
+    @events = current_user.events.order(date: "ASC")
   end
 
   def show
