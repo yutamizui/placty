@@ -1,5 +1,8 @@
 div.col-md-12
+  
   div.form-group
+    = f.label t('activerecord.attributes.notice_board.which_language')
+    br
     = f.collection_select :language_id, Language.all,:id,:translated_name
   div.form-group
     = f.label :note

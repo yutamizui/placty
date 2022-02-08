@@ -104,6 +104,7 @@ ja:
         user_name: ユーザー名
         created_at: 作成日
         no_request: 現在イベントのリクエストはありません
+        which_language: どの言語に対してのリクエストですか？
 
       language:
         name: 言語
