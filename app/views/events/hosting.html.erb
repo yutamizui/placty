@@ -9,6 +9,7 @@
 <table class="table table-bordered d-none d-md-block" id="hosting-event-table">  
   <thead class="thead-dark table-active">
     <tr>
+      <th><%= t('activerecord.attributes.event.language') %></th>
       <th scope="col"><%= t('activerecord.attributes.event.date') %></th>
       <th colspan="2" scope="col"><%= t('activerecord.attributes.event.title') %></th>
       <th scope="col"><%= t('activerecord.attributes.event.number') %></th>
@@ -47,7 +48,8 @@
       <% else %>
         <tr>
       <% end %>
-        <th scope="row"><%= "#{e.date.strftime("%Y/%m/%d (%a) %H:%M")}" %></th>
+        <td><%= e.language.translated_name %></td>
+        <td><%= "#{e.date.strftime("%Y/%m/%d (%a) %H:%M")}" %></td>
         <td colspan="2"><%= e.title %></td>
         <td><%= e.tickets.count %></td>
         <td><%= e.tickets.count * actual_point.to_i %><%= "pt" %></td>
@@ -95,6 +97,10 @@
         <% actual_point = e.point - 10 %>
       <% end %>
       <tr>
+        <th><%= t('activerecord.attributes.event.language') %></th>
+        <td><%= e.language.translated_name %></td>
+      </tr>
+      <tr>
         <th><%= t('activerecord.attributes.event.date') %></th>
         <td><%= "#{e.date.strftime("%Y/%m/%d (%a) %H:%M")}" %></td>
       </tr>
@@ -122,6 +128,10 @@
             <%= link_to t('activerecord.attributes.event.proccessed'), hosting_events_path, class:"btn btn-primary disabled" %>
           <% end %>
         </td>
+      </tr>
+      <tr class="table-space">
+        <th></th>
+        <td><span class="pb-3"></span></td>
       </tr>
     </tbody>
   <% end %>

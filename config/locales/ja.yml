@@ -86,6 +86,8 @@ ja:
         location: 開催場所
         number_of_point: 必要ポイント数
         length: イベント時間
+        language: 言語
+        which_language: どの言語に対してのイベントですか？
         length_value: 分
         point: ポイント
         participation_points: 参加ポイント
@@ -102,6 +104,8 @@ ja:
         how_to_use_memo: こちらに参加者と共有したいイベント内容のメモを記載してください。
         no_event: 現在開催予定のイベントはありません。
         free: 無料
+        event_invitation: |-
+          %{current_user}さんの興味のあるイベントがあったら、ぜひ参加してみてね！
 
       notice_board:
         request: リクエスト

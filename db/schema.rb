@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_09_004738) do
+ActiveRecord::Schema.define(version: 2022_02_09_093153) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(version: 2022_02_09_004738) do
     t.integer "point", default: 0
     t.boolean "point_process", default: false
     t.integer "limit_number", default: 1, null: false
+    t.bigint "language_id"
+    t.index ["language_id"], name: "index_events_on_language_id"
   end
 
   create_table "invoices", force: :cascade do |t|
@@ -95,6 +97,7 @@ ActiveRecord::Schema.define(version: 2022_02_09_004738) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "events", "languages"
   add_foreign_key "invoices", "users"
   add_foreign_key "notice_boards", "languages"
   add_foreign_key "notice_boards", "users"

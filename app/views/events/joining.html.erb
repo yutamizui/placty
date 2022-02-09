@@ -9,6 +9,7 @@
 <table class="table table-bordered table-hidden" id="all-event-table">
   <thead class="thead-dark table-active">
     <tr>
+      <th><%= t('activerecord.attributes.event.language') %></th>
       <th scope="col"><%= t('activerecord.attributes.event.date') %></th>
       <th colspan="2" scope="col"><%= t('activerecord.attributes.event.title') %></th>  
       <th scope="col"><%= t('activerecord.attributes.event.organizer') %></th>
@@ -19,7 +20,8 @@
   <tbody>
     <% @events.each do |e| %>
       <tr>
-        <th scope="row"><%= "#{e.date.strftime("%Y/%m/%d (%a) %H:%M")}" %></th>
+        <td><%= e.language.translated_name %></td>
+        <td><%= "#{e.date.strftime("%Y/%m/%d (%a) %H:%M")}" %></th>
         <td colspan="2"><%= e.title %></td>
       <% if params[:type] == "hosting" %>
         <td><%= e.tickets.count %></td>
@@ -39,6 +41,10 @@
   <% @events.each do |e| %>
     <tbody>
       <tr>
+        <th><%= t('activerecord.attributes.event.language') %></th>
+        <td><%= e.language.translated_name %></td>
+      </tr>
+      <tr>
         <th scope="col"><%= t('activerecord.attributes.event.date') %></th>
         <td scope="row"><%= "#{e.date.strftime("%Y/%m/%d (%a) %H:%M")}" %></td>
       </tr>
@@ -54,8 +60,14 @@
         <th scope="col"><%= t('activerecord.attributes.button.show') %></th>
         <td> <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type]), class:"btn btn-success btn-sm " %></td>
       </tr>
+      <tr class="table-space">
+        <th></th>
+        <td><span class="pb-3"></span></td>
+      </tr>
     </tbody>
   <% end %>
+  
 </table>
-</div>
-
+<%= link_to :back do %>
+  <%= link_to t('devise.shared.links.back'), events_path, class:"btn btn-secondary button-margin"  %>
+<% end %>
