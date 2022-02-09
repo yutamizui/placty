@@ -1,0 +1,40 @@
+<h3>
+  <%= t('activerecord.attributes.notice_board.request') %>
+</h3>
+
+
+<table class="table table-bordered" id="small-display-event-table">
+  <tbody>
+    <tr>
+        <th><%= t('activerecord.attributes.notice_board.created_at') %></th>
+        <td><%= @notice_board.language.created_at.strftime("%Y/%m/%d (%a)") %></td>
+    </tr>
+    <tr>
+        <th><%= t('activerecord.attributes.notice_board.user_name') %></th>
+        <td><%= @notice_board.user.translated_name %></td>
+    </tr>
+    <tr>
+        <th><%= t('activerecord.attributes.language.name') %></th>
+        <td><%= @notice_board.language.translated_name %></td>
+    </tr>
+    <tr>
+        <th><%= t('activerecord.attributes.notice_board.request_content') %></th>
+        <td><%= strip_tags(@notice_board.note) %></td>
+    </tr>
+    <% if current_user.id == @notice_board.user_id %>
+      <tr>
+        <td colspan="2">
+          <%= link_to t('activerecord.attributes.button.edit'), edit_notice_board_path(id: @notice_board.id), class:"btn btn-warning button-margin" %>
+          <%= link_to t('activerecord.attributes.button.delete'), notice_board_path(id: @notice_board.id), method: :delete, 
+            data: {confirm:"本当にこのリクエストを削除しますか？"}, class:"btn btn-danger button-margin" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('devise.shared.links.back'), notice_boards_path, class:"btn btn-secondary button-margin"  %>
+
+
+
+

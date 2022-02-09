@@ -5,6 +5,9 @@ class NoticeBoardsController < ApplicationController
     @notice_boards = NoticeBoard.all.order(created_at: :DESC)
   end
 
+  def show
+  end
+
   def new
     @notice_board = NoticeBoard.new
   end
@@ -24,7 +27,7 @@ class NoticeBoardsController < ApplicationController
 
   def update
     if @notice_board.update(notice_board_params)
-      redirect_to notice_boards_path, notice: t('activerecord.attributes.notification.edited')
+      redirect_to notice_board_path(id: @notice_board.id), notice: t('activerecord.attributes.notification.edited')
     else
       flash[:notice] = t('activerecord.attributes.link.failed_to_create')
       render 'notice_boards/edit'

@@ -18,21 +18,21 @@
   <% else %>
     <%= image_tag 'avatar.png', size:"100x100" %>
   <% end %>
-  <hr>
+  
   <p class="card-text">
     <!-- イベント参加を中止する -->
     <% if current_user.present? && @tickets.present? && current_user.id != @event.user_id %>
-      <%= link_to t('activerecord.attributes.event.cancel'), ticket_path(ticket_id: @tickets.first.id), method: :delete,  class:"btn btn-danger btn-lg" %>
+      <%= link_to t('activerecord.attributes.event.cancel'), ticket_path(ticket_id: @tickets.first.id), method: :delete,  class:"btn btn-danger btn-lg button-margin" %>
     <% elsif current_user.present? && current_user.id != @event.user_id %>
     <!-- イベントに参加する -->
-      <%= link_to t('activerecord.attributes.event.join'), tickets_path(event_id: @event.id, user_id: current_user.id), method: :post, class:"btn btn-success btn-lg" %>
+      <hr>
+      <%= link_to t('activerecord.attributes.event.join'), tickets_path(event_id: @event.id, user_id: current_user.id), method: :post, class:"btn btn-success btn-lg button-margin" %>
     <% end %>
-
+    
     <!-- ユーザー登録をしていない場合のメッセージ表示　-->
     <% unless current_user.present? %>
       <h3><%= t('activerecord.attributes.user.registration_message') %></h3>
-      <%= link_to t('activerecord.attributes.user.guide_to_user_registration'), new_user_registration_path, class:"btn btn-primary" %>
-
+      <%= link_to t('activerecord.attributes.user.guide_to_user_registration'), new_user_registration_path, class:"btn btn-primary button-margin" %>
     <% end %>
 
     <% if current_user.present? && Event.where(id: current_user.tickets.pluck(:event_id)).select { |e| e[:id] == @event.id}.count != 0 %>
@@ -64,7 +64,6 @@
       </form>
     </div>
      <span class="button-right">
-      <%= link_to t('activerecord.attributes.button.edit'), edit_event_path(id: @event.id), class:"btn btn-warning button-margin" %>
       <%= link_to t('activerecord.attributes.button.delete'), event_path(id: @event.id), method: :delete,  data: {confirm: t('activerecord.attributes.button.are_you_sure_to_delete')}, class:"btn btn-danger button-margin" %>
     </span>
   <% end %>

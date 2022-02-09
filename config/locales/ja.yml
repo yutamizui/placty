@@ -71,6 +71,9 @@ ja:
         hosting: 主催イベント
         number: 参加者数
         participant: 参加者
+        limit_number: 最大参加人数
+        limit_number_value: 人
+        fully_booked: 満席
         receiving_point: 取得予定ポイント
         join: 参加する
         cancel: 参加をやめる
@@ -82,8 +85,11 @@ ja:
         organizer: 主催者
         location: 開催場所
         number_of_point: 必要ポイント数
-        length: 開催時間
+        length: イベント時間
+        length_value: 分
         point: ポイント
+        participation_points: 参加ポイント
+        point_value: ポイント
         add_point: ポイント追加
         proccessed: 処理済
         preparing: 準備中

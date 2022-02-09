@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_02_071641) do
+ActiveRecord::Schema.define(version: 2022_02_09_004738) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2022_02_02_071641) do
     t.integer "length", default: 10
     t.integer "point", default: 0
     t.boolean "point_process", default: false
+    t.integer "limit_number", default: 1, null: false
   end
 
   create_table "invoices", force: :cascade do |t|

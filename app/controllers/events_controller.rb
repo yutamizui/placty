@@ -2,11 +2,7 @@ class EventsController < ApplicationController
   before_action :find_event, only: [:show, :edit, :update, :destroy, :add_point]
 
   def index
-    if current_user.present?
-      @events = Event.where('date >= ?', Time.now).order(date: "ASC") - current_user.events.where('date >= ?', Time.now) - Event.where(id: current_user.tickets.pluck(:event_id)).where('date >= ?', Time.now)
-    else
-      @events = Event.where('date >= ?', Time.now).order(date: "ASC")
-    end
+    @events = Event.where('date >= ?', Time.now).order(date: "ASC")
   end
 
   def joining 
@@ -90,7 +86,7 @@ class EventsController < ApplicationController
     @users = User.where(id: @users_id)
     @users.each do |u|
       u.notes.first.update(
-        content: params[:memo_content] + "\n" + u.notes.first.content 
+        content: params[:memo_content] + "\n" + (u.notes.first.content).to_s 
       )
     end
     redirect_to event_path(id: @event.id), notice: "イベントメモを共有しました！"

@@ -16,7 +16,7 @@ en:
         delete: Delete
         update: Update
         click: Click here
-        are_you_sure_to_delete: Are you sure to delete this?
+        are_you_sure_to_delete: Are you sure to delete?
 
       notification:
         created: Created successfully
@@ -69,7 +69,10 @@ en:
         joining: Joining events
         hosting: Hosting events
         join: Join 
-        number: Participants
+        number: Participants number
+        limit_number: Maximum participants
+        limit_number_value: paricipants 
+        fully_booked: Fully booked
         participant: Participants
         receiving_point: Receiving Point
         cancel: Cancel
@@ -81,8 +84,11 @@ en:
         organizer: Organizer
         location: Location
         number_of_point: Required points
-        length: Opening hours
+        length: Event hours
+        length_value: mins
         point: Point
+        participation_points: Participation points
+        point_value: pt
         point_management: Point Calculation
         proccessed: Already handled
         preparing: Preparing
