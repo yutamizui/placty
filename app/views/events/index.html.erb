@@ -23,15 +23,20 @@
           <td><%= "#{e.date.strftime("%Y/%m/%d (%a) %H:%M")}" %></td>
           <td><%= e.title %></td>
           <td><%= User.find(e.user_id).translated_name %></td>
-          <% if current_user.present? && e.tickets.pluck(:user_id).include?(current_user.id) %>
-            <td><%= link_to t('activerecord.attributes.event.joining'), event_path(id: e.id), class:"btn btn-danger btn-sm disabled" %> </td>
-          <% elsif e.limit_number == e.tickets.count %>
-            <td><%= link_to t('activerecord.attributes.event.fully_booked'), event_path(id: e.id), class:"btn btn-warning btn-sm disabled" %></td>
-          <% elsif current_user.present? && e.user_id == current_user.id %>
-            <td><%= link_to t('activerecord.attributes.event.hosting'), event_path(id: e.id), class:"btn btn-success btn-sm disabled" %></td>
-          <% else %>
-            <td><%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id), class:"btn btn-success btn-sm" %></td>
-          <% end %>
+          <td>
+            <% if current_user.present? && e.tickets.pluck(:user_id).include?(current_user.id) %>
+              <%= link_to t('activerecord.attributes.event.joining'), event_path(id: e.id), class:"btn btn-danger btn-sm disabled" %> 
+            <% elsif e.limit_number == e.tickets.count %>
+              <%= link_to t('activerecord.attributes.event.fully_booked'), event_path(id: e.id), class:"btn btn-warning btn-sm disabled" %>
+            <% elsif current_user.present? && e.user_id == current_user.id %>
+              <%= link_to t('activerecord.attributes.event.hosting'), event_path(id: e.id), class:"btn btn-success btn-sm disabled" %>
+            <% else %>
+              <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id), class:"btn btn-success btn-sm" %>
+            <% end %>
+            <% if e.point == 0 %>
+              <%= link_to t('activerecord.attributes.event.free'), events_path, class:"btn btn-warning button-circle btn-sm disabled" %>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>
@@ -55,15 +60,20 @@
         </tr>
         <tr>
           <th><%= t('activerecord.attributes.button.show') %></th>
-          <% if current_user.present? && e.tickets.pluck(:user_id).include?(current_user.id) %>
-            <td><%= link_to t('activerecord.attributes.event.joining'), event_path(id: e.id), class:"btn btn-danger btn-sm disabled" %> </td>
-          <% elsif e.limit_number == e.tickets.count %>
-            <td><%= link_to t('activerecord.attributes.event.fully_booked'), event_path(id: e.id), class:"btn btn-warning btn-sm disabled" %></td>
-          <% elsif current_user.present? && e.user_id == current_user.id %>
-            <td><%= link_to t('activerecord.attributes.event.hosting'), event_path(id: e.id), class:"btn btn-success btn-sm disabled" %></td>
-          <% else %>
-            <td><%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id), class:"btn btn-success btn-sm" %></td>
-          <% end %>
+          <td>
+            <% if current_user.present? && e.tickets.pluck(:user_id).include?(current_user.id) %>
+              <%= link_to t('activerecord.attributes.event.joining'), event_path(id: e.id), class:"btn btn-danger btn-sm disabled" %> 
+            <% elsif e.limit_number == e.tickets.count %>
+              <%= link_to t('activerecord.attributes.event.fully_booked'), event_path(id: e.id), class:"btn btn-warning btn-sm disabled" %>
+            <% elsif current_user.present? && e.user_id == current_user.id %>
+              <%= link_to t('activerecord.attributes.event.hosting'), event_path(id: e.id), class:"btn btn-success btn-sm disabled" %>
+            <% else %>
+              <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id), class:"btn btn-success btn-sm" %>
+            <% end %>
+            <% if e.point == 0 %>
+              <%= link_to t('activerecord.attributes.event.free'), events_path, class:"btn btn-warning button-circle btn-sm disabled" %>
+            <% end %>
+          </td>
         </tr>
       </tbody>
     <% end %>

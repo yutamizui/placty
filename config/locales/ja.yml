@@ -101,6 +101,7 @@ ja:
         shared_memo: 参加者との共有メモ
         how_to_use_memo: こちらに参加者と共有したいイベント内容のメモを記載してください。
         no_event: 現在開催予定のイベントはありません。
+        free: 無料
 
       notice_board:
         request: リクエスト
@@ -111,6 +112,12 @@ ja:
         created_at: 作成日
         no_request: 現在イベントのリクエストはありません
         which_language: どの言語に対してのリクエストですか？
+        description: "%{current_user}さんの参加してみたいイベントなどありましたら、気軽にリクエストをお願いします！"
+        send_request: この内容でリクエストする
+        making_event_invitation: |-
+          %{current_user}さん、下記のリクエストが届いています。
+          リクエストされたイベントを開催できる方はぜひ気軽に開催してみてね!
+
 
       language:
         name: 言語

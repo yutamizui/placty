@@ -3,8 +3,9 @@ div.col-md-12
     div class="card-header text-white bg-secondary text-center" 
       h4 = t('activerecord.attributes.notice_board.create')
     div class="card-body"
+      h4 = t('activerecord.attributes.notice_board.description', current_user: current_user.translated_name)
       == render 'shared/errors', obj: @notice_board
       = form_for @notice_board do |f|
         == render 'notice_boards/form', f: f
         = f.hidden_field :user_id, value: current_user.id
-        = f.submit  t('activerecord.attributes.button.create'), class:"btn btn-info"
+        = f.submit  t('activerecord.attributes.notice_board.send_request'), class:"btn btn-info"

@@ -3,6 +3,7 @@
 <h3>
   <%= t('activerecord.attributes.notice_board.request') %>
 </h3>
+<h4><%= simple_format(t('activerecord.attributes.notice_board.making_event_invitation', current_user: current_user.translated_name)) %></h4>
 <hr>
 <% if @notice_boards.count > 0 %>
   <%# 画面サイズが md lg xlの時に表示%>
