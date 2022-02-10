@@ -45,8 +45,8 @@
   </table>
 
   <%# 画面サイズがxs sm の時に表示%>
-  <table class="table table-bordered d-xs-block d-md-none" id="small-display-event-table">
-    <% @events.each do |e| %>
+  <% @events.each do |e| %>
+    <table class="table table-bordered d-xs-block d-md-none" id="small-display-event-table">
       <tbody>
         <tr>
           <th><%= t('activerecord.attributes.event.language') %></th>
@@ -80,14 +80,10 @@
               <%= link_to t('activerecord.attributes.event.free'), events_path, class:"btn btn-warning button-circle btn-sm disabled" %>
             <% end %>
           </td>
-          <tr class="table-space">
-            <th></th>
-            <td><span class="pb-3"></span></td>
-          </tr>
         </tr>
       </tbody>
-    <% end %>
-  </table>
+    </table>
+  <% end %>
 <% else %>
   <h4><%= t('activerecord.attributes.event.no_event') %></h4 >
 <% end %>

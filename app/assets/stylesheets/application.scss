@@ -281,6 +281,9 @@ footer ul.quicklinks {
   width: 30%;
 }
 
+#small-display-event-table th  {
+  background-color: #DDDDDD;
+}
 
 #small-display-event-table th, #small-display-event-table td {
   border-color: #2b2d2e;
@@ -289,11 +292,6 @@ footer ul.quicklinks {
 
 #small-display-event-table > tbody > tr > th {
   width: 30%;
-}
-
-#small-display-event-table > tbody > .table-space th, .table-space td  {
-  background-color: gray;
-  border-color: gray; 
 }
 
 .background-gray {

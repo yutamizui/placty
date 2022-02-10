@@ -106,7 +106,9 @@ en:
         free: Free
         event_invitation: |-
           If there's an event you're interested in, go for it!
-
+        add_point_alert: |- 
+          Would you like to add the points from this event to your own points? (%{point}pt)
+          This event information will be deleted automatically.
 
       notice_board:
         request: Request

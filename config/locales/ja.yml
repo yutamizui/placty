@@ -106,6 +106,10 @@ ja:
         free: 無料
         event_invitation: |-
           %{current_user}さんの興味のあるイベントがあったら、ぜひ参加してみてね！
+        add_point_alert: |- 
+          このイベントのポイント(%{point}pt)をご自身のポイントに追加しますか？
+          こちらのイベント情報は自動的に削除されます。
+          
 
       notice_board:
         request: リクエスト

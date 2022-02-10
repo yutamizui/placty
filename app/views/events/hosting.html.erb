@@ -55,7 +55,7 @@
         <td><%= e.tickets.count * actual_point.to_i %><%= "pt" %></td>
         <td><%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type]), class:"btn btn-success btn-sm " %></td>
         <% if e.point_process == false && e.date < Date.today %>
-          <td><%= link_to t('activerecord.attributes.event.add_point'), add_point_events_path(id: e.id, giving_point: e.tickets.count * actual_point.to_i), method: :post, class:"btn btn-warning btn-sm " %></td>
+          <td><%= link_to t('activerecord.attributes.event.add_point'), add_point_events_path(id: e.id, giving_point: e.tickets.count * actual_point.to_i), method: :post, data: {confirm: t('activerecord.attributes.event.add_point_alert', point: e.tickets.count * actual_point.to_i)}, class:"btn btn-warning btn-sm " %></td>
         <% elsif e.point_process == false && e.date > Date.today %>
           <td><%= link_to t('activerecord.attributes.event.preparing'), hosting_events_path, class:"btn btn-warning btn-sm disabled" %></td>
         <% elsif e.point_process == true %>
@@ -68,8 +68,8 @@
 
 
 <%# 画面サイズがxs sm の時に表示%>
-<table class="table table-bordered d-xs-block d-md-none" id="small-display-event-table">
-  <% @events.each do |e| %>
+<% @events.each do |e| %>
+  <table class="table table-bordered d-xs-block d-md-none" id="small-display-event-table">
     <% if e.date < Time.now %>
       <tbody class="background-gray">
     <% else %>
@@ -121,7 +121,7 @@
         <td>
           <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type]), class:"btn btn-success" %>
           <% if e.point_process == false && e.date < Date.today %>
-            <%= link_to t('activerecord.attributes.event.add_point'), add_point_events_path(id: e.id, giving_point: e.tickets.count * actual_point.to_i), method: :post, class:"btn btn-warning" %>
+            <%= link_to t('activerecord.attributes.event.add_point'), add_point_events_path(id: e.id, giving_point: e.tickets.count * actual_point.to_i), method: :post, data: {confirm: t('activerecord.attributes.event.add_point_alert')},class:"btn btn-warning" %>
           <% elsif e.point_process == false && e.date > Date.today %>
             <%= link_to t('activerecord.attributes.event.preparing'), hosting_events_path, class:"btn btn-warning disabled" %>
           <% elsif e.point_process == true %>
@@ -129,13 +129,9 @@
           <% end %>
         </td>
       </tr>
-      <tr class="table-space">
-        <th></th>
-        <td><span class="pb-3"></span></td>
-      </tr>
     </tbody>
-  <% end %>
-</table>
+  </table>
+<% end %>
 
 
 

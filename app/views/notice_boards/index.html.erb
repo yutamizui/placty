@@ -32,8 +32,8 @@
 
 
   <%# 画面サイズがxs sm の時に表示%>
-  <table class="table table-bordered d-xs-block d-md-none" id="small-display-event-table">
-    <% @notice_boards.each_with_index do |n, i| %>
+  <% @notice_boards.each_with_index do |n, i| %>
+    <table class="table table-bordered d-xs-block d-md-none" id="small-display-event-table">
       <tbody>
         <tr>
           <th><%= t('activerecord.attributes.notice_board.created_at') %></th>
@@ -54,13 +54,9 @@
         <tr>
           <td colspan="2"><%= link_to t('activerecord.attributes.button.show'), notice_board_path(id: n), class:"btn btn-success button-margin" %></td>
         </tr>
-        <tr class="table-space">
-          <th></th>
-          <td><span class="pb-3"></span></td>
-        </tr>
       </tbody>
-    <% end %>
-  </table>
+    </table>
+  <% end %>
 <% else %>
   <h4><%= t('activerecord.attributes.notice_board.no_request') %></h4 >
 <% end %>
