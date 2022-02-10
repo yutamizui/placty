@@ -24,6 +24,7 @@ en:
         updated: Updated successfully
         deleted: Deleted successfully
         requested: Requested successfully
+        failed_to_create: Couldn't create it
 
       language:
         language: Language
@@ -85,16 +86,15 @@ en:
         organizer: Organizer
         location: Location
         number_of_point: Required points
-        length: Event hours
+        length: Event length
         language: Language
-        which_language: What language is the event for?
+        which_language: What language is this event for?
         length_value: mins
         point: Point
         participation_points: Participation points
         point_value: pt
         point_management: Point Calculation
-        proccessed: Already handled
-        preparing: Preparing
+        point_rule: The number of points you can enter will be 0 or more than 4
         sale: Sale
         transfer_status: Transfer Status
         add_point: Add points
@@ -109,6 +109,7 @@ en:
         add_point_alert: |- 
           Would you like to add the points from this event to your own points? (%{point}pt)
           This event information will be deleted automatically.
+        successsfully_added: Event points have been added to your points.
 
       notice_board:
         request: Request

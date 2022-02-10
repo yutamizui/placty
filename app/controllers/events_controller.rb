@@ -28,7 +28,7 @@ class EventsController < ApplicationController
     if @event.save
       redirect_to hosting_events_path, notice: t('activerecord.attributes.notification.created')
     else
-      flash.now[:alert] = t('activerecord.attirbutes.activity.failed_to_create')
+      flash.now[:alert] = t('activerecord.attributes.notification.failed_to_create')
       render 'new'
     end
   end
@@ -70,10 +70,8 @@ class EventsController < ApplicationController
         expired_at: Date.today.next_year,
       )
     end
-    @event.update(
-      point_process: true
-    )
-    redirect_to hosting_events_path, notice: "Sucessfully added"
+    @event.delete
+    redirect_to hosting_events_path, notice: t('activerecord.attributes.event.successsfully_added')
   end
 
   def duplicate

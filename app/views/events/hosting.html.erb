@@ -15,7 +15,6 @@
       <th scope="col"><%= t('activerecord.attributes.event.number') %></th>
       <th scope="col"><%= t('activerecord.attributes.event.receiving_point') %></th>
       <th scope="col"><%= t('activerecord.attributes.button.show') %></th>
-      <th scope="col"></th>
     </tr>
   </thead>
   
@@ -53,14 +52,10 @@
         <td colspan="2"><%= e.title %></td>
         <td><%= e.tickets.count %></td>
         <td><%= e.tickets.count * actual_point.to_i %><%= "pt" %></td>
-        <td><%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type]), class:"btn btn-success btn-sm " %></td>
-        <% if e.point_process == false && e.date < Date.today %>
-          <td><%= link_to t('activerecord.attributes.event.add_point'), add_point_events_path(id: e.id, giving_point: e.tickets.count * actual_point.to_i), method: :post, data: {confirm: t('activerecord.attributes.event.add_point_alert', point: e.tickets.count * actual_point.to_i)}, class:"btn btn-warning btn-sm " %></td>
-        <% elsif e.point_process == false && e.date > Date.today %>
-          <td><%= link_to t('activerecord.attributes.event.preparing'), hosting_events_path, class:"btn btn-warning btn-sm disabled" %></td>
-        <% elsif e.point_process == true %>
-          <td><%= link_to t('activerecord.attributes.event.proccessed'), hosting_events_path, class:"btn btn-secondary btn-sm disabled" %></td>
-        <% end %>
+        <td>
+          <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type]), class:"btn btn-success btn-sm button-margin" %>
+          <%= link_to t('activerecord.attributes.event.add_point'), add_point_events_path(id: e.id, giving_point: e.tickets.count * actual_point.to_i), method: :post, data: {confirm: t('activerecord.attributes.event.add_point_alert', point: e.tickets.count * actual_point.to_i)}, class:"btn btn-warning btn-sm button-margin" %>
+        </td>
       </tr>
     <% end %>
   </tbody>
@@ -120,13 +115,7 @@
         <th><%= t('activerecord.attributes.button.show') %></th>
         <td>
           <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type]), class:"btn btn-success" %>
-          <% if e.point_process == false && e.date < Date.today %>
-            <%= link_to t('activerecord.attributes.event.add_point'), add_point_events_path(id: e.id, giving_point: e.tickets.count * actual_point.to_i), method: :post, data: {confirm: t('activerecord.attributes.event.add_point_alert')},class:"btn btn-warning" %>
-          <% elsif e.point_process == false && e.date > Date.today %>
-            <%= link_to t('activerecord.attributes.event.preparing'), hosting_events_path, class:"btn btn-warning disabled" %>
-          <% elsif e.point_process == true %>
-            <%= link_to t('activerecord.attributes.event.proccessed'), hosting_events_path, class:"btn btn-primary disabled" %>
-          <% end %>
+          <%= link_to t('activerecord.attributes.event.add_point'), add_point_events_path(id: e.id, giving_point: e.tickets.count * actual_point.to_i), method: :post, data: {confirm: t('activerecord.attributes.event.add_point_alert', point: e.tickets.count * actual_point.to_i)},class:"btn btn-warning" %>
         </td>
       </tr>
     </tbody>

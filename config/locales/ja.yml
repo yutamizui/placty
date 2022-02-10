@@ -24,6 +24,7 @@ ja:
         updated: 内容を更新しました
         deleted: 内容を削除しました
         requested: リクエストしました
+        failed_to_create: 作成できませんでした
       
       language:
         language: 言語
@@ -93,9 +94,8 @@ ja:
         participation_points: 参加ポイント
         point_value: ポイント
         add_point: ポイント追加
-        proccessed: 処理済
-        preparing: 準備中
         point_management: ポイント精算
+        point_rule: 入力できるポイント数は０または４以上になります
         sale: 売上
         transfer_status: 振込状況
         transfer_request_day: 振込依頼日
@@ -109,7 +109,7 @@ ja:
         add_point_alert: |- 
           このイベントのポイント(%{point}pt)をご自身のポイントに追加しますか？
           こちらのイベント情報は自動的に削除されます。
-          
+        successsfully_added: イベントポイントがご自身のポイントに加算されました
 
       notice_board:
         request: リクエスト
