@@ -80,10 +80,8 @@ class EventsController < ApplicationController
         expired_at: Date.today.next_year,
       )
     end
-<<<<<<< HEAD
     @event.delete
     redirect_to hosting_events_path, notice: t('activerecord.attributes.event.successsfully_added')
-=======
     ## イベント削除と共にチケットも削除される
     @event.destroy
     if params[:manage].present?
@@ -91,7 +89,6 @@ class EventsController < ApplicationController
     else
       redirect_to hosting_events_path, notice: t('activerecord.attributes.notification.point_added')
     end
->>>>>>> aaa4fc2 (Created event management page)
   end
 
   def duplicate
