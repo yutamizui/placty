@@ -24,7 +24,11 @@ ja:
         updated: 内容を更新しました
         deleted: 内容を削除しました
         requested: リクエストしました
+<<<<<<< HEAD
         failed_to_create: 作成できませんでした
+=======
+        point_added: ポイントが自身のポイントに追加されました
+>>>>>>> aaa4fc2 (Created event management page)
       
       language:
         language: 言語
@@ -106,10 +110,15 @@ ja:
         free: 無料
         event_invitation: |-
           %{current_user}さんの興味のあるイベントがあったら、ぜひ参加してみてね！
+<<<<<<< HEAD
         add_point_alert: |- 
           このイベントのポイント(%{point}pt)をご自身のポイントに追加しますか？
           こちらのイベント情報は自動的に削除されます。
         successsfully_added: イベントポイントがご自身のポイントに加算されました
+=======
+        public_event_invitation: 興味のあるイベントがあったら、ぜひ参加してみてね！
+        manage: イベント管理
+>>>>>>> aaa4fc2 (Created event management page)
 
       notice_board:
         request: リクエスト

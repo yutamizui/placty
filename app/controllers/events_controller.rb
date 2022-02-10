@@ -13,6 +13,10 @@ class EventsController < ApplicationController
     @events = current_user.events.order(date: "ASC")
   end
 
+  def manage
+    @events = Event.all.order(date: "ASC")
+  end
+
   def show
     if current_user.present? 
       @tickets = Ticket.where(user_id: current_user.id).where(event_id: @event.id)
@@ -57,28 +61,44 @@ class EventsController < ApplicationController
         end
       end
     end
+    ## もし削除のタイミングがイベント開始時間の１日前以降だった場合
+    if Time.now >= @event.date - 1.day
+      @event.user.update(
+        penalty: @event.user.penalty + 1
+      )
+    end
     ## イベント削除と共にチケットも削除される
     @event.destroy
-    redirect_to hosting_events_path(type: "hosting"), notice: t('activerecord.attributes.notification.deleted')
+    redirect_to hosting_events_path, notice: t('activerecord.attributes.notification.deleted')
   end
 
   def add_point
     @giving_point = params[:giving_point].to_i
     @giving_point.times do
       Point.create(
-        user_id: current_user.id,
+        user_id: @event.user_id,
         expired_at: Date.today.next_year,
       )
     end
+<<<<<<< HEAD
     @event.delete
     redirect_to hosting_events_path, notice: t('activerecord.attributes.event.successsfully_added')
+=======
+    ## イベント削除と共にチケットも削除される
+    @event.destroy
+    if params[:manage].present?
+      redirect_to manage_events_path, notice: t('activerecord.attributes.notification.point_added')
+    else
+      redirect_to hosting_events_path, notice: t('activerecord.attributes.notification.point_added')
+    end
+>>>>>>> aaa4fc2 (Created event management page)
   end
 
   def duplicate
   end
   
 
-  def memo 
+  def memo
     @event = Event.find(params[:id])
     @users_id = @event.tickets.pluck(:user_id)
     @users = User.where(id: @users_id)

@@ -1,7 +1,7 @@
 <%= render "event_button" %>
 
 <h3>
-  <%= t('activerecord.attributes.event.hosting') %>
+  <%= t('activerecord.attributes.event.manage') %>
 </h3>
 <hr>
 
@@ -15,6 +15,7 @@
       <th scope="col"><%= t('activerecord.attributes.event.number') %></th>
       <th scope="col"><%= t('activerecord.attributes.event.receiving_point') %></th>
       <th scope="col"><%= t('activerecord.attributes.button.show') %></th>
+      <th scope="col"></th>
     </tr>
   </thead>
   
@@ -52,20 +53,12 @@
         <td colspan="2"><%= e.title %></td>
         <td><%= e.tickets.count %></td>
         <td><%= e.tickets.count * actual_point.to_i %><%= "pt" %></td>
-<<<<<<< HEAD
-        <td>
-          <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type]), class:"btn btn-success btn-sm button-margin" %>
-          <%= link_to t('activerecord.attributes.event.add_point'), add_point_events_path(id: e.id, giving_point: e.tickets.count * actual_point.to_i), method: :post, data: {confirm: t('activerecord.attributes.event.add_point_alert', point: e.tickets.count * actual_point.to_i)}, class:"btn btn-warning btn-sm button-margin" %>
-        </td>
-=======
         <td><%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type]), class:"btn btn-success btn-sm " %></td>
-        <%# 開催日より２日以上が経過している場合、不正を防ぐため %>
         <% if e.date + 2.day < Date.today %>
-          <td><%= link_to t('activerecord.attributes.event.add_point'), add_point_events_path(id: e.id, giving_point: e.tickets.count * actual_point.to_i), method: :post, class:"btn btn-warning btn-sm " %></td>
+          <td><%= link_to t('activerecord.attributes.event.add_point'), add_point_events_path(id: e.id, manage: "manage", giving_point: e.tickets.count * actual_point.to_i), method: :post, class:"btn btn-warning btn-sm " %></td>
         <% else %>
           <td><%= link_to t('activerecord.attributes.event.preparing'), hosting_events_path, class:"btn btn-warning btn-sm disabled" %></td>
         <% end %>
->>>>>>> aaa4fc2 (Created event management page)
       </tr>
     <% end %>
   </tbody>
@@ -73,8 +66,8 @@
 
 
 <%# 画面サイズがxs sm の時に表示%>
-<% @events.each do |e| %>
-  <table class="table table-bordered d-xs-block d-md-none" id="small-display-event-table">
+<table class="table table-bordered d-xs-block d-md-none" id="small-display-event-table">
+  <% @events.each do |e| %>
     <% if e.date < Time.now %>
       <tbody class="background-gray">
     <% else %>
@@ -125,21 +118,17 @@
         <th><%= t('activerecord.attributes.button.show') %></th>
         <td>
           <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type]), class:"btn btn-success" %>
-<<<<<<< HEAD
-          <%= link_to t('activerecord.attributes.event.add_point'), add_point_events_path(id: e.id, giving_point: e.tickets.count * actual_point.to_i), method: :post, data: {confirm: t('activerecord.attributes.event.add_point_alert', point: e.tickets.count * actual_point.to_i)},class:"btn btn-warning" %>
-=======
           <%# 開催日より２日以上が経過している場合、不正を防ぐため %>
           <% if e.date + 2.day < Date.today %>
             <%= link_to t('activerecord.attributes.event.add_point'), add_point_events_path(id: e.id, giving_point: e.tickets.count * actual_point.to_i), method: :post, class:"btn btn-warning" %>
           <% else %>
             <%= link_to t('activerecord.attributes.event.preparing'), hosting_events_path, class:"btn btn-warning disabled" %>
           <% end %>
->>>>>>> aaa4fc2 (Created event management page)
         </td>
       </tr>
     </tbody>
-  </table>
-<% end %>
+  <% end %>
+</table>
 
 
 
