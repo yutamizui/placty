@@ -81,14 +81,9 @@ class EventsController < ApplicationController
       )
     end
     @event.delete
-    redirect_to hosting_events_path, notice: t('activerecord.attributes.event.successsfully_added')
     ## イベント削除と共にチケットも削除される
     @event.destroy
-    if params[:manage].present?
-      redirect_to manage_events_path, notice: t('activerecord.attributes.notification.point_added')
-    else
-      redirect_to hosting_events_path, notice: t('activerecord.attributes.notification.point_added')
-    end
+    redirect_to hosting_events_path, notice: t('activerecord.attributes.notification.point_added')
   end
 
   def duplicate
