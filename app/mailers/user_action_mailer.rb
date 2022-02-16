@@ -11,6 +11,7 @@ class UserActionMailer < ApplicationMailer
       :to => "info@calahe.com",
       :subject => @title,
       :name => @name,
+      :email => @email,
       :content => @content
     )
   end
