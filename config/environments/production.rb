@@ -106,7 +106,7 @@ Rails.application.configure do
     :authentication => :plain,
     :user_name      => ENV['SENDGRID_USERNAME'],
     :password       => ENV['SENDGRID_PASSWORD'],
-    :api_key        => ENV['SENDGRID_WEB_API_KEY'],
+    :api_key        => ENV['SENDGRID_WEB_KEY'],
     :domain         => 'placty.com',
     :enable_starttls_auto => true
   }
