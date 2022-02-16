@@ -104,7 +104,8 @@ Rails.application.configure do
     :address        => 'smtp.sendgrid.net',
     :port           => '587',
     :authentication => :plain,
-    :api_key       => ENV['SENDGRID_WEB_API_KEY'],
+    :user_name      => 'apikey',
+    :password       => ENV['SENDGRID_API_KEY'],
     :domain         => 'placty.com',
     :enable_starttls_auto => true
   }
