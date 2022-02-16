@@ -9,7 +9,6 @@ class UserActionMailer < ApplicationMailer
     @content = content
     mail( 
       :to => "info@calahe.com",
-      :from => @email,
       :subject => @title,
       :name => @name,
       :content => @content
