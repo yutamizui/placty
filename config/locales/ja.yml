@@ -149,7 +149,16 @@ ja:
 
       point:
         management: ポイント管理
-
+      
+      contact:
+       title: お問い合わせ
+       name: 名前
+       subject: タイトル
+       email: メールアドレス
+       send: 送信する
+       sent_successfully: メッセージが送信されました
+       
+      
   devise:
     password_length: 文字以上
     blank_for_no_change: もしパスワードを変更しない場合は空欄にしてください。

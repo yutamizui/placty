@@ -151,6 +151,14 @@ en:
       point:
          management: Point management
 
+      contact:
+       title: Inquiry
+       name: Name
+       subject: Subject
+       email: Email
+       send: Send
+       sent_successfully: Your message has been sent
+      
   devise:
     password_length: characters minimum
     blank_for_no_change: Leave blank if you don't want to change it

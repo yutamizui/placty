@@ -28,6 +28,9 @@ Rails.application.routes.draw do
   end
 
   get "locale" => "application#locale", as: "locale"
+  get "introduction" => "home#introduction", as: "introduction"
+  get "contact" => "home#contact", as: "contact"
+  post "contact_sending" => "home#contact_sending", as: "contact_sending"
   post "payments/customer_registration"
   post "payments/payjpcard_update"
   get 'payments/price'

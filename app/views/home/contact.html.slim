@@ -1,0 +1,25 @@
+div class="row"
+  div class="col-md-12"
+    div class="card border-success button-margin-sm"
+      div class="card-header"
+        h3 = t('activerecord.attributes.contact.title')
+      div class="card-body"
+        = form_tag(contact_sending_path, method: "post") do
+          - unless current_user.present?
+            div.form-group
+              div = t('activerecord.attributes.contact.name') 
+              = text_field_tag :name, nil, class:"form-control"
+            div.form-group
+              div = t('activerecord.attributes.contact.email') 
+              = text_field_tag :email, nil, class:"form-control"
+
+          div.form-group
+            div = t('activerecord.attributes.contact.subject') 
+            = text_field_tag :title, nil, class:"form-control"
+          div.form-group
+            = text_area_tag :content, nil, class:"", size: "30x10" 
+            
+          = submit_tag t('activerecord.attributes.contact.send') , class:"btn btn-warning btn-sm button-margin", style:"color:white;"
+br
+= link_to :back do 
+  = link_to t('devise.shared.links.back'), events_path, class:"btn btn-secondary button-margin"  
