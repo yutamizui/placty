@@ -15,8 +15,10 @@ ja:
         save: 保存する
         update: 更新する
         delete: 削除する
+        duplicate: 複製する
+        back: 戻る
         click: こちらをクリック
-        are_you_sure_to_delete: 本当によろしい削除しますか？
+        are_you_sure_to_delete: 本当に削除しますか？
      
       notification:
         created: 内容を作成しました
@@ -71,6 +73,7 @@ ja:
         all: すべてのイベント
         joining: 参加イベント
         hosting: 主催イベント
+        hosted: 以前のイベント
         number: 参加者数
         participant: 参加者
         limit_number: 最大参加人数
@@ -108,8 +111,7 @@ ja:
         event_invitation: |-
           %{current_user}さんの興味のあるイベントがあったら、ぜひ参加してみてね！
         add_point_alert: |- 
-          このイベントのポイント(%{point}pt)をご自身のポイントに追加しますか？
-          こちらのイベント情報は自動的に削除されます。
+          このイベントのポイント(%{giving_point}pt)をご自身のポイントに追加しますか？
         successsfully_added: イベントポイントがご自身のポイントに加算されました
         public_event_invitation: 興味のあるイベントがあったら、ぜひ参加してみてね！
         manage: イベント管理
@@ -129,6 +131,7 @@ ja:
         making_event_invitation: |-
           %{current_user}さん、下記のリクエストが届いています。
           リクエストされたイベントを開催できる方はぜひ気軽に開催してみてね!
+        edit: リクエストの編集
 
 
       language:

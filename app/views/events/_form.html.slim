@@ -49,7 +49,7 @@ div.col-md-12
 
 
 javascript:
-  $("input[name='event[point]']").on('click blur keydown keyup keypress change touchstart', function(){
+  $("input[name='event[point]']").on('change', function(){
     var val = $(this).val().replace(/[０-９]/g,s => String.fromCharCode(s.charCodeAt(0) - 65248)).replace(/\D/g,'',
     function( tmpStr ) {
       return String.fromCharCode( tmpStr.charCodeAt(0) - 0xFEE0 );

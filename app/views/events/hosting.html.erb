@@ -3,8 +3,6 @@
 <h3>
   <%= t('activerecord.attributes.event.hosting') %>
 </h3>
-<hr>
-
 <%# 画面サイズが md lg xlの時に表示%>
 <table class="table table-bordered d-none d-md-block" id="hosting-event-table">  
   <thead class="thead-dark table-active">
@@ -19,7 +17,7 @@
   </thead>
   
   <tbody>
-    <% @events.each do |e| %>
+    <% @active_events.each do |e| %>
       <% if e.point == 0 %>
         <% actual_point = 0 %>
       <% elsif e.point >= 4 && e.point <= 15 %>
@@ -56,7 +54,7 @@
           <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type]), class:"btn btn-success btn-sm " %>
           <%# 開催日より２日以上が経過している場合、不正を防ぐため %>
           <% if e.date + 2.day < Date.today %>
-            <%= link_to t('activerecord.attributes.event.add_point'), add_point_events_path(id: e.id, giving_point: e.tickets.count * actual_point.to_i), method: :post, class:"btn btn-warning btn-sm " %>
+            <%= link_to t('activerecord.attributes.event.add_point'), add_point_events_path(id: e.id, giving_point: e.tickets.count * actual_point.to_i), data: {confirm:  t('activerecord.attributes.event.add_point_alert', giving_point: e.tickets.count * actual_point.to_i)}, method: :post, class:"btn btn-warning btn-sm " %>
           <% else %>
             <%= link_to t('activerecord.attributes.event.preparing'), hosting_events_path, class:"btn btn-warning btn-sm disabled" %>
           <% end %>
@@ -68,7 +66,7 @@
 
 
 <%# 画面サイズがxs sm の時に表示%>
-<% @events.each do |e| %>
+<% @active_events.each do |e| %>
   <table class="table table-bordered d-xs-block d-md-none" id="small-display-event-table">
     <% if e.date < Time.now %>
       <tbody class="background-gray">
@@ -122,7 +120,7 @@
           <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type]), class:"btn btn-success" %>
           <%# 開催日より２日以上が経過している場合、不正を防ぐため %>
           <% if e.date + 2.day < Date.today %>
-            <%= link_to t('activerecord.attributes.event.add_point'), add_point_events_path(id: e.id, giving_point: e.tickets.count * actual_point.to_i), method: :post, class:"btn btn-warning" %>
+            <%= link_to t('activerecord.attributes.event.add_point'), add_point_events_path(id: e.id, giving_point: e.tickets.count * actual_point.to_i), data: {confirm:  t('activerecord.attributes.event.add_point_alert', giving_point: e.tickets.count * actual_point.to_i)}, method: :post, class:"btn btn-warning" %>
           <% else %>
             <%= link_to t('activerecord.attributes.event.preparing'), hosting_events_path, class:"btn btn-warning disabled" %>
           <% end %>
@@ -131,7 +129,64 @@
     </tbody>
   </table>
 <% end %>
+<hr>
+<%# 以前開催したイベント　%>
+<h3>
+  <%= t('activerecord.attributes.event.hosted') %>
+</h3>
+<% if @inactive_events.present? %>
+  <%# 画面サイズが md lg xlの時に表示%>
+  <table class="table table-bordered d-none d-md-block" id="hosting-event-table">  
+    <thead class="thead-dark table-active">
+      <tr>
+        <th><%= t('activerecord.attributes.event.language') %></th>
+        <th scope="col"><%= t('activerecord.attributes.event.date') %></th>
+        <th colspan="2" scope="col"><%= t('activerecord.attributes.event.title') %></th>
+        <th scope="col"><%= t('activerecord.attributes.button.show') %></th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <% @inactive_events.each do |e| %>
+        <tr style="background-color:#8f8888;">
+          <td><%= e.language.translated_name %></td>
+          <td><%= "#{e.date.strftime("%Y/%m/%d (%a) %H:%M")}" %></td>
+          <td colspan="2"><%= e.title %></td>
+          <td>
+            <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type]), class:"btn btn-success btn-sm " %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
+
+  <%# 画面サイズがxs sm の時に表示%>
+  <% @inactive_events.each do |e| %>
+    <table class="table table-bordered d-xs-block d-md-none" id="small-display-event-table">
+      <tbody class="background-gray">
+        <tr>
+          <th><%= t('activerecord.attributes.event.language') %></th>
+          <td><%= e.language.translated_name %></td>
+        </tr>
+        <tr>
+          <th><%= t('activerecord.attributes.event.date') %></th>
+          <td><%= "#{e.date.strftime("%Y/%m/%d (%a) %H:%M")}" %></td>
+        </tr>
+        <tr>
+          <th><%= t('activerecord.attributes.event.title') %></th>
+          <td><%= e.title %></td>
+        </tr>
+        <tr>
+          <th><%= t('activerecord.attributes.button.show') %></th>
+          <td>
+            <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type]), class:"btn btn-success" %>
+          </td>
+          </tr>
+        </tbody>
+    </table>
+  <% end %>
+<% end %>
 
 
 

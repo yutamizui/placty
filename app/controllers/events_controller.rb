@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :find_event, only: [:show, :edit, :update, :destroy, :add_point]
+  before_action :find_event, only: [:show, :edit, :update, :destroy, :add_point, :duplication]
 
   def index
     @events = Event.where('date >= ?', Time.now).order(date: "ASC")
@@ -10,11 +10,8 @@ class EventsController < ApplicationController
   end
 
   def hosting 
-    @events = current_user.events.order(date: "ASC")
-  end
-
-  def manage
-    @events = Event.all.order(date: "ASC")
+    @active_events = current_user.events.where(status: true).order(date: "ASC")
+    @inactive_events = current_user.events.where(status: false).order(date: "ASC")
   end
 
   def show
@@ -24,7 +21,22 @@ class EventsController < ApplicationController
   end
 
   def new
-    @event = Event.new
+    if params[:event_id].present?
+      original_event = Event.find(params[:event_id])
+      @event = Event.new(
+        title: original_event.title,
+        content: original_event.content,
+        location: original_event.location,
+        user_id: original_event.user_id,
+        length: original_event.length,
+        point: original_event.point,
+        limit_number: original_event.limit_number,
+        language_id: original_event.language_id,
+        status: true
+      )
+    else
+      @event = Event.new
+    end
   end
 
   def create
@@ -80,13 +92,9 @@ class EventsController < ApplicationController
         expired_at: Date.today.next_year,
       )
     end
-    @event.delete
-    ## イベント削除と共にチケットも削除される
-    @event.destroy
+    @event.tickets.destroy_all
+    @event.update(status: false)
     redirect_to hosting_events_path, notice: t('activerecord.attributes.notification.point_added')
-  end
-
-  def duplicate
   end
   
 

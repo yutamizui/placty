@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_10_151246) do
+ActiveRecord::Schema.define(version: 2022_02_17_060831) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 2022_02_10_151246) do
     t.integer "point", default: 0
     t.integer "limit_number", default: 1, null: false
     t.bigint "language_id"
+    t.boolean "status", default: true
     t.index ["language_id"], name: "index_events_on_language_id"
   end
 

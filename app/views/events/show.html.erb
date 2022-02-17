@@ -49,7 +49,6 @@
     <% @event.tickets.each do |t| %>
       <%= User.find(t.user_id).translated_name %>
     <% end %>
-  
     <hr>
     <p>
       <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
@@ -66,11 +65,16 @@
      <span class="button-right">
       <%= link_to t('activerecord.attributes.button.delete'), event_path(id: @event.id), method: :delete,  data: {confirm: t('activerecord.attributes.button.are_you_sure_to_delete')}, class:"btn btn-danger button-margin" %>
     </span>
+    <% if @event.status == false %>
+      <span class="button-right">
+        <%= link_to t('activerecord.attributes.button.duplicate'), new_event_path(event_id: @event.id), class:"btn btn-primary button-margin" %>
+      </span>
+    <% end %>
   <% end %>
 </div>
 
 <%= link_to :back do %>
-  <%= link_to t('devise.shared.links.back'), :back, class:"btn btn-secondary button-margin"  %>
+  <%= link_to t("activerecord.attributes.button.back"), :back, class:"btn btn-secondary button-margin"  %>
 <% end %>
 
 
