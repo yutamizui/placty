@@ -18,6 +18,7 @@ en:
         back: Back
         duplicate: Duplicate
         click: Click here
+        how_to_use: How to use
         are_you_sure_to_delete: Are you sure to delete?
 
       notification:
