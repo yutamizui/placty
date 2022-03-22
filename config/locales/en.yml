@@ -118,7 +118,24 @@ en:
         public_event_invitation: If there's an event you're interested in, go for it! 
         manage: management
         preparing: Preparing
+        intro_to_use: |-
+          <h3>⭐️About Placty Events⭐️</h3>
+          This is an event platform for language exchange.
+          You are free to participate in and organize any events you wish to have language exchanges.
+          All events are managed by points, with free and paid events.
+          <br>
+          <h3>⭐️Those who wish to participate in the event⭐️</h3>
+          Free events can be attended without points.
+          For paid events (lesson, lecture style, etc.), please purchase points before attending the event.
+          
+          <br>
+          <h3>⭐️Those who wish to host an event⭐️</h3>
+          For free events, they will be provided free of charge.
+          For paid events (lesson, lecture style, etc.),　points will be awarded to the event organizer based on the event's points and the number of participants. Points are redeemable for cash.
 
+          The money will be transferred by Wise.<a href="https://wise.com/" target="_blank" rel="noopener noreferrer">Click here for Wise</a>
+          (If you plan to hold a paid event, please create an account at Wise and register Wise's information in your Placty account information)
+          <a href="https://www.placty.com/users/edit" target="_blank" rel="noopener noreferrer">Click here for information on Placty's account.</a>
 
       notice_board:
         request: Request
