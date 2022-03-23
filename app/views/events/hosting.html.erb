@@ -1,5 +1,5 @@
 <%= render "event_button" %>
-
+<%= link_to t('activerecord.attributes.event.create'), new_event_path, class:"btn btn-info button-margin pull-right" %>
 <h3>
   <%= t('activerecord.attributes.event.hosting') %>
 </h3>
@@ -129,12 +129,14 @@
     </tbody>
   </table>
 <% end %>
+
+
 <hr>
 <%# 以前開催したイベント　%>
 <h3>
   <%= t('activerecord.attributes.event.hosted') %>
 </h3>
-<% if @inactive_events.present? %>
+<% if @past_events.present? %>
   <%# 画面サイズが md lg xlの時に表示%>
   <table class="table table-bordered d-none d-md-block" id="hosting-event-table">  
     <thead class="thead-dark table-active">
@@ -147,7 +149,7 @@
     </thead>
     
     <tbody>
-      <% @inactive_events.each do |e| %>
+      <% @past_events.each do |e| %>
         <tr style="background-color:#8f8888;">
           <td><%= e.language.translated_name %></td>
           <td><%= "#{e.date.strftime("%Y/%m/%d (%a) %H:%M")}" %></td>
@@ -162,7 +164,7 @@
 
 
   <%# 画面サイズがxs sm の時に表示%>
-  <% @inactive_events.each do |e| %>
+  <% @past_events.each do |e| %>
     <table class="table table-bordered d-xs-block d-md-none" id="small-display-event-table">
       <tbody class="background-gray">
         <tr>

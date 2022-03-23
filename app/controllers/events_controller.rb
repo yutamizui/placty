@@ -3,6 +3,7 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.where('date >= ?', Time.now).order(date: "ASC")
+    @past_events = Event.where('date < ?', Time.now+1800).order(date: "DESC") ##開始時間の30分後のもの
   end
 
   def joining 
@@ -10,8 +11,11 @@ class EventsController < ApplicationController
   end
 
   def hosting 
-    @active_events = current_user.events.where(status: true).order(date: "ASC")
-    @inactive_events = current_user.events.where(status: false).order(date: "ASC")
+    @active_events = current_user.events.where('date >= ?', Time.now).order(date: "ASC")
+    @past_events = Event.where('date < ?', Time.now+1800).order(date: "DESC") ##開始時間の30分後のもの
+    @past_events.each do |e|
+      e.update(status: false)
+    end
   end
 
   def show
@@ -73,7 +77,7 @@ class EventsController < ApplicationController
         end
       end
     end
-    ## もし削除のタイミングがイベント開始時間の１日前以降だった場合
+    ## もし削除のタイミングがイベント開始時間から２４時間以内だった場合
     if Time.now >= @event.date - 1.day
       @event.user.update(
         penalty: @event.user.penalty + 1
