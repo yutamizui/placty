@@ -137,6 +137,15 @@ en:
           (If you plan to hold a paid event, please create an account at Wise and register Wise's information in your Placty account information)
           <a href="https://www.placty.com/users/edit" target="_blank" rel="noopener noreferrer">Click here for information on Placty's account.</a>
 
+      payment:
+        user_list: Users wishing to redeem points
+        redeem_point: Redeem currently owned points
+        being_redeemed: Points are redeemed for cash
+        completed: Remittance Completed✔︎
+        name: Name
+        point: Points to be redeemed
+
+
       notice_board:
         request: Request
         create: Make a request

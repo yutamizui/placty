@@ -25,19 +25,38 @@ div.row
         = hidden_field_tag 'product_type_id', 1
         br
         = submit_tag "20ポイントを購入する", name:"purchase_point", data: {confirm:"本当にポイントを購入しますか？"}, class:"btn btn-success btn-block point_remind"
-    
+
     br
     div.col-md-4
       span １pt：１２０円
       span 期限：購入日より１年
-        
       = form_tag(action: :payjpcard_update, method: :post) do
         script.payjp-button[src="https://checkout.pay.jp" data-key="#{ENV.fetch("PAYJP_PUBLIC_KEY")}" data-text="カードの変更はこちら" data-submit-text="このカードに変更する"]
-      br
-      = link_to "現在所有のポイントを現金化する", root_path, class:"btn btn-secondary button-margin-sm disabled"
+hr
+- if current_user.redeem_point != 0
+  = link_to t('activerecord.attributes.payment.being_redeemed') + " (#{current_user.redeem_point}pt)", payments_path, class:"btn btn-secondary button-margin-sm disabled" 
+- else 
+  = link_to t('activerecord.attributes.payment.redeem_point') , payments_redeem_point_path(current_user), method: :post, class:"btn btn-secondary button-margin-sm"
 br
 br
-= link_to t('devise.shared.links.back'), root_path, class:"btn btn-secondary button-margin-sm float-left"
+
+- if current_user == User.first 
+  hr
+  h3 = t('activerecord.attributes.payment.user_list')
+  // 画面サイズが md lg xlの時に表示
+  table class="table table-bordered"
+    thead class="thead-dark table-active"
+      tr
+        th = t('activerecord.attributes.payment.name') 
+        th = t('activerecord.attributes.payment.point')
+        th 
+    tbody
+      - @users.each do |u| 
+        tr
+          td = u.translated_name 
+          td = u.redeem_point
+          td = link_to t('activerecord.attributes.payment.completed'), payments_redeem_completed_path(user_id: u.id), method: :post, class:"btn btn-warning button-margin-sm"
+
 br
 br
 

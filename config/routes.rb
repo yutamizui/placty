@@ -35,6 +35,8 @@ Rails.application.routes.draw do
   get 'payments/price'
   post "payments/payjp_webhook"
   post "payments/charge"
+  post "payments/redeem_point"
+  post "payments/redeem_completed"
   post "payments/subscribe"
   post "payments/unsubscribe"
   get "payments" => "payments#index", as: "payments"

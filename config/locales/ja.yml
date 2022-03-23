@@ -137,6 +137,13 @@ ja:
           （有料イベントを開催予定の場合はワイズでアカウントを作成し、プラクティーのアカウント情報にワイズの情報をご登録ください）
           <a href="https://www.placty.com/users/edit" target="_blank" rel="noopener noreferrer">プラクティーのアカウント情報はこちら</a>
           
+      payment:
+        user_list: ポイント換金希望のユーザー
+        redeem_point: 現在所有のポイントを換金する
+        being_redeemed: 現在ポイントを換金しています
+        completed: 送金完了✔︎
+        name: 名前
+        point: 換金希望ポイント
 
       notice_board:
         request: リクエスト

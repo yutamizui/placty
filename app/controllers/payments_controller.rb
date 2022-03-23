@@ -4,6 +4,7 @@ class PaymentsController < ApplicationController
     unless current_user.present?
       redirect_to  new_user_session_path, notice: "ログインしてください。"
     end
+    @users = User.where("redeem_point > ?", 0)
   end
 
   def customer_registration
@@ -108,7 +109,25 @@ class PaymentsController < ApplicationController
       redirect_to payments_path
     end
   end
+  
+  def redeem_point
+    @point_number = current_user.points.count
+    current_user.points.each do |p|
+      p.destroy
+    end
+    current_user.update(
+      redeem_point: @point_number
+    )
+    redirect_to payments_path, notice: t('activerecord.attributes.payment.being_redeemed')
+  end
 
+  def redeem_completed
+    @user = User.find(params[:user_id])
+    @user.update(
+      redeem_point: 0
+    )
+    redirect_to payments_path, notice: t('activerecord.attributes.payment.completed')
+  end
   # ## 毎月自動引き落とし
   # def subscribe
   #   @product_type = ProductType.find(params[:id])
