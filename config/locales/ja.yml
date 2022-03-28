@@ -68,6 +68,7 @@ ja:
         image_extension_allowed: (jpg jpeg gif png形式のみ)
         registration_message: ユーザー登録後にイベントへの参加が可能になります
         guide_to_user_registration: ユーザー登録はこちらから
+        time_zone_id: タイムゾーンID
 
       event:
         page_title: イベント

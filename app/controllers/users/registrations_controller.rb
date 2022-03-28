@@ -55,6 +55,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     # resource.login_name = params[:user][:login_name]
 
     resource_updated = resource.update_without_current_password(account_update_params)
+    
+   
     yield resource if block_given?
     if resource_updated
       if is_flashing_format?

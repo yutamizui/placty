@@ -83,7 +83,7 @@ class PaymentsController < ApplicationController
       @point_number.times do
         Point.create!(
           user_id: current_user.id,
-          expired_at: Date.today.end_of_day.next_month,
+          expired_at: Date.current.end_of_day.next_month,
         )
       end
       flash[:notice] = "#{@point_number}ポイントを購入しました。"
@@ -128,95 +128,7 @@ class PaymentsController < ApplicationController
     )
     redirect_to payments_path, notice: t('activerecord.attributes.payment.completed')
   end
-  # ## 毎月自動引き落とし
-  # def subscribe
-  #   @product_type = ProductType.find(params[:id])
-  #   @student = current_student
-  #   Payjp.api_key = ENV.fetch("PAYJP_SECRET_KEY")
-  #   begin
-  #     Payjp::Subscription.create(
-  #       plan: @product_type.plan,
-  #       customer: @student.customer_id,
-  #     )
 
-  #   rescue Payjp::AuthenticationError => e
-  #     flash[:alert] = "エラーが発生しました。運営にお問い合わせください。(お問い合わせ番号：１)"
-  #   rescue Payjp::APIConnectionError => e
-  #     flash[:alert] = "接続エラーが発生しました。再度やり直してください。(お問い合わせ番号：２)"
-  #   rescue Payjp::PayjpError => e
-  #     flash[:alert] = "エラーが発生しました。運営にお問い合わせください。(お問い合わせ番号：３)"
-  #   rescue => e
-  #     flash[:alert] = "エラーが発生しました。運営にお問い合わせください。(お問い合わせ番号：４)"
-  #   end
-
-  #   if flash[:alert].present?
-  #     render 'payments/price'
-  #   elsif @product_type.plan == 'hop'
-  #     @student.update(
-  #       subscription: "hop",
-  #       start_day: Date.today
-  #     )
-  #     32.times do
-  #       Point.create!(
-  #         student_id: @student.id,
-  #         expired_at: Date.today.next_month,
-  #       )
-  #     end
-  #     flash[:notice] = "プランを開始しました。"
-  #     redirect_to root_path
-
-  #   elsif @product_type.plan == "step"
-  #     @student.update(
-  #       subscription: "step",
-  #       start_day: Date.today
-  #     )
-  #     68.times do
-  #       Point.create!(
-  #         student_id: @student.id,
-  #         expired_at: Date.today.next_month,
-  #       )
-  #     end
-  #     flash[:notice] = "プランを開始しました。"
-  #     redirect_to root_path #'https://www.calahe.com/'
-  #   end
-  # end
-
-
-  
-
-  # # プランをやめる時
-  # def unsubscribe
-  #   @product_type = ProductType.find(params[:id])
-  #   @student = current_student
-  #   Student.transaction do
-  #     Payjp.api_key = ENV.fetch("PAYJP_SECRET_KEY")
-  #     customer = Payjp::Customer.retrieve(
-  #       "your_english_student" + @student.id.to_s,
-  #     )
-
-  #     subscription_id = customer[:subscriptions].pluck(:id).join()
-  #     subscription = Payjp::Subscription.retrieve(subscription_id)
-  #     @student.update!(
-  #       subscription: "nothing",
-  #       start_day: nil
-  #     )
-
-  #     unless subscription.delete
-  #       raise "RunTimeError??"
-  #     end
-
-  #     flash[:notice] = @product_type.name + "を解約しました。"
-  #     redirect_to payments_price_path
-
-  #   end
-  # rescue StandardError => e
-  #   ## エラー通知 err bit
-  #   flash[:alert] = "プラン変更ができませんでした。運営にお問い合わせください。"
-  #   render 'payments/price'
-  # end
-
-
-  
 
   def payjp_webhook
   end

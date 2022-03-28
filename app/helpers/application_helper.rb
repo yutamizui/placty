@@ -12,7 +12,7 @@ module ApplicationHelper
       end
       html.html_safe
     end
-  
+
     def translated_name
       if I18n.locale == :ja
         "#{ja_name}"
@@ -20,5 +20,8 @@ module ApplicationHelper
         "#{en_name}"
       end
     end
+
+    def localize(time, zone)
+      I18n.l time.in_time_zone(zone)
+    end
   end
-  

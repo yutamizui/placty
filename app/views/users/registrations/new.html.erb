@@ -23,6 +23,11 @@
             </div>
 
             <div class="form-group">
+              <%= f.label :time_zone_id %><br />
+              <%= f.collection_select :time_zone_id, TimeZone.all, :id, :ja_name, selected: 39 %>
+            </div>
+
+            <div class="form-group">
               <%= f.label :password %>
               <% if @minimum_password_length %>
               <em>(<%= @minimum_password_length %> characters minimum)</em>

@@ -1,5 +1,5 @@
 <div row>
-  <div class="col-md-6">
+  <div class="col-md-12">
     <div class="card worksheet-basic-setting">
       <div class="card-header worksheet-bg">
         <h3><%= t('activerecord.attributes.user.edit') %></h3>
@@ -25,15 +25,20 @@
               <%= f.label :ja_name, t('activerecord.attributes.ja_name') %><br />
               <%= f.text_field :ja_name, class: "form-control" %>
             </div>
-            
+
             <div class="form-group">
               <%= f.label :en_name, t('activerecord.attributes.en_name')  %><br />
               <%= f.text_field :en_name, class: "form-control" %>
             </div>
-            
+
             <div class="form-group">
               <%= f.label :email %><br />
               <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control" %>
+            </div>
+
+           <div class="form-group">
+              <%= f.label :time_zone_id %><br />
+              <%= f.collection_select :time_zone_id, TimeZone.all, :id, :both  %>
             </div>
 
             <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>

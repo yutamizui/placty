@@ -2,17 +2,17 @@ class EventsController < ApplicationController
   before_action :find_event, only: [:show, :edit, :update, :destroy, :add_point, :duplication]
 
   def index
-    @events = Event.where('date >= ?', Time.now).order(date: "ASC")
-    @past_events = Event.where('date < ?', Time.now+1800).order(date: "DESC") ##開始時間の30分後のもの
+    @events = Event.where('date >= ?', Time.zone.now).order(date: "ASC")
+    @past_events = Event.where('date < ?', Time.zone.now+1800).order(date: "DESC") ##開始時間の30分後のもの
   end
 
   def joining 
-    @events = Event.where(id: current_user.tickets.pluck(:event_id)).where('date >= ?', Time.now + 60*10).order(date: "ASC") 
+    @events = Event.where(id: current_user.tickets.pluck(:event_id)).where('date >= ?', Time.zone.now + 60*10).order(date: "ASC") 
   end
 
   def hosting 
-    @active_events = current_user.events.where('date >= ?', Time.now).order(date: "ASC")
-    @past_events = Event.where('date < ?', Time.now+1800).order(date: "DESC") ##開始時間の30分後のもの
+    @active_events = current_user.events.where('date >= ?', Time.zone.now).order(date: "ASC")
+    @past_events = Event.where('date < ?', Time.zone.now+1800).order(date: "DESC") ##開始時間の30分後のもの
     @past_events.each do |e|
       e.update(status: false)
     end
@@ -26,6 +26,7 @@ class EventsController < ApplicationController
 
   def new
     if params[:event_id].present?
+      
       original_event = Event.find(params[:event_id])
       @event = Event.new(
         title: original_event.title,
@@ -45,6 +46,12 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
+    year = params[:event]["date(1i)"].to_s
+    month = params[:event]["date(2i)"].to_s
+    date = params[:event]["date(3i)"].to_s
+    hour = params[:event]["date(4i)"].to_s
+    min = params[:event]["date(5i)"].to_s
+    @event.date = Time.new(year, month, date, hour, min).to_time.to_s
     if @event.save
       redirect_to hosting_events_path, notice: t('activerecord.attributes.notification.created')
     else
@@ -72,13 +79,13 @@ class EventsController < ApplicationController
         @event.point.times do
           Point.create(
             user_id: t.user_id,
-            expired_at: Date.today.next_year
+            expired_at: Date.current.next_year
           )
         end
       end
     end
     ## もし削除のタイミングがイベント開始時間から２４時間以内だった場合
-    if Time.now >= @event.date - 1.day
+    if Time.zone.now >= @event.date - 1.day
       @event.user.update(
         penalty: @event.user.penalty + 1
       )
@@ -93,7 +100,7 @@ class EventsController < ApplicationController
     @giving_point.times do
       Point.create(
         user_id: @event.user_id,
-        expired_at: Date.today.next_year,
+        expired_at: Date.current.next_year,
       )
     end
     @event.tickets.destroy_all
@@ -123,7 +130,7 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:title, :content, :date, :location, :user_id, :length, :point, :language_id)
+    params.require(:event).permit(:title, :content, :location, :user_id, :length, :point, :language_id)
   end
 end
 

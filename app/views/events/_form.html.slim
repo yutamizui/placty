@@ -11,9 +11,8 @@ div.col-md-12
     div.form-group.col-md-6
       br
       = f.label :date
-      = f.datetime_select :date, default: Time.now, :start_hour => 9, :end_hour => 23, :start_year => Time.now.year - 1, :end_year => Time.now.year + 1, :minute_step => 5, class:"form-control"
-  
-  
+      = f.datetime_select :date, default: localize(Time.zone.now, TimeZone.find(current_user.time_zone_id).en_name).to_time, :start_year => Time.zone.now.year - 1, :end_year => Time.zone.now.year + 1, :minute_step => 5, class:"form-control"
+      
     div.form-group.col-md-6
       = f.label t('activerecord.attributes.event.which_language')
       br

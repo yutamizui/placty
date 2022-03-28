@@ -38,7 +38,7 @@ class TicketsController < ApplicationController
     if @user.points.count > 0
       expired_at = @user.points.last.expired_at
     else
-      expired_at = Date.today.end_of_day.next_month
+      expired_at = Date.current.end_of_day.next_month
     end
     @ticket.destroy
     @event.point.times do

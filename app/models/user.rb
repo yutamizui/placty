@@ -9,6 +9,8 @@ class User < ApplicationRecord
   has_many :notice_boards, dependent: :destroy
   has_many :notes, dependent: :destroy
 
+  validates :time_zone_id, presence: true
+
   def update_without_current_password(params, *options)
 
     ## current_password のパラメータを削除。
@@ -25,5 +27,7 @@ class User < ApplicationRecord
     clean_up_passwords
     result
   end
+
+  
 
 end

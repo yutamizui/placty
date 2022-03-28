@@ -20,7 +20,7 @@
     <% @events.each do |e| %>
       <tr>
         <td><%= e.language.translated_name %></td>
-        <td><%= "#{e.date.strftime("%Y/%m/%d (%a) %H:%M")}" %></th>
+        <td><%= localize(e.date, TimeZone.find(e.user.time_zone_id).en_name).to_datetime.strftime("%Y/%m/%d (%a) %H:%M") %></th>
         <td colspan="2"><%= e.title %></td>
       <% if params[:type] == "hosting" %>
         <td><%= e.tickets.count %></td>
@@ -45,7 +45,7 @@
       </tr>
       <tr>
         <th scope="col"><%= t('activerecord.attributes.event.date') %></th>
-        <td scope="row"><%= "#{e.date.strftime("%Y/%m/%d (%a) %H:%M")}" %></td>
+        <td scope="row"> <%= localize(e.date, TimeZone.find(e.user.time_zone_id).en_name).to_datetime.strftime("%Y/%m/%d (%a) %H:%M") %></td>
       </tr>
       <tr>
         <th scope="col"><%= t('activerecord.attributes.event.title') %></th>  

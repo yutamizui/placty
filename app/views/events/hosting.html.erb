@@ -40,20 +40,20 @@
         <% actual_point = e.point - 10 %>
       <% end %>
       
-      <% if e.date < Time.now %>
+      <% if e.date < Time.zone.now %>
         <tr style="background-color:#8f8888;">
       <% else %>
         <tr>
       <% end %>
         <td><%= e.language.translated_name %></td>
-        <td><%= "#{e.date.strftime("%Y/%m/%d (%a) %H:%M")}" %></td>
+        <td><%= localize(e.date, TimeZone.find(e.user.time_zone_id).en_name).to_datetime.strftime("%Y/%m/%d (%a) %H:%M") %></td>
         <td colspan="2"><%= e.title %></td>
         <td><%= e.tickets.count %></td>
         <td><%= e.tickets.count * actual_point.to_i %><%= "pt" %></td>
         <td>
           <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type]), class:"btn btn-success btn-sm " %>
           <%# 開催日より２日以上が経過している場合、不正を防ぐため %>
-          <% if e.date + 2.day < Date.today %>
+          <% if e.date + 2.day < Date.current %>
             <%= link_to t('activerecord.attributes.event.add_point'), add_point_events_path(id: e.id, giving_point: e.tickets.count * actual_point.to_i), data: {confirm:  t('activerecord.attributes.event.add_point_alert', giving_point: e.tickets.count * actual_point.to_i)}, method: :post, class:"btn btn-warning btn-sm " %>
           <% else %>
             <%= link_to t('activerecord.attributes.event.preparing'), hosting_events_path, class:"btn btn-warning btn-sm disabled" %>
@@ -68,7 +68,7 @@
 <%# 画面サイズがxs sm の時に表示%>
 <% @active_events.each do |e| %>
   <table class="table table-bordered d-xs-block d-md-none" id="small-display-event-table">
-    <% if e.date < Time.now %>
+    <% if e.date < Time.zone.now %>
       <tbody class="background-gray">
     <% else %>
       <tbody>
@@ -100,7 +100,9 @@
       </tr>
       <tr>
         <th><%= t('activerecord.attributes.event.date') %></th>
-        <td><%= "#{e.date.strftime("%Y/%m/%d (%a) %H:%M")}" %></td>
+        <td>
+          <%= localize(e.date, TimeZone.find(e.user.time_zone_id).en_name).to_datetime.strftime("%Y/%m/%d (%a) %H:%M") %>
+        </td>
       </tr>
       <tr>
         <th><%= t('activerecord.attributes.event.title') %></th>
@@ -119,7 +121,7 @@
         <td>
           <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type]), class:"btn btn-success" %>
           <%# 開催日より２日以上が経過している場合、不正を防ぐため %>
-          <% if e.date + 2.day < Date.today %>
+          <% if e.date + 2.day < Date.current %>
             <%= link_to t('activerecord.attributes.event.add_point'), add_point_events_path(id: e.id, giving_point: e.tickets.count * actual_point.to_i), data: {confirm:  t('activerecord.attributes.event.add_point_alert', giving_point: e.tickets.count * actual_point.to_i)}, method: :post, class:"btn btn-warning" %>
           <% else %>
             <%= link_to t('activerecord.attributes.event.preparing'), hosting_events_path, class:"btn btn-warning disabled" %>
@@ -152,7 +154,7 @@
       <% @past_events.each do |e| %>
         <tr style="background-color:#8f8888;">
           <td><%= e.language.translated_name %></td>
-          <td><%= "#{e.date.strftime("%Y/%m/%d (%a) %H:%M")}" %></td>
+          <td><%= localize(e.date, TimeZone.find(e.user.time_zone_id).en_name).to_datetime.strftime("%Y/%m/%d (%a) %H:%M") %></td>
           <td colspan="2"><%= e.title %></td>
           <td>
             <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type]), class:"btn btn-success btn-sm " %>
@@ -173,7 +175,7 @@
         </tr>
         <tr>
           <th><%= t('activerecord.attributes.event.date') %></th>
-          <td><%= "#{e.date.strftime("%Y/%m/%d (%a) %H:%M")}" %></td>
+          <td><%= localize(e.date, TimeZone.find(e.user.time_zone_id).en_name).to_datetime.strftime("%Y/%m/%d (%a) %H:%M") %></td>
         </tr>
         <tr>
           <th><%= t('activerecord.attributes.event.title') %></th>
