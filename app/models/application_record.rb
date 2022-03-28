@@ -8,4 +8,8 @@ class ApplicationRecord < ActiveRecord::Base
       "#{en_name}"
     end
   end
+
+  def localize(time, zone)
+    I18n.l time.in_time_zone(zone)
+  end
 end
