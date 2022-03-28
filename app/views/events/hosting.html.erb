@@ -46,7 +46,7 @@
         <tr>
       <% end %>
         <td><%= e.language.translated_name %></td>
-        <td><%= localize(e.date, TimeZone.find(e.user.time_zone_id).en_name).to_datetime.strftime("%Y/%m/%d (%a) %H:%M") %></td>
+        <td><%= e.date.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).to_datetime.strftime("%Y/%m/%d (%a) %H:%M") %></td>
         <td colspan="2"><%= e.title %></td>
         <td><%= e.tickets.count %></td>
         <td><%= e.tickets.count * actual_point.to_i %><%= "pt" %></td>
@@ -100,9 +100,7 @@
       </tr>
       <tr>
         <th><%= t('activerecord.attributes.event.date') %></th>
-        <td>
-          <%= localize(e.date, TimeZone.find(e.user.time_zone_id).en_name).to_datetime.strftime("%Y/%m/%d (%a) %H:%M") %>
-        </td>
+        <td><%= e.date.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).to_datetime.strftime("%Y/%m/%d (%a) %H:%M") %></td>
       </tr>
       <tr>
         <th><%= t('activerecord.attributes.event.title') %></th>
@@ -154,7 +152,7 @@
       <% @past_events.each do |e| %>
         <tr style="background-color:#8f8888;">
           <td><%= e.language.translated_name %></td>
-          <td><%= localize(e.date, TimeZone.find(e.user.time_zone_id).en_name).to_datetime.strftime("%Y/%m/%d (%a) %H:%M") %></td>
+          <td><%= e.date.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).to_datetime.strftime("%Y/%m/%d (%a) %H:%M") %></td>
           <td colspan="2"><%= e.title %></td>
           <td>
             <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type]), class:"btn btn-success btn-sm " %>
@@ -175,7 +173,7 @@
         </tr>
         <tr>
           <th><%= t('activerecord.attributes.event.date') %></th>
-          <td><%= localize(e.date, TimeZone.find(e.user.time_zone_id).en_name).to_datetime.strftime("%Y/%m/%d (%a) %H:%M") %></td>
+          <td><%= e.date.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).to_datetime.strftime("%Y/%m/%d (%a) %H:%M") %></td>
         </tr>
         <tr>
           <th><%= t('activerecord.attributes.event.title') %></th>
