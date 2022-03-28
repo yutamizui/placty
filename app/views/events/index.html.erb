@@ -1,4 +1,10 @@
 <%= render "event_button" %>
+<%
+=begin%>
+ <%= localize(e.date, TimeZone.find(e.user.time_zone_id).en_name).to_datetime.strftime("%Y/%m/%d (%a) %H:%M") %>  
+<%
+=end%>
+<%= I18n.l Event.last.date.in_time_zone(TimeZone.find(Event.last.user.time_zone_id).en_name) %>
 
 <h3>
   <%= t('activerecord.attributes.event.all') %>
