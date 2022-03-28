@@ -32,3 +32,4 @@
     </div>
   </div>
 </div>
+<%= I18n.l Event.last.date.in_time_zone(TimeZone.find(Event.last.user.time_zone_id).en_name) %>
