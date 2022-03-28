@@ -1,5 +1,5 @@
 <%= render "event_button" %>
-
+<%= localize(Time.zone.now, TimeZone.find(current_user.time_zone_id).en_name).to_time %>
 <h3>
   <%= t('activerecord.attributes.event.all') %>
 </h3>
