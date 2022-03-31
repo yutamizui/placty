@@ -12,18 +12,6 @@ div.col-md-12
         - if @note != @notes.first
           = link_to "削除する", note_path(id: @note.id), method: :delete, data: {confirm:"本当にこのノートを削除しますか？"}, class:"btn btn-danger button-margin float-right"
 
-        button id="chicken" class="btn btn-warning button-margin dropdown-toggle float-right" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-          span 複製する
-
-        div class="dropdown-menu" aria-labelledby="chicken"
-          form action="/notes/duplicate" method="post" class="note_duplicate" onSubmit="return checkSubmit()"
-            h4 ノートの名前
-            input type="text" id="note_title" name="note_title" required="required"
-            input type="hidden" name="id" value="#{@note.id}"
-            input type="hidden" name="user_id" value="#{@note.user_id}"
-            br
-            input type="submit" value="複製する" class="btn btn-success button-margin"
-
       div class="card-body"
         = form_for @note, url: note_path(id: @note, user_id: current_user.id), html: {method: "patch"} do |f|
           div.note_setting
@@ -34,6 +22,18 @@ div.col-md-12
               = f.text_area :content, cols: "15", rows: "10", class:"form-control"
           div.actions
           = f.submit t('activerecord.attributes.button.update'), class:"btn btn-info"
+      div
+        button id="chicken" class="btn btn-warning button-margin dropdown-toggle pull-right" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+          span 複製する
+
+        div class="dropdown-menu pull-right" aria-labelledby="chicken"
+          form action="/notes/duplicate" method="post" class="note_duplicate" onSubmit="return checkSubmit()"
+            h4 ノートの名前
+            input type="text" id="note_title" name="note_title" required="required"
+            input type="hidden" name="id" value="#{@note.id}"
+            input type="hidden" name="user_id" value="#{@note.user_id}"
+            br
+              input type="submit" value="複製する" class="btn btn-success button-margin"
 
 = link_to :back do 
   button class="btn btn-secondary button-margin" 戻る
