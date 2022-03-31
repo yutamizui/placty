@@ -26,7 +26,12 @@
       <% @events.each do |e| %>
         <tr>
           <td><%= e.language.translated_name %></td>
-          <td><%= e.date.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).to_datetime.strftime("%Y/%m/%d (%a) %H:%M") %></td>
+          <%if current_user.present? %>
+            <td><%= e.date.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).to_datetime.strftime("%Y/%m/%d (%a) %H:%M") %></td>
+          <% else %>
+             <td><%= e.date.in_time_zone(TimeZone.find(39).en_name).to_datetime.strftime("%Y/%m/%d (%a) %H:%M") %></td>
+          <% end %>
+          
           <td><%= e.title %></td>
           <td><%= User.find(e.user_id).translated_name %></td>
           <td>
@@ -58,7 +63,11 @@
         </tr>
         <tr>
           <th><%= t('activerecord.attributes.event.date') %></th>
-          <td><%= e.date.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).to_datetime.strftime("%Y/%m/%d (%a) %H:%M") %></td>
+          <% if current_user.present? %>
+            <td><%= e.date.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).to_datetime.strftime("%Y/%m/%d (%a) %H:%M") %></td>
+          <% else %>
+            <td><%= e.date.in_time_zone(TimeZone.find(39).en_name).to_datetime.strftime("%Y/%m/%d (%a) %H:%M") %></td>
+          <% end %>
         </tr>
         <tr>
           <th><%= t('activerecord.attributes.event.title') %></th>
@@ -115,7 +124,11 @@
       <% @past_events.each do |e| %>
         <tr style="background-color:#8f8888;">
           <td><%= e.language.translated_name %></td>
-          <td><%= e.date.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).to_datetime.strftime("%Y/%m/%d (%a) %H:%M") %></td>
+          <% if current_user.present? %>
+            <td><%= e.date.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).to_datetime.strftime("%Y/%m/%d (%a) %H:%M") %></td>
+          <% else %>
+            <td><%= e.date.in_time_zone(TimeZone.find(39).en_name).to_datetime.strftime("%Y/%m/%d (%a) %H:%M") %></td>
+          <% end %>
           <td><%= e.title %></td>
           <td><%= User.find(e.user_id).translated_name %></td>
           
@@ -134,7 +147,11 @@
         </tr>
         <tr>
           <th><%= t('activerecord.attributes.event.date') %></th>
-          <td><%= e.date.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).to_datetime.strftime("%Y/%m/%d (%a) %H:%M") %></td>
+          <% if current_user.present? %>
+            <td><%= e.date.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).to_datetime.strftime("%Y/%m/%d (%a) %H:%M") %></td>
+          <% else %>
+            <td><%= e.date.in_time_zone(TimeZone.find(39).en_name).to_datetime.strftime("%Y/%m/%d (%a) %H:%M") %></td>
+          <% end %>
         </tr>
         <tr>
           <th><%= t('activerecord.attributes.event.title') %></th>
