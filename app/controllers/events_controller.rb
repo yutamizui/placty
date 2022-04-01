@@ -2,17 +2,17 @@ class EventsController < ApplicationController
   before_action :find_event, only: [:show, :edit, :update, :destroy, :add_point, :duplication]
 
   def index
-    @events = Event.where('date >= ?', Time.zone.now).order(date: "ASC")
-    @past_events = Event.where('date < ?', Time.zone.now+1800).order(date: "DESC") ##開始時間の30分後のもの
+    @events = Event.where('date >= ?', Time.zone.now+900).order(date: "ASC")  ##開始時間の15分後のものより小さいイベント
+    @past_events = Event.where('date < ?', Time.zone.now+900).order(date: "DESC") ##開始時間の15分後のものより大きいイベント
   end
 
   def joining 
-    @events = Event.where(id: current_user.tickets.pluck(:event_id)).where('date >= ?', Time.zone.now + 60*10).order(date: "ASC") 
+    @events = Event.where(id: current_user.tickets.pluck(:event_id)).where('date >= ?', Time.zone.now+900).order(date: "ASC") 
   end
 
   def hosting 
-    @active_events = current_user.events.where('date >= ?', Time.zone.now).order(date: "ASC")
-    @past_events = Event.where('date < ?', Time.zone.now+1800).order(date: "DESC") ##開始時間の30分後のもの
+    @active_events = current_user.events.where('date >= ?', Time.zone.now+900).order(date: "ASC") ##開始時間の15分後のものより小さいイベント
+    @past_events = Event.where('date < ?', Time.zone.now+900).order(date: "DESC") ##開始時間の15分後のものより大きいイベント
     @past_events.each do |e|
       e.update(status: false)
     end

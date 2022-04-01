@@ -175,9 +175,14 @@ ja:
         yen: 円
       
       note:
+        all: 全てのノート
         note: ノート
         title: ノート名
         content: 内容
+        duplicate: 複製する
+        name: ノートの名前
+        comment: 学習内容をメモしていきましょう！
+        are_you_sure: 本当にこのノートを削除しますか？
 
       point:
         management: ポイント管理

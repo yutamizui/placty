@@ -7,7 +7,7 @@
   <tbody>
     <tr>
         <th><%= t('activerecord.attributes.notice_board.created_at') %></th>
-        <td><%= @notice_board.language.created_at.strftime("%Y/%m/%d (%a)") %></td>
+        <td><%= @notice_board.created_at.strftime("%Y/%m/%d (%a)") %></td>
     </tr>
     <tr>
         <th><%= t('activerecord.attributes.notice_board.user_name') %></th>

@@ -176,9 +176,14 @@ en:
         yen: yen
 
       note:
+        all: All notes
         note: Note
         title: Note name
         content: Content
+        duplicate: Duplicate
+        name: Note name
+        comment: Let's take note of what we learn!
+        are_you_sure: Are you sure to delete this note?
 
       point:
          management: Point management

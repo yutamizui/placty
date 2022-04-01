@@ -317,11 +317,16 @@ textarea {
 
 @media screen and (max-width: 767px) {
   .dropdown-item  {
-    color: white;
+    color: black;
+    padding-left: 10%;
   }
   .table-hidden {
     display: none;
   }
+}
+
+.note-dropdown {
+  top: 12%;
 }
 
 .button-circle {
