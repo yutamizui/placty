@@ -13,9 +13,6 @@ class EventsController < ApplicationController
   def hosting 
     @active_events = current_user.events.where('date >= ?', Time.zone.now+900).order(date: "ASC") ##開始時間の15分後のものより小さいイベント
     @past_events = Event.where('date < ?', Time.zone.now+900).order(date: "DESC") ##開始時間の15分後のものより大きいイベント
-    @past_events.each do |e|
-      e.update(status: false)
-    end
   end
 
   def show

@@ -52,10 +52,10 @@
         <td><%= e.tickets.count * actual_point.to_i %><%= "pt" %></td>
         <td>
           <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type]), class:"btn btn-success btn-sm " %>
-          <%# 開催日より２日以上が経過している場合、不正を防ぐため %>
-          <% if e.date + 2.day < Date.current %>
+          <%# 開催日より１日以上が経過している場合、不正を防ぐため %>
+          <% if e.date.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).to_datetime + 1.day < Time.zone.now && e.status == true %>
             <%= link_to t('activerecord.attributes.event.add_point'), add_point_events_path(id: e.id, giving_point: e.tickets.count * actual_point.to_i), data: {confirm:  t('activerecord.attributes.event.add_point_alert', giving_point: e.tickets.count * actual_point.to_i)}, method: :post, class:"btn btn-warning btn-sm " %>
-          <% else %>
+          <% elsif e.status == true %>
             <%= link_to t('activerecord.attributes.event.preparing'), hosting_events_path, class:"btn btn-warning btn-sm disabled" %>
           <% end %>
         </td>
@@ -118,10 +118,10 @@
         <th><%= t('activerecord.attributes.button.show') %></th>
         <td>
           <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type]), class:"btn btn-success" %>
-          <%# 開催日より２日以上が経過している場合、不正を防ぐため %>
-          <% if e.date + 2.day < Date.current %>
+          <%# 開催日より１日以上が経過している場合、不正を防ぐため %>
+          <% if e.date.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).to_datetime + 1.day < Time.zone.now && e.status == true %>
             <%= link_to t('activerecord.attributes.event.add_point'), add_point_events_path(id: e.id, giving_point: e.tickets.count * actual_point.to_i), data: {confirm:  t('activerecord.attributes.event.add_point_alert', giving_point: e.tickets.count * actual_point.to_i)}, method: :post, class:"btn btn-warning" %>
-          <% else %>
+          <% elsif e.status == true %>
             <%= link_to t('activerecord.attributes.event.preparing'), hosting_events_path, class:"btn btn-warning disabled" %>
           <% end %>
         </td>
@@ -144,18 +144,48 @@
         <th><%= t('activerecord.attributes.event.language') %></th>
         <th scope="col"><%= t('activerecord.attributes.event.date') %></th>
         <th colspan="2" scope="col"><%= t('activerecord.attributes.event.title') %></th>
+        <th><%= t('activerecord.attributes.event.number') %></th>
+        <th><%= t('activerecord.attributes.event.receiving_point') %></th>
         <th scope="col"><%= t('activerecord.attributes.button.show') %></th>
       </tr>
     </thead>
     
     <tbody>
       <% @past_events.each do |e| %>
+        <% if e.point == 0 %>
+          <% actual_point = 0 %>
+        <% elsif e.point >= 4 && e.point <= 15 %>
+          <% actual_point = e.point - 2 %>
+        <% elsif e.point >= 16 && e.point <= 25 %>
+          <% actual_point = e.point - 3 %>
+        <% elsif e.point >= 26 && e.point <= 35 %>
+          <% actual_point = e.point - 4 %>
+        <% elsif e.point >= 36 && e.point <= 45 %>
+          <% actual_point = e.point - 5 %>
+        <% elsif e.point >= 46 && e.point <= 55 %>
+          <% actual_point = e.point - 6 %>
+        <% elsif e.point >= 56 && e.point <= 65 %>
+          <% actual_point = e.point - 7 %>
+        <% elsif e.point >= 66 && e.point <= 75 %>
+          <% actual_point = e.point - 8 %>
+        <% elsif e.point >= 76 && e.point <= 85 %>
+          <% actual_point = e.point - 9 %>
+        <% elsif e.point >= 86 %>
+          <% actual_point = e.point - 10 %>
+        <% end %>
         <tr style="background-color:#8f8888;">
           <td><%= e.language.translated_name %></td>
           <td><%= e.date.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).to_datetime.strftime("%Y/%m/%d (%a) %H:%M") %></td>
           <td colspan="2"><%= e.title %></td>
+          <td><%= e.tickets.count %></td>
+          <td><%= e.tickets.count * actual_point.to_i %><%= "pt" %></td>
           <td>
             <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type]), class:"btn btn-success btn-sm " %>
+            <% if e.date.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).to_datetime + 1.day < Time.zone.now && e.status == true %>
+              <%= link_to t('activerecord.attributes.event.add_point'), add_point_events_path(id: e.id, giving_point: e.tickets.count * actual_point.to_i), data: {confirm:  t('activerecord.attributes.event.add_point_alert', giving_point: e.tickets.count * actual_point.to_i)}, method: :post, class:"btn btn-warning" %>
+            <% elsif e.status == true %>
+              <%= link_to t('activerecord.attributes.event.preparing'), hosting_events_path, class:"btn btn-warning disabled" %>
+            <% end %>
           </td>
         </tr>
       <% end %>
@@ -165,6 +195,27 @@
 
   <%# 画面サイズがxs sm の時に表示%>
   <% @past_events.each do |e| %>
+    <% if e.point == 0 %>
+      <% actual_point = 0 %>
+    <% elsif e.point >= 4 && e.point <= 15 %>
+      <% actual_point = e.point - 2 %>
+    <% elsif e.point >= 16 && e.point <= 25 %>
+      <% actual_point = e.point - 3 %>
+    <% elsif e.point >= 26 && e.point <= 35 %>
+      <% actual_point = e.point - 4 %>
+    <% elsif e.point >= 36 && e.point <= 45 %>
+      <% actual_point = e.point - 5 %>
+    <% elsif e.point >= 46 && e.point <= 55 %>
+      <% actual_point = e.point - 6 %>
+    <% elsif e.point >= 56 && e.point <= 65 %>
+      <% actual_point = e.point - 7 %>
+    <% elsif e.point >= 66 && e.point <= 75 %>
+      <% actual_point = e.point - 8 %>
+    <% elsif e.point >= 76 && e.point <= 85 %>
+      <% actual_point = e.point - 9 %>
+    <% elsif e.point >= 86 %>
+      <% actual_point = e.point - 10 %>
+    <% end %>
     <table class="table table-bordered d-xs-block d-md-none" id="small-display-event-table">
       <tbody class="background-gray">
         <tr>
@@ -183,6 +234,11 @@
           <th><%= t('activerecord.attributes.button.show') %></th>
           <td>
             <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type]), class:"btn btn-success" %>
+            <% if e.date.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).to_datetime + 1.day < Time.zone.now && e.status == true %>
+              <%= link_to t('activerecord.attributes.event.add_point'), add_point_events_path(id: e.id, giving_point: e.tickets.count * actual_point.to_i), data: {confirm:  t('activerecord.attributes.event.add_point_alert', giving_point: e.tickets.count * actual_point.to_i)}, method: :post, class:"btn btn-warning" %>
+            <% elsif e.status == true %>
+              <%= link_to t('activerecord.attributes.event.preparing'), hosting_events_path, class:"btn btn-warning disabled" %>
+            <% end %>
           </td>
           </tr>
         </tbody>
