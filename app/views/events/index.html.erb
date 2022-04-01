@@ -112,7 +112,7 @@
   <%# 画面サイズが md lg xlの時に表示%>
   <table class="table table-bordered d-none d-md-block" id="all-event-table">
     <thead class="thead-dark table-active ">
-      <tr>
+      <tr style="background-color:#8f8888;">
         <th><%= t('activerecord.attributes.event.language') %></th>
         <th><%= t('activerecord.attributes.event.date') %></th>
         <th><%= t('activerecord.attributes.event.title') %></th>
@@ -140,7 +140,7 @@
   <%# 画面サイズがxs sm の時に表示%>
   <% @past_events.each do |e| %>
     <table class="table table-bordered d-xs-block d-md-none" id="small-display-event-table">
-      <tbody>
+      <tbody style="background-color:#8f8888;">
         <tr>
           <th><%= t('activerecord.attributes.event.language') %></th>
           <td><%= e.language.translated_name %></td>
