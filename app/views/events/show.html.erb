@@ -4,10 +4,10 @@
   <p class="lead"><%= @event.content %></p>
   <hr class="my-4">
   <% if current_user.present? %>
-            <td><%= e.date.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).to_datetime.strftime("%Y/%m/%d (%a) %H:%M") %></td>
-          <% else %>
-            <td><%= e.date.in_time_zone(TimeZone.find(39).en_name).to_datetime.strftime("%Y/%m/%d (%a) %H:%M") %></td>
-          <% end %>
+    <td><%= e.date.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).to_datetime.strftime("%Y/%m/%d (%a) %H:%M") %></td>
+  <% else %>
+    <td><%= e.date.in_time_zone(TimeZone.find(39).en_name).to_datetime.strftime("%Y/%m/%d (%a) %H:%M") %></td>
+  <% end %>
   <p><%= t('activerecord.attributes.event.date') + ": " + "#{@event.date.strftime("%Y/%m/%d (%a) %H:%M")}" %></p>
   <p><%= t('activerecord.attributes.event.length') + ": " + "#{@event.length}分" %></p>
   <% if @event.point == 0 %>
