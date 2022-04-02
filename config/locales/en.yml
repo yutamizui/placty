@@ -119,7 +119,7 @@ en:
         manage: management
         preparing: Preparing
         how_to_use: How to use
-        wise_account_creation: Click here to create an account at Wise.
+        wise_account_creation: Create an account at Wise.
         register_wise_account: Register your Wise account information with Placty
         about_placty: |-
           ⭐️About Placty Events⭐️
@@ -137,8 +137,8 @@ en:
         about_hosting_content:
           For free events, they will be provided free of charge.
           For paid events,　points will be awarded to the event organizer based on the event's points and the number of participants(Commission fee will be charged). Points are redeemable for cash.
-          The money will be transferred by Wise.
-          (If you plan to hold a paid event, please create an account at Wise and register Wise's information in your Placty account information)
+          The money will be transferred by Wise.(If you redeem 100 pts or more, there is no remittance fee.)
+          If you plan to hold a paid event, please create an account at Wise and register Wise's information in your Placty account information.
         about_commission: About commission fees
         point: Event points
         commission: Commission fees
