@@ -19,7 +19,6 @@ ja:
         duplicate: 複製する
         back: 戻る
         click: こちらをクリック
-        how_to_use: ご利用方法
         are_you_sure_to_delete: 本当に削除しますか？
      
       notification:
@@ -119,25 +118,32 @@ ja:
         public_event_invitation: 興味のあるイベントがあったら、ぜひ参加してみてね！
         manage: イベント管理
         preparing: 準備中
-        intro_to_use: |-
-          <h3>⭐️プラクティーのイベントについて⭐️</h3>
+        how_to_use: ご利用方法
+        wise_account_creation: ワイズのアカウントを作成する
+        register_wise_account: ワイズのアカウント情報をプラクティーに登録する
+
+        about_placty: |-
+          ⭐️プラクティーのイベントについて⭐️
+        about_placty_content: |-
           言語交流のためのイベントプラットフォームです。
           自由に言語交流したいイベントに参加したり、開催したりすることができます。
           イベントはすべてポイントで管理され、無料・有料のイベントが開催されています。
-          <br>
-          <h3>⭐️イベント参加をご希望の方⭐️</h3>
+        about_participating: |-
+          ⭐️イベント参加をご希望の方⭐️
+        about_participating_content: 
           無料イベントはポイントなしで参加可能です。
-          有料イベント（レッスンや講義形式など）はポイントをご購入後にイベントにご参加ください。
-          
-          <br>
-          <h3>⭐️イベント開催をご希望の方⭐️</h3>
+          有料イベントはポイントをご購入後にイベントにご参加ください。
+        about_hosting: |-
+          ⭐️イベント開催をご希望の方⭐️
+        about_hosting_content: |-
           無料イベント開催の場合は無償提供となります。
-          有料イベント（レッスンや講義形式など）を開催の場合はイベントのポイントと参加人数により、イベント主催者にポイントが付与されます。ポイントは換金可能です。
-
-          Wiseで送金となります。<a href="https://wise.com/" target="_blank" rel="noopener noreferrer">ワイズのページはこちら</a>
+          有料イベントを開催の場合はイベントのポイントと参加人数により、イベント主催者にポイントが付与されます（手数料が差し引かれます）。ポイントは換金可能です。
+          換金された料金はWiseで送金となります。
           （有料イベントを開催予定の場合はワイズでアカウントを作成し、プラクティーのアカウント情報にワイズの情報をご登録ください）
-          <a href="https://www.placty.com/users/edit" target="_blank" rel="noopener noreferrer">プラクティーのアカウント情報はこちら</a>
-          
+        about_commission: 手数料について
+        point: イベントのポイント
+        commission: 手数料
+
       payment:
         user_list: ポイント換金希望のユーザー
         redeem_point: 現在所有のポイントを換金する

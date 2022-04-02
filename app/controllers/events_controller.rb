@@ -119,6 +119,9 @@ class EventsController < ApplicationController
     return
   end
 
+  def how_to_use
+  end
+
 
   private
 

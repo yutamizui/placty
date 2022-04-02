@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       collection do
         get :joining
         get :hosting
+        get :how_to_use
         post :add_point
         post :memo
       end
