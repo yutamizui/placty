@@ -20,10 +20,10 @@
     <tbody>
       <% @notice_boards.each_with_index do |n, i| %>
         <tr>
-          <td><%= n.created_at.strftime("%Y/%m/%d (%a)") %></td>
+          <td><%= n.created_at.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).to_datetime.strftime("%Y/%m/%d (%a)") %></td>
           <td><%= n.user.translated_name %></td>
           <td><%= n.language.translated_name %></td>
-          <td><%= truncate(strip_tags(n.note), length:100) %></td>
+          <td><%= simple_format(truncate(strip_tags(n.note), length:100)) %></td>
           <td><%= link_to t('activerecord.attributes.button.show'), notice_board_path(id: n), class:"btn btn-success button-margin" %></td>
         </tr>
       <% end %>
@@ -37,7 +37,7 @@
       <tbody>
         <tr>
           <th><%= t('activerecord.attributes.notice_board.created_at') %></th>
-          <td><%= n.created_at.strftime("%Y/%m/%d (%a)") %></td>
+          <td><%= n.created_at.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).to_datetime.strftime("%Y/%m/%d (%a)") %></td>
         </tr>
         <tr>
           <th><%= t('activerecord.attributes.notice_board.user_name') %></th>
@@ -49,7 +49,7 @@
         </tr>
         <tr>
           <th><%= t('activerecord.attributes.notice_board.request_content') %></th>
-          <td><%= truncate(strip_tags(n.note), length:100) %></td>
+          <td><%= simple_format(truncate(strip_tags(n.note), length:100)) %></td>
         </tr>
         <tr>
           <td colspan="2"><%= link_to t('activerecord.attributes.button.show'), notice_board_path(id: n), class:"btn btn-success button-margin" %></td>
