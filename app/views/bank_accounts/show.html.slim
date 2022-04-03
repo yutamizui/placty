@@ -1,0 +1,12 @@
+table class="table table-bordered"
+  thead class="thead-dark table-active"
+    tr
+    th = t('activerecord.attributes.event.point') 
+    th = t('activerecord.attributes.event.commission')
+  tbody
+    tr 
+      td 0pt
+      td 0pt
+
+= link_to :back do 
+  = link_to t("activerecord.attributes.button.back"), events_path, class:"btn btn-secondary button-margin"  

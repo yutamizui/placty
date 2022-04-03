@@ -10,10 +10,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_28_045536) do
+ActiveRecord::Schema.define(version: 2022_04_03_021650) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bank_accounts", force: :cascade do |t|
+    t.string "email"
+    t.string "account_holder"
+    t.string "institution_number"
+    t.string "transit_number"
+    t.string "ach_routing_number"
+    t.string "bsb_code"
+    t.string "uk_sort_code"
+    t.string "bank_name"
+    t.string "branch_name"
+    t.integer "account_type"
+    t.string "account_number"
+    t.string "iban"
+    t.integer "currency"
+    t.string "country_name"
+    t.string "city_name"
+    t.string "recipient_address"
+    t.string "post_code"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_bank_accounts_on_user_id"
+  end
 
   create_table "events", force: :cascade do |t|
     t.string "title"
@@ -100,6 +124,7 @@ ActiveRecord::Schema.define(version: 2022_03_28_045536) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "bank_accounts", "users"
   add_foreign_key "events", "languages"
   add_foreign_key "invoices", "users"
   add_foreign_key "notice_boards", "languages"

@@ -27,7 +27,12 @@
                 <%= t('activerecord.attributes.account') %>
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <%= link_to t('activerecord.attributes.account_information'), edit_user_registration_path, class:"dropdown-item" %>
+                <%= link_to t('activerecord.attributes.user.account_information'), edit_user_registration_path, class:"dropdown-item" %>
+                <% if current_user.present? && current_user.bank_account.blank? %>
+                  <%= link_to t('activerecord.attributes.user.bank_account_information'), new_bank_account_path, class:"dropdown-item" %>
+                <% else %>
+                  <%= link_to t('activerecord.attributes.user.bank_account_information'), edit_bank_account_path(id: current_user.bank_account.id), class:"dropdown-item" %>
+                <% end %>
                 <%= link_to t('activerecord.attributes.point.management'), payments_path, class:"dropdown-item" %>
                 <%= link_to t('activerecord.attributes.user.logout'), destroy_user_session_path, class:"dropdown-item" %>
               </div>

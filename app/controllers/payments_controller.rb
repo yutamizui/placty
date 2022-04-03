@@ -7,6 +7,10 @@ class PaymentsController < ApplicationController
     @users = User.where("redeem_point > ?", 0)
   end
 
+  def show
+    @user = User.find(params[:user_id])
+  end
+
   def customer_registration
     if current_user.present?
       @user = current_user

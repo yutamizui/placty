@@ -1,0 +1,14 @@
+table class="table table-bordered"
+    thead class="thead-dark table-active"
+      
+       
+    tbody
+      tr
+        th = t('activerecord.attributes.payment.name') 
+        td = @user.translated_name 
+      tr
+        th = t('activerecord.attributes.payment.point') 
+        td = @user.redeem_point
+      tr
+        th
+        td = link_to t('activerecord.attributes.payment.completed'), payments_redeem_completed_path(user_id: @user.id), method: :post, class:"btn btn-warning button-margin-sm"

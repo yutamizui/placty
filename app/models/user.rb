@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :invoices, dependent: :destroy
   has_many :notice_boards, dependent: :destroy
   has_many :notes, dependent: :destroy
+  has_one :bank_account
 
   validates :time_zone_id, presence: true
 

@@ -13,12 +13,15 @@ Rails.application.routes.draw do
 
     resources :notice_boards
     resources :invoices 
-    resources :tickets 
+    resources :tickets
+    resources :bank_accounts
     resources :notes do
       collection do
         post :duplicate
       end
     end
+
+
     
     devise_for :users, controllers: {
       sessions:      'users/sessions',
@@ -41,4 +44,5 @@ Rails.application.routes.draw do
   post "payments/subscribe"
   post "payments/unsubscribe"
   get "payments" => "payments#index", as: "payments"
+  get "payment" => "payments#show", as: "payment"
 end

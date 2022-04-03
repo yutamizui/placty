@@ -6,11 +6,11 @@ ja:
       main_title: プラクティー
       home: ホーム
       account: アカウント
-      account_information: アカウント情報
       title: 遊び感覚の学び合い
 
       button: 
         create: 作成する
+        register: 登録する
         show: 詳細
         edit: 編集する
         save: 保存する
@@ -68,6 +68,8 @@ ja:
         registration_message: ユーザー登録後にイベントへの参加が可能になります
         guide_to_user_registration: ユーザー登録はこちらから
         time_zone_id: タイムゾーンID
+        bank_account_information: 銀行口座情報
+        account_information: アカウント情報
 
       event:
         page_title: イベント
@@ -154,7 +156,7 @@ ja:
         redeem_point: 現在所有のポイントを換金する
         being_redeemed: 現在ポイントを換金しています
         completed: 送金完了✔︎
-        name: 名前
+        name: 換金希望者
         point: 換金希望ポイント
 
       notice_board:
@@ -197,7 +199,29 @@ ja:
 
       point:
         management: ポイント管理
-      
+
+      bank_account:
+        register: 口座情報の登録
+        update: 口座情報の更新
+        email: メールアドレス
+        account_holder: アカウント所有者
+        institution_number: 機関番号
+        transit_number: トランジットナンバー
+        ach_routing_number: ACH ルーティングナンバー
+        bsb_code: BSBコード
+        uk_sort_code: UKソートコード
+        bank_name: 銀行名
+        branch_name: 支店名
+        account_type: 口座種類
+        account_number: 口座番号
+        iban: IBAN
+        currency: 通貨
+        country_name: 国名
+        city_name: 都市名
+        recipient_address: 受取人アドレス
+        post_code: 郵便番号
+
+
       contact:
        title: お問い合わせ
        name: 名前

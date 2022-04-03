@@ -85,9 +85,7 @@ table class="table table-bordered"
         = "11pt"
         = " x "
         = t('activerecord.attributes.event.number') 
-    
-    
-
 
 = link_to t("activerecord.attributes.event.wise_account_creation"), "https://wise.com/", target: "_blank", rel: "nofollow", class:"btn btn-primary button-margin"
-= link_to t("activerecord.attributes.event.register_wise_account"), edit_user_registration_path(id: current_user.id), class:"btn btn-default button-margin"
+- if current_user.present?
+  = link_to t("activerecord.attributes.event.register_wise_account"), edit_bank_account_path(id: current_user.bank_account.id), class:"btn btn-default button-margin"

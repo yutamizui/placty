@@ -6,11 +6,11 @@ en:
       main_title: Placty
       home: Home
       account: Account
-      account_information: Account Information
       title: Playful activity for fun
 
       button:
         create: Create
+        register: Register
         show: Detail
         edit: Edit
         save: Save
@@ -34,6 +34,7 @@ en:
         language: Language
         japanese: Japanese
         english: English
+
       user:
         confirmation_sent_at: Confirmation sent at
         confirmation_token: Confirmation token
@@ -67,6 +68,8 @@ en:
         registration_message: After registering as a user, you will be able to participate in the event
         guide_to_user_registration: Click here to register
         time_zone_id: Time Zone ID
+        bank_account_information: Bank Account Information
+        account_information: Account Information
 
 
       event:
@@ -152,7 +155,7 @@ en:
         redeem_point: Redeem currently owned points
         being_redeemed: Points are redeemed for cash
         completed: Remittance Completed✔︎
-        name: Name
+        name: Redeemer
         point: Points to be redeemed
 
 
@@ -196,6 +199,28 @@ en:
 
       point:
          management: Point management
+      
+      bank_account:
+        register: Register bank account information
+        update: Update bank account information
+        email: Email Address
+        account_holder: Account holder
+        institution_number: Institution number
+        transit_number: Transit number
+        ach_routing_number: ACH routing number
+        bsb_code: BSB code
+        uk_sort_code: UK sort code
+        bank_name: Bank name
+        branch_name: Branch name
+        account_type: Account type
+        account_number: Account number
+        iban: IBAN
+        currency: Currency
+        country_name: Country name
+        city_name: City name
+        recipient_address: Recipient address
+        post_code: Post code
+
 
       contact:
        title: Inquiry

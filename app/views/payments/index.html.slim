@@ -49,17 +49,14 @@ br
       tr
         th = t('activerecord.attributes.payment.name') 
         th = t('activerecord.attributes.payment.point')
-        th 
+        th = t('activerecord.attributes.button.show')
     tbody
       - @users.each do |u| 
         tr
           td = u.translated_name 
           td = u.redeem_point
-          td = link_to t('activerecord.attributes.payment.completed'), payments_redeem_completed_path(user_id: u.id), method: :post, class:"btn btn-warning button-margin-sm"
-
-br
-br
-
+          / td = link_to t('activerecord.attributes.payment.completed'), payments_redeem_completed_path(user_id: u.id), method: :post, class:"btn btn-warning button-margin-sm"
+          td = link_to t('activerecord.attributes.button.show'), payment_path(user_id: u.id), class:"btn btn-warning button-margin-sm"
 javascript:
   $('#number_of_buying_points').on('change', function(){
     var e = document.getElementById("number_of_buying_points");
