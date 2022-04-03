@@ -11,81 +11,94 @@ p = t('activerecord.attributes.event.about_participating_content')
 h3 = t('activerecord.attributes.event.about_hosting')
 p = t('activerecord.attributes.event.about_hosting_content')
 
+button class="btn btn-warning" data-toggle="collapse" data-target="#commission-list" aria-expand="false" aria-controls="example-1" 
+  span = t('activerecord.attributes.event.about_commission')
+div class="collapse" id="commission-list"
+  div class="card card-body"
+    div 
+      table class="table table-bordered"
+        thead class="thead-dark table-active"
+          tr
+          th = t('activerecord.attributes.event.point') 
+          th = t('activerecord.attributes.event.commission')
+        tbody
+          tr 
+            td 0pt
+            td 0pt
+          tr 
+            td 4pt ~ 15pt
+            td 
+              = "2pt" 
+              = " x "
+              = t('activerecord.attributes.event.number') 
+          tr 
+            td 16pt ~ 25pt
+            td 
+              = "3pt"
+              = " x "
+              = t('activerecord.attributes.event.number') 
+          tr 
+            td 26pt ~ 35pt
+            td 
+              = "4pt"
+              = " x "
+              = t('activerecord.attributes.event.number') 
+          tr 
+            td 36pt ~ 45pt
+            td 
+              = "5pt"
+              = " x "
+              = t('activerecord.attributes.event.number') 
+          tr 
+            td 46pt ~ 55pt
+            td 
+              = "6pt"
+              = " x "
+              = t('activerecord.attributes.event.number') 
+          tr 
+            td 56pt ~ 65pt
+            td 
+              = "7pt"
+              = " x "
+              = t('activerecord.attributes.event.number') 
+          tr 
+            td 66pt ~ 75pt
+            td 
+              = "8pt"
+              = " x "
+              = t('activerecord.attributes.event.number') 
+          tr 
+            td 76pt ~ 85pt
+            td 
+              = "9pt"
+              = " x "
+              = t('activerecord.attributes.event.number') 
+          tr 
+            td 86pt ~ 95pt
+            td 
+              = "10pt"
+              = " x "
+              = t('activerecord.attributes.event.number') 
+          tr 
+            td 96pt ~ 105pt
+            td 
+              = "11pt"
+              = " x "
+              = t('activerecord.attributes.event.number') 
+    
 // イベント内容をリクエストしたい方へ
 h3 = t('activerecord.attributes.event.about_request')
 p = t('activerecord.attributes.event.about_request_content')
 br
-h4 = t('activerecord.attributes.event.about_commission')
-table class="table table-bordered"
-  thead class="thead-dark table-active"
-    tr
-    th = t('activerecord.attributes.event.point') 
-    th = t('activerecord.attributes.event.commission')
-  tbody
-    tr 
-      td 0pt
-      td 0pt
-    tr 
-      td 4pt ~ 15pt
-      td 
-        = "2pt" 
-        = " x "
-        = t('activerecord.attributes.event.number') 
-    tr 
-      td 16pt ~ 25pt
-      td 
-        = "3pt"
-        = " x "
-        = t('activerecord.attributes.event.number') 
-    tr 
-      td 26pt ~ 35pt
-      td 
-        = "4pt"
-        = " x "
-        = t('activerecord.attributes.event.number') 
-    tr 
-      td 36pt ~ 45pt
-      td 
-        = "5pt"
-        = " x "
-        = t('activerecord.attributes.event.number') 
-    tr 
-      td 46pt ~ 55pt
-      td 
-        = "6pt"
-        = " x "
-        = t('activerecord.attributes.event.number') 
-    tr 
-      td 56pt ~ 65pt
-      td 
-        = "7pt"
-        = " x "
-        = t('activerecord.attributes.event.number') 
-    tr 
-      td 66pt ~ 75pt
-      td 
-        = "8pt"
-        = " x "
-        = t('activerecord.attributes.event.number') 
-    tr 
-      td 76pt ~ 85pt
-      td 
-        = "9pt"
-        = " x "
-        = t('activerecord.attributes.event.number') 
-    tr 
-      td 86pt ~ 95pt
-      td 
-        = "10pt"
-        = " x "
-        = t('activerecord.attributes.event.number') 
-    tr 
-      td 96pt ~ 105pt
-      td 
-        = "11pt"
-        = " x "
-        = t('activerecord.attributes.event.number') 
+
 
 = link_to t("activerecord.attributes.event.wise_account_creation"), "https://wise.com/", target: "_blank", rel: "nofollow", class:"btn btn-primary button-margin"
 - if current_user.present?
   = link_to t("activerecord.attributes.event.register_wise_account"), edit_bank_account_path(id: current_user.bank_account.id), class:"btn btn-default button-margin"
+
+javascript: 
+  $(document).ready(function () {
+    $('#collapseExample').on('click', function(){
+      $('.collapse').collapse('hide');
+    });
+  });

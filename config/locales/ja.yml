@@ -220,6 +220,8 @@ ja:
         city_name: 都市名
         recipient_address: 受取人アドレス
         post_code: 郵便番号
+        how_to_fill_in: 入力内容は送金される通貨によって異なります。下記のリンクより入力内容をご確認いただき、入力をお願い致します。
+        check_what_to_fill_in: ※入力内容の確認はこちらから
 
 
       contact:

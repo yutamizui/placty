@@ -15,7 +15,7 @@ class BankAccountsController < ApplicationController
   def create
     @bank_account = BankAccount.new(bank_account_params)
     if @bank_account.save
-      redirect_to bank_account_path(id: @bank_account.id), notice: t('activerecord.attributes.notification.created')
+      redirect_to edit_bank_account_path(id: @bank_account.id), notice: t('activerecord.attributes.notification.created')
     else
       flash.now[:alert] = t('activerecord.attributes.notification.failed_to_create')
       render 'new'

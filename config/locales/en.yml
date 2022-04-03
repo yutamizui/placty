@@ -220,6 +220,8 @@ en:
         city_name: City name
         recipient_address: Recipient address
         post_code: Post code
+        how_to_fill_in: The information to be filled in depends on the currency to be transferred. Please click on the link below to confirm the information you need to fill in.
+        check_what_to_fill_in: ※Check what to fill in
 
 
       contact:
