@@ -139,6 +139,10 @@ en:
           For paid events,　points will be awarded to the event organizer based on the event's points and the number of participants(Commission fee will be charged). Points are redeemable for cash.
           The money will be transferred by Wise.(If you redeem 100 pts or more, there is no remittance fee.)
           If you plan to hold a paid event, please create an account at Wise and register Wise's information in your Placty account information.
+        about_request: |-
+          ⭐️Those who wish to request an event⭐️
+        about_request_content: |-
+          You can request event details. Please indicate your desired date, time and event details on the request page.
         about_commission: About commission fees
         point: Event points
         commission: Commission fees
