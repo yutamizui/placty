@@ -148,6 +148,7 @@ en:
           You can request event details. Please indicate your desired date, time and event details on the request page.
         about_commission: About commission fees
         point: Event points
+        point_detail: 1pt = 120yen
         commission: Commission fees
       
       payment:
