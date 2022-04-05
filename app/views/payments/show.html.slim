@@ -1,14 +1,66 @@
 table class="table table-bordered"
     thead class="thead-dark table-active"
-      
-       
+      tr
+        th colspan="2" class="text-center" = t('activerecord.attributes.payment.redeemer_datail') 
     tbody
       tr
-        th = t('activerecord.attributes.payment.name') 
+        td = t('activerecord.attributes.payment.name') 
         td = @user.translated_name 
       tr
-        th = t('activerecord.attributes.payment.point') 
-        td = @user.redeem_point
+        td = t('activerecord.attributes.payment.point') 
+        td 
+          = @user.redeem_point 
+          = "pt"
       tr
-        th
-        td = link_to t('activerecord.attributes.payment.completed'), payments_redeem_completed_path(user_id: @user.id), method: :post, class:"btn btn-warning button-margin-sm"
+        td = t('activerecord.attributes.bank_account.email') 
+        td = @user.bank_account.email 
+      tr
+        td = t('activerecord.attributes.bank_account.account_holder') 
+        td = @user.bank_account.account_holder 
+      tr
+        td = t('activerecord.attributes.bank_account.institution_number') 
+        td = @user.bank_account.institution_number
+      tr
+        td = t('activerecord.attributes.bank_account.transit_number') 
+        td = @user.bank_account.transit_number
+      tr
+        td = t('activerecord.attributes.bank_account.ach_routing_number') 
+        td = @user.bank_account.ach_routing_number
+      tr
+        td = t('activerecord.attributes.bank_account.bsb_code') 
+        td = @user.bank_account.bsb_code
+      tr
+        td = t('activerecord.attributes.bank_account.uk_sort_code') 
+        td = @user.bank_account.uk_sort_code
+      tr
+        td = t('activerecord.attributes.bank_account.bank_name') 
+        td = @user.bank_account.bank_name
+      tr
+        td = t('activerecord.attributes.bank_account.branch_name') 
+        td = @user.bank_account.branch_name
+      tr
+        td = t('activerecord.attributes.bank_account.account_type') 
+        td = @user.bank_account.account_type
+      tr
+        td = t('activerecord.attributes.bank_account.account_number') 
+        td = @user.bank_account.account_number
+      tr
+        td = t('activerecord.attributes.bank_account.iban') 
+        td = @user.bank_account.iban
+      tr
+        td = t('activerecord.attributes.bank_account.currency') 
+        td = @user.bank_account.currency
+      tr
+        td = t('activerecord.attributes.bank_account.country_name') 
+        td = @user.bank_account.country_name
+      tr
+        td = t('activerecord.attributes.bank_account.city_name') 
+        td = @user.bank_account.city_name
+      tr
+        td = t('activerecord.attributes.bank_account.recipient_address') 
+        td = @user.bank_account.recipient_address
+      tr
+        td = t('activerecord.attributes.bank_account.post_code') 
+        td = @user.bank_account.post_code
+      tr
+        td colspan="2" class="text-center" = link_to t('activerecord.attributes.payment.completed'), payments_redeem_completed_path(user_id: @user.id), method: :post, class:"btn btn-warning button-margin-sm"

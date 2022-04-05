@@ -156,8 +156,9 @@ en:
         redeem_point: Redeem currently owned points
         being_redeemed: Points are redeemed for cash
         completed: Remittance Completed✔︎
-        name: Redeemer
+        name: Name
         point: Points to be redeemed
+        redeemer_detail: Redeemer Details
 
 
       notice_board:

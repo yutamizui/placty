@@ -42,7 +42,7 @@ div.col-md-12
 
   div.form-group  
     = f.label :account_type
-    = select_tag :account_type, options_for_select(BankAccount.account_types.map{|key,value| [key,value]}), class:"form-control"
+    = f.select :account_type, BankAccount.account_types.keys, {prompt: "選択してください"}, class: "form-control"
  
   div.form-group  
     = f.label :account_number
@@ -54,7 +54,7 @@ div.col-md-12
 
   div.form-group  
     = f.label :currency
-    = select_tag :currency, options_for_select(BankAccount.currencies.map{|key,value| [key,value]}, selected: 16),  class:"form-control"
+    = f.select :currency, BankAccount.currencies.keys, {prompt: "選択してください"}, class: "form-control"
 
   div.form-group  
     = f.label :country_name
