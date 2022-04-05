@@ -28,7 +28,7 @@
       <% else %>
         <td><%= User.find(e.user_id).translated_name %></td>
       <% end %>
-        <td> <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type]), class:"btn btn-success btn-sm " %></td>
+        <td> <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type], target_page: "joining"), class:"btn btn-success btn-sm " %></td>
       </tr>
     <% end %>
   </tbody>
@@ -57,7 +57,7 @@
       </tr>
       <tr>
         <th scope="col"><%= t('activerecord.attributes.button.show') %></th>
-        <td> <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type]), class:"btn btn-success btn-sm " %></td>
+        <td> <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type], target_page: "joining"), class:"btn btn-success btn-sm " %></td>
       </tr>
     </tbody>
   </table>

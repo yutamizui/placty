@@ -6,6 +6,12 @@ en:
         Checking: Checking
         Saving: Saving
   activerecord:
+    models:
+      user: User
+      event: Event
+      note: Note
+      payment: Payment
+
     attributes:
       ja_name: Japanese Name
       en_name: English Name
@@ -156,6 +162,8 @@ en:
         point: Event points
         point_detail: 1pt = 120yen
         commission: Commission fees
+        
+
       
       payment:
         user_list: Users wishing to redeem points
@@ -165,7 +173,10 @@ en:
         name: Name
         point: Points to be redeemed
         redeemer_detail: Redeemer Details
-
+        current_point: Current point
+        payment_card: Payment card registration is required.
+        please_click: Please click the button below to register your card information for payment.
+        register_card: Register card information
 
       notice_board:
         request: Request
@@ -196,6 +207,7 @@ en:
         yen: yen
 
       note:
+        shared: Share note
         all: All notes
         note: Note
         title: Note name

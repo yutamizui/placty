@@ -17,6 +17,7 @@ class ApplicationController < ActionController::Base
       I18n.locale = cookies[:locale]
     end
   end
+  
 
   def after_sign_in_path_for(resource)
     events_path # ログイン後に遷移するpathを設定

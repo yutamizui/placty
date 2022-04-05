@@ -17,8 +17,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   
      # 先程のresource.saveが成功していたら
      if resource.persisted?
+       if I18n.locale == :ja
+        note_title = "シェアノート"
+       elsif I18n.locale == :en
+        note_title = "Shared note"
+       end
        Note.create(
-         title: "シェアノート",
+         title: note_title,
          user_id: resource.id
        )
   

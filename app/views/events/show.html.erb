@@ -78,7 +78,13 @@
 </div>
 
 <%= link_to :back do %>
-  <%= link_to t("activerecord.attributes.button.back"), :back, class:"btn btn-secondary button-margin"  %>
+  <% if params[:target_page] == "joining" %>
+    <%= link_to t("activerecord.attributes.button.back"), joining_events_path, class:"btn btn-secondary button-margin"  %>
+  <% elsif params[:target_page] == "hosting" %>
+    <%= link_to t("activerecord.attributes.button.back"), hosting_events_path, class:"btn btn-secondary button-margin"  %>
+  <% else %>
+    <%= link_to t("activerecord.attributes.button.back"), events_path, class:"btn btn-secondary button-margin"  %>
+  <% end %>
 <% end %>
 
 

@@ -2,7 +2,8 @@
 div.row
   div.col-md-12
     h2 class="alert alert-info" role="alert"
-      span 現在のポイント 
+      span = t("activerecord.attributes.payment.current_point")
+      span = " "
       span.pink = "#{current_user.points.count} pt"
 div.row
   - if current_user.customer_id == nil
@@ -10,13 +11,13 @@ div.row
       .panel.panel-success
         .panel-heading
           h3.panel-title
-            | 決済用カードのご登録が必要です。
+            span = t("activerecord.attributes.payment.payment_card")
         .panel-body
-          | 下記のボタンをクリックして、決済用のカード情報をご登録ください。
+          span = t("activerecord.attributes.payment.please_click")
           br
           br
           = form_tag(action: :customer_registration, method: :post) do
-            script.payjp-button[src="https://checkout.pay.jp" data-key="#{ENV.fetch("PAYJP_PUBLIC_KEY")}" data-text="カード情報を登録する"]
+            script.payjp-button[src="https://checkout.pay.jp" data-key="#{ENV.fetch("PAYJP_PUBLIC_KEY")}" data-text="#{t("activerecord.attributes.payment.register_card")}"]
   - else
    div.col-md-12.frame
     div.col-md-8

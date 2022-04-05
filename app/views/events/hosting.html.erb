@@ -51,7 +51,7 @@
         <td><%= e.tickets.count %></td>
         <td><%= e.tickets.count * actual_point.to_i %><%= "pt" %></td>
         <td>
-          <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type]), class:"btn btn-success btn-sm " %>
+          <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type], target_page: "hosting"), class:"btn btn-success btn-sm " %>
           <%# 開催日より１日以上が経過している場合、不正を防ぐため %>
           <% if e.date.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).to_datetime + 1.day < Time.zone.now && e.status == true %>
             <%= link_to t('activerecord.attributes.event.add_point'), add_point_events_path(id: e.id, giving_point: e.tickets.count * actual_point.to_i), data: {confirm:  t('activerecord.attributes.event.add_point_alert', giving_point: e.tickets.count * actual_point.to_i)}, method: :post, class:"btn btn-warning btn-sm " %>
@@ -117,7 +117,7 @@
       <tr>
         <th><%= t('activerecord.attributes.button.show') %></th>
         <td>
-          <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type]), class:"btn btn-success" %>
+          <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type], target_page: "hosting"), class:"btn btn-success" %>
           <%# 開催日より１日以上が経過している場合、不正を防ぐため %>
           <% if e.date.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).to_datetime + 1.day < Time.zone.now && e.status == true %>
             <%= link_to t('activerecord.attributes.event.add_point'), add_point_events_path(id: e.id, giving_point: e.tickets.count * actual_point.to_i), data: {confirm:  t('activerecord.attributes.event.add_point_alert', giving_point: e.tickets.count * actual_point.to_i)}, method: :post, class:"btn btn-warning" %>

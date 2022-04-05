@@ -7,6 +7,12 @@ ja:
         Saving: 貯蓄
 
   activerecord:
+    models:
+      user: ユーザ-
+      event: イベント
+      note: ノート
+      payment: 支払い
+
     attributes:
       ja_name: 日本語名
       en_name: 英語名
@@ -167,6 +173,10 @@ ja:
         name: 名前
         point: 換金希望ポイント
         redeemer_datail: 換金希望者詳細
+        current_point: 現在のポイント
+        payment_card: 決済用のカードのご登録が必要です
+        please_click: 下記のボタンをクリックして、決済用のカード情報をご登録ください
+        register_card: カード情報を登録する
 
       notice_board:
         request: リクエスト
@@ -197,6 +207,7 @@ ja:
         yen: 円
       
       note:
+        shared: シェアノート
         all: 全てのノート
         note: ノート
         title: ノート名
