@@ -1,7 +1,7 @@
 class BankAccount < ApplicationRecord
     belongs_to :users
 
-    enum account_type: { Futsuu: 1, Chochiku: 2, Touza: 3, Checking: 4, Saving: 5 }
+    enum account_type: { Futsuu: 1, Checking: 2, Saving: 3 }
     enum currency: { 
         AED: 1, AUD: 2, BGN: 3, BRL: 4, CAD: 5, CHF: 6, CZK: 7, DKK: 8, EUR: 9,  GBP: 10,
         HKD: 11, HRK: 12, HUF: 13, IDR: 14, INR: 15, JPY: 16, MYR: 17, NOK: 18, NZD: 19, PLN: 20,

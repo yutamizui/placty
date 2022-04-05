@@ -42,7 +42,7 @@ div.col-md-12
 
   div.form-group  
     = f.label :account_type
-    = f.select :account_type, BankAccount.account_types.keys, {prompt: "選択してください"}, class: "form-control"
+    = f.select :account_type, BankAccount.account_types.keys.map {|k| [I18n.t("enums.bank_account.account_type.#{k}"), k]}
  
   div.form-group  
     = f.label :account_number
