@@ -1,4 +1,10 @@
 en:
+  enums:
+    bank_account: 
+      account_type: 
+        Futsuu: General
+        Checking: Checking
+        Saving: Saving
   activerecord:
     attributes:
       ja_name: Japanese Name
