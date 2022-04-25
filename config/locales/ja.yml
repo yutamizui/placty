@@ -163,6 +163,7 @@ ja:
         point: イベントのポイント
         point_detail: 1ポイント = 120円
         commission: 手数料
+        google_calendar: Googleカレンダー
 
 
       payment:

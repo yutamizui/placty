@@ -51,12 +51,17 @@
         <td><%= e.tickets.count %></td>
         <td><%= e.tickets.count * actual_point.to_i %><%= "pt" %></td>
         <td>
-          <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type], target_page: "hosting"), class:"btn btn-success btn-sm " %>
+          <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type], target_page: "hosting"), class:"btn btn-success btn-sm button-margin" %>
+          <%# グーグルカレンダーに予定を追加 %>
+          <% end_time = e.date + (60*e.length) %>
+          <%= link_to("https://www.google.com/calendar/render?action=TEMPLATE&text=#{e.title}&dates=#{e.date.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).to_datetime.strftime("%Y%m%dT%H%M")}/#{end_time.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).to_datetime.strftime("%Y%m%dT%H%M")}&location=#{e.location}&details=#{e.content}") do %>
+            <button class="btn btn-danger btn-sm button-margin"><%= t('activerecord.attributes.event.google_calendar') %></button>
+          <% end %>
           <%# 開催日より１日以上が経過している場合、不正を防ぐため %>
           <% if e.date.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).to_datetime + 1.day < Time.zone.now && e.status == true %>
-            <%= link_to t('activerecord.attributes.event.add_point'), add_point_events_path(id: e.id, giving_point: e.tickets.count * actual_point.to_i), data: {confirm:  t('activerecord.attributes.event.add_point_alert', giving_point: e.tickets.count * actual_point.to_i)}, method: :post, class:"btn btn-warning btn-sm " %>
+            <%= link_to t('activerecord.attributes.event.add_point'), add_point_events_path(id: e.id, giving_point: e.tickets.count * actual_point.to_i), data: {confirm:  t('activerecord.attributes.event.add_point_alert', giving_point: e.tickets.count * actual_point.to_i)}, method: :post, class:"btn btn-warning btn-sm button-margin" %>
           <% elsif e.status == true %>
-            <%= link_to t('activerecord.attributes.event.preparing'), hosting_events_path, class:"btn btn-warning btn-sm disabled" %>
+            <%= link_to t('activerecord.attributes.event.preparing'), hosting_events_path, class:"btn btn-warning btn-sm button-margin disabled" %>
           <% end %>
         </td>
       </tr>
@@ -117,12 +122,17 @@
       <tr>
         <th><%= t('activerecord.attributes.button.show') %></th>
         <td>
-          <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type], target_page: "hosting"), class:"btn btn-success" %>
+          <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type], target_page: "hosting"), class:"btn btn-success btn-sm button-margin" %>
+          <%# グーグルカレンダーに予定を追加 %>
+          <% end_time = e.date + (60*e.length) %>
+          <%= link_to("https://www.google.com/calendar/render?action=TEMPLATE&text=#{e.title}&dates=#{e.date.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).to_datetime.strftime("%Y%m%dT%H%M")}/#{end_time.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).to_datetime.strftime("%Y%m%dT%H%M")}&location=#{e.location}&details=#{e.content}") do %>
+            <button class="btn btn-danger btn-sm button-margin"><%= t('activerecord.attributes.event.google_calendar') %></button>
+          <% end %>
           <%# 開催日より１日以上が経過している場合、不正を防ぐため %>
           <% if e.date.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).to_datetime + 1.day < Time.zone.now && e.status == true %>
-            <%= link_to t('activerecord.attributes.event.add_point'), add_point_events_path(id: e.id, giving_point: e.tickets.count * actual_point.to_i), data: {confirm:  t('activerecord.attributes.event.add_point_alert', giving_point: e.tickets.count * actual_point.to_i)}, method: :post, class:"btn btn-warning" %>
+            <%= link_to t('activerecord.attributes.event.add_point'), add_point_events_path(id: e.id, giving_point: e.tickets.count * actual_point.to_i), data: {confirm:  t('activerecord.attributes.event.add_point_alert', giving_point: e.tickets.count * actual_point.to_i)}, method: :post, class:"btn btn-warning button-margin btn-sm" %>
           <% elsif e.status == true %>
-            <%= link_to t('activerecord.attributes.event.preparing'), hosting_events_path, class:"btn btn-warning disabled" %>
+            <%= link_to t('activerecord.attributes.event.preparing'), hosting_events_path, class:"btn btn-warning btn-sm button-margin disabled" %>
           <% end %>
         </td>
       </tr>
@@ -180,11 +190,11 @@
           <td><%= e.tickets.count %></td>
           <td><%= e.tickets.count * actual_point.to_i %><%= "pt" %></td>
           <td>
-            <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type]), class:"btn btn-success btn-sm " %>
+            <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type]), class:"btn btn-success btn-sm button-margin" %>
             <% if e.date.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).to_datetime + 1.day < Time.zone.now && e.status == true %>
-              <%= link_to t('activerecord.attributes.event.add_point'), add_point_events_path(id: e.id, giving_point: e.tickets.count * actual_point.to_i), data: {confirm:  t('activerecord.attributes.event.add_point_alert', giving_point: e.tickets.count * actual_point.to_i)}, method: :post, class:"btn btn-warning" %>
+              <%= link_to t('activerecord.attributes.event.add_point'), add_point_events_path(id: e.id, giving_point: e.tickets.count * actual_point.to_i), data: {confirm:  t('activerecord.attributes.event.add_point_alert', giving_point: e.tickets.count * actual_point.to_i)}, method: :post, class:"btn btn-warning button-margin btn-sm" %>
             <% elsif e.status == true %>
-              <%= link_to t('activerecord.attributes.event.preparing'), hosting_events_path, class:"btn btn-warning disabled" %>
+              <%= link_to t('activerecord.attributes.event.preparing'), hosting_events_path, class:"btn btn-warning btn-sm button-margin disabled" %>
             <% end %>
           </td>
         </tr>
@@ -233,11 +243,11 @@
         <tr>
           <th><%= t('activerecord.attributes.button.show') %></th>
           <td>
-            <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type]), class:"btn btn-success" %>
+            <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type]), class:"btn btn-success btn-sm button-margin" %>
             <% if e.date.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).to_datetime + 1.day < Time.zone.now && e.status == true %>
-              <%= link_to t('activerecord.attributes.event.add_point'), add_point_events_path(id: e.id, giving_point: e.tickets.count * actual_point.to_i), data: {confirm:  t('activerecord.attributes.event.add_point_alert', giving_point: e.tickets.count * actual_point.to_i)}, method: :post, class:"btn btn-warning" %>
+              <%= link_to t('activerecord.attributes.event.add_point'), add_point_events_path(id: e.id, giving_point: e.tickets.count * actual_point.to_i), data: {confirm:  t('activerecord.attributes.event.add_point_alert', giving_point: e.tickets.count * actual_point.to_i)}, method: :post, class:"btn btn-warning button-margin btn-sm" %>
             <% elsif e.status == true %>
-              <%= link_to t('activerecord.attributes.event.preparing'), hosting_events_path, class:"btn btn-warning disabled" %>
+              <%= link_to t('activerecord.attributes.event.preparing'), hosting_events_path, class:"btn btn-warning btn-sm button-margin disabled" %>
             <% end %>
           </td>
           </tr>
