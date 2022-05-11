@@ -2,17 +2,17 @@ class EventsController < ApplicationController
   before_action :find_event, only: [:show, :edit, :update, :destroy, :add_point, :duplication]
 
   def index
-    @events = Event.where('date >= ?', Time.zone.now+900).order(date: "ASC")  ##開始時間の15分後のものより小さいイベント
-    @past_events = Event.where('date < ?', Time.zone.now+900).order(date: "DESC") ##開始時間の15分後のものより大きいイベント
+    @events = Event.where('date >= ?', Time.zone.now-900).order(date: "ASC")  ##現在時刻から１５分をマイナスした時間より大きい開始時間のイベント
+    @past_events = Event.where('date < ?', Time.zone.now-900).order(date: "DESC") ##現在時刻から１５分をマイナスした時間より小さい開始時間のイベント
   end
 
   def joining 
-    @events = Event.where(id: current_user.tickets.pluck(:event_id)).where('date >= ?', Time.zone.now+900).order(date: "ASC") 
+    @events = Event.where(id: current_user.tickets.pluck(:event_id)).where('date >= ?', Time.zone.now-900).order(date: "ASC") 
   end
 
   def hosting 
-    @active_events = current_user.events.where('date >= ?', Time.zone.now+900).order(date: "ASC") ##開始時間の15分後のものより小さいイベント
-    @past_events = Event.where('date < ?', Time.zone.now+900).order(date: "DESC") ##開始時間の15分後のものより大きいイベント
+    @active_events = current_user.events.where('date >= ?', Time.zone.now-900).order(date: "ASC") ##現在時刻から１５分をマイナスした時間より大きい開始時間のイベント
+    @past_events = Event.where('date < ?', Time.zone.now-900).order(date: "DESC") ##現在時刻から１５分をマイナスした時間より小さい開始時間のイベント
   end
 
   def show
