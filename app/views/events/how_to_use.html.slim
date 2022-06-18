@@ -3,17 +3,24 @@
 h3 = t('activerecord.attributes.event.about_placty')
 p = t('activerecord.attributes.event.about_placty_content')
 p = "(" + t('activerecord.attributes.event.point_detail') + ")"
+br
 
 // イベントに参加したい方へ
 h3 = t('activerecord.attributes.event.about_participating')
 p = t('activerecord.attributes.event.about_participating_content')
+p = link_to t('activerecord.attributes.payment.go_to_point_page'), payments_path, class:"btn btn-secondary"
+br
 
 // イベントを主催したい方へ
 h3 = t('activerecord.attributes.event.about_hosting')
 p = t('activerecord.attributes.event.about_hosting_content')
-
-button class="btn btn-warning" data-toggle="collapse" data-target="#commission-list" aria-expand="false" aria-controls="example-1" 
+button class="btn btn-secondary" data-toggle="collapse" data-target="#commission-list" aria-expand="false" aria-controls="example-1" 
   span = t('activerecord.attributes.event.about_commission')
+= link_to t("activerecord.attributes.event.wise_account_creation"), "https://wise.com/", target: "_blank", rel: "nofollow", class:"btn btn-primary button-margin"
+- if current_user.present? && current_user.bank_account.present?
+  = link_to t("activerecord.attributes.event.register_wise_account"), edit_bank_account_path(id: current_user.bank_account.id), class:"btn btn-success button-margin"
+- elsif current_user.present?
+  = link_to t('activerecord.attributes.event.register_wise_account'), new_bank_account_path, class:"btn btn-success button-margin" 
 div class="collapse" id="commission-list"
   div class="card card-body"
     div 
@@ -86,19 +93,13 @@ div class="collapse" id="commission-list"
               = "11pt"
               = " x "
               = t('activerecord.attributes.event.number') 
-    
+br
+br
 // イベント内容をリクエストしたい方へ
 h3 = t('activerecord.attributes.event.about_request')
 p = t('activerecord.attributes.event.about_request_content')
+p = link_to t('activerecord.attributes.notice_board.go_to_request_page'), notice_boards_path, class:"btn btn-secondary"
 br
-
-
-= link_to t("activerecord.attributes.event.wise_account_creation"), "https://wise.com/", target: "_blank", rel: "nofollow", class:"btn btn-primary button-margin"
-- if current_user.present? && current_user.bank_account.present?
-  = link_to t("activerecord.attributes.event.register_wise_account"), edit_bank_account_path(id: current_user.bank_account.id), class:"btn btn-default button-margin"
-- elsif current_user.present?
-  = link_to t('activerecord.attributes.user.bank_account_information'), new_bank_account_path, class:"btn btn-default button-margin" 
-
 javascript: 
   $(document).ready(function () {
     $('#collapseExample').on('click', function(){

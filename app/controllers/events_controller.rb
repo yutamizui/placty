@@ -12,7 +12,7 @@ class EventsController < ApplicationController
 
   def hosting 
     @active_events = current_user.events.where('date >= ?', Time.zone.now-900).order(date: "ASC") ##現在時刻から１５分をマイナスした時間より大きい開始時間のイベント
-    @past_events = Event.where('date < ?', Time.zone.now-900).order(date: "DESC") ##現在時刻から１５分をマイナスした時間より小さい開始時間のイベント
+    @past_events = current_user.events.where('date < ?', Time.zone.now-900).order(date: "DESC") ##現在時刻から１５分をマイナスした時間より小さい開始時間のイベント
   end
 
   def show
