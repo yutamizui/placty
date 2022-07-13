@@ -135,7 +135,7 @@ ja:
         preparing: 準備中
         how_to_use: ご利用方法
         wise_account_creation: ワイズのアカウントを作成する
-        register_wise_account: ワイズのアカウント情報をプラクティーに登録する
+        register_wise_account: ワイズのアカウント情報を登録する
 
         about_placty: |-
           ⭐️プラクティーのイベントについて⭐️
@@ -193,6 +193,7 @@ ja:
         payment_card: 決済用のカードのご登録が必要です
         please_click: 下記のボタンをクリックして、決済用のカード情報をご登録ください
         register_card: カード情報を登録する
+        go_to_point_page: ポイント管理ページへ
 
       notice_board:
         request: リクエスト
@@ -209,6 +210,7 @@ ja:
           %{current_user}さん、下記のリクエストが届いています。
           リクエストされたイベントを開催できる方はぜひ気軽に開催してみてね!
         edit: リクエストの編集
+        go_to_request_page: イベントリクエストページへ
 
 
       language:

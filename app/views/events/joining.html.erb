@@ -31,8 +31,9 @@
         <td>
           <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type], target_page: "joining"), class:"btn btn-success btn-sm button-margin" %>
           <%# グーグルカレンダーに予定を追加 %>
-          <% end_time = e.date + (60*e.length) %>
-          <%= link_to("https://www.google.com/calendar/render?action=TEMPLATE&text=#{e.title}&dates=#{e.date.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).to_datetime.strftime("%Y%m%dT%H%M")}/#{end_time.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).to_datetime.strftime("%Y%m%dT%H%M")}&location=#{e.location}&details=#{e.content}") do %>
+          <% start_time = e.date.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).to_datetime - Rational(5, 24 * 60) %>
+          <% end_time = start_time + Rational((e.length), 24 * 60)  %>
+          <%= link_to("https://www.google.com/calendar/render?action=TEMPLATE&text=#{e.title}&dates=#{start_time.strftime("%Y%m%dT%H%M")}/#{end_time.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).to_datetime.strftime("%Y%m%dT%H%M")}&location=#{e.location}&details=#{e.content}",  target:"_blank", rel:"noopener noreferrer") do %>
             <button class="btn btn-danger btn-sm button-margin"><%= t('activerecord.attributes.event.google_calendar') %></button>
           <% end %>
         </td>
@@ -67,8 +68,9 @@
         <td>
           <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id, type: params[:type], target_page: "joining"), class:"btn btn-success btn-sm " %>
           <%# グーグルカレンダーに予定を追加 %>
-          <% end_time = e.date + (60*e.length) %>
-          <%= link_to("https://www.google.com/calendar/render?action=TEMPLATE&text=#{e.title}&dates=#{e.date.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).to_datetime.strftime("%Y%m%dT%H%M")}/#{end_time.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).to_datetime.strftime("%Y%m%dT%H%M")}&location=#{e.location}&details=#{e.content}") do %>
+          <% start_time = e.date.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).to_datetime - Rational(5, 24 * 60) %>
+          <% end_time = start_time + Rational((e.length), 24 * 60)  %>
+          <%= link_to("https://www.google.com/calendar/render?action=TEMPLATE&text=#{e.title}&dates=#{start_time.strftime("%Y%m%dT%H%M")}/#{end_time.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).to_datetime.strftime("%Y%m%dT%H%M")}&location=#{e.location}&details=#{e.content}", target:"_blank", rel:"noopener noreferrer") do %>
             <button class="btn btn-danger btn-sm button-margin"><%= t('activerecord.attributes.event.google_calendar') %></button>
           <% end %>
         </td>

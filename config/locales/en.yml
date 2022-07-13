@@ -135,7 +135,7 @@ en:
         preparing: Preparing
         how_to_use: How to use
         wise_account_creation: Create an account at Wise.
-        register_wise_account: Register your Wise account information with Placty
+        register_wise_account: Register your Wise account information
         about_placty: |-
           ⭐️About Placty Events⭐️
         about_placty_content: |-
@@ -192,6 +192,7 @@ en:
         payment_card: Payment card registration is required.
         please_click: Please click the button below to register your card information for payment.
         register_card: Register card information
+        go_to_point_page: Go to Point Management page
 
       notice_board:
         request: Request
@@ -208,6 +209,7 @@ en:
           %{current_user},the following requests have been received.
           If you are able to organize the requested event, please give it a try!
         edit: Edit Request
+        go_to_request_page: Go to Event Request Page
         
 
       language:
