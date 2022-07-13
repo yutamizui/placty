@@ -166,7 +166,8 @@ en:
         
 
       challenge:
-        page_title: My challenge
+        page_title: 7days Challenge
+        content: ( Aggregate activity data for the past 7 days )
         send_assignment: Give a challenge
         detail: Details
         create: Create Challenge
@@ -179,6 +180,7 @@ en:
         note: Details
         percentage: Percentage of this item
         complete: Complete
+        complete_status: Achievement Status
 
       payment:
         user_list: Users wishing to redeem points

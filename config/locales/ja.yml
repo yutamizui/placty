@@ -166,7 +166,8 @@ ja:
         google_calendar: Googleカレンダー
 
       challenge:
-        page_title: マイチャレンジ
+        page_title: ７日間チャレンジ
+        content: (過去７日間の活動データを集計)
         send_assignment: 課題を出す
         detail: チャレンジ内容
         create: チャレンジを作成する
@@ -179,6 +180,8 @@ ja:
        note: 内容の詳細
        percentage: このアイテムの割合
        complete: 達成
+       complete_status: 達成状況
+
        
         
       payment:

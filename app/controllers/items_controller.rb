@@ -25,9 +25,10 @@ class ItemsController < ApplicationController
   end
 
   def report_update
-    @report = current_user.report.last
+    @report = Challenge.find(params[:challenge_id]).reports.last
     @report.update(
-      completed_item: ((@report.completed_item.map(&:to_i).push(@report.id).uniq
+      completed_item: ((@report.completed_item.map(&:to_i).push(params[:item_id].to_i).uniq))
     )
+    redirect_to challenge_path(id: params[:challenge_id])
   end
 end
