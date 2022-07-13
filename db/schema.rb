@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_03_021650) do
+ActiveRecord::Schema.define(version: 2022_07_12_092331) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,14 @@ ActiveRecord::Schema.define(version: 2022_04_03_021650) do
     t.index ["user_id"], name: "index_bank_accounts_on_user_id"
   end
 
+  create_table "challenges", force: :cascade do |t|
+    t.string "title"
+    t.string "target_user"
+    t.integer "author_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "events", force: :cascade do |t|
     t.string "title"
     t.text "content"
@@ -61,6 +69,16 @@ ActiveRecord::Schema.define(version: 2022_04_03_021650) do
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "status", default: false
     t.index ["user_id"], name: "index_invoices_on_user_id"
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.string "name"
+    t.text "note"
+    t.integer "percentage"
+    t.bigint "challenge_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["challenge_id"], name: "index_items_on_challenge_id"
   end
 
   create_table "languages", force: :cascade do |t|
@@ -97,6 +115,16 @@ ActiveRecord::Schema.define(version: 2022_04_03_021650) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "reports", force: :cascade do |t|
+    t.bigint "challenge_id"
+    t.bigint "user_id"
+    t.string "completed_item"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["challenge_id"], name: "index_reports_on_challenge_id"
+    t.index ["user_id"], name: "index_reports_on_user_id"
+  end
+
   create_table "tickets", force: :cascade do |t|
     t.integer "user_id"
     t.integer "event_id"
@@ -127,6 +155,9 @@ ActiveRecord::Schema.define(version: 2022_04_03_021650) do
   add_foreign_key "bank_accounts", "users"
   add_foreign_key "events", "languages"
   add_foreign_key "invoices", "users"
+  add_foreign_key "items", "challenges"
   add_foreign_key "notice_boards", "languages"
   add_foreign_key "notice_boards", "users"
+  add_foreign_key "reports", "challenges"
+  add_foreign_key "reports", "users"
 end

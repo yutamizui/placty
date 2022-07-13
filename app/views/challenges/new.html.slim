@@ -1,0 +1,9 @@
+div.col-md-12
+  div class="card"
+    div class="card-header text-white bg-secondary text-center" 
+      h4 = t('activerecord.attributes.challenge.create')
+    div class="card-body"
+      == render 'shared/errors', obj: @challenge
+      = form_for @challenge do |f|
+        == render 'challenges/form', f: f
+        = f.submit  t('activerecord.attributes.button.create'), class:"btn btn-info"

@@ -165,7 +165,22 @@ ja:
         commission: 手数料
         google_calendar: Googleカレンダー
 
+      challenge:
+        page_title: マイチャレンジ
+        send_assignment: 課題を出す
+        detail: チャレンジ内容
+        create: チャレンジを作成する
+        
 
+      item:
+       title: チャレンジアイテム
+       create: チャレンジアイテムを作成する
+       name: アイテム名
+       note: 内容の詳細
+       percentage: このアイテムの割合
+       complete: 達成
+       
+        
       payment:
         user_list: ポイント換金希望のユーザー
         redeem_point: 現在所有のポイントを換金する

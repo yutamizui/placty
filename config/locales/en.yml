@@ -165,7 +165,21 @@ en:
         google_calendar: Google Calendar
         
 
-      
+      challenge:
+        page_title: My challenge
+        send_assignment: Give a challenge
+        detail: Details
+        create: Create Challenge
+        
+       
+      item:
+        title: Challenge Item
+        create: Create Challenge Item
+        name: Item Name
+        note: Details
+        percentage: Percentage of this item
+        complete: Complete
+
       payment:
         user_list: Users wishing to redeem points
         redeem_point: Redeem currently owned points

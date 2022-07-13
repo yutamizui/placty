@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'items/new'
+  get 'items/create'
   scope '(:locale)', locale: /#{I18n.available_locales.map(&:to_s).join('|')}/ do 
     root to: 'events#index'
     resources :events do
@@ -8,6 +10,12 @@ Rails.application.routes.draw do
         get :how_to_use
         post :add_point
         post :memo
+      end
+    end
+    resources :challenges
+    resources :items do
+      collection do
+        post :report_update
       end
     end
 

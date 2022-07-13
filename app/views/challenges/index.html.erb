@@ -1,0 +1,17 @@
+<%= link_to t('activerecord.attributes.challenge.create'), new_challenge_path, class:'btn btn-info button-margin' %></th>
+<table class="table table-default table-striped">
+  <thead>
+    <th><%= t('activerecord.attributes.challenge.page_title') %></th>
+    <th></th>
+    <th></th>
+  </thead>
+  <tbody>
+    <% @challenges.each do |c| %>
+      <tr>
+        <td><%= c.title %></td>
+        <td><%= "ここにパーセント表示" %></td>
+        <td><%= link_to t('activerecord.attributes.button.show'), challenge_path(id: c.id), class:"btn btn-success btn-sm" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
