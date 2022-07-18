@@ -1,17 +1,25 @@
-<%= link_to t('activerecord.attributes.challenge.create'), new_challenge_path, class:'btn btn-info button-margin' %></th>
+<%= link_to t('activerecord.attributes.challenge.assignment'), challenges_path(name: "assignment"), class:"btn btn-success" %>
+<%= link_to t('activerecord.attributes.challenge.7days'), challenges_path(name: "seven_days"), class:"btn btn-warning" %>
+<%= link_to t('activerecord.attributes.challenge.create'), new_challenge_path, class:'btn btn-info button-margin pull-right' %>
 
 <table class="table table-default table-striped">
   <thead>
-    <th><%= t('activerecord.attributes.challenge.page_title') + "  " + t('activerecord.attributes.challenge.content') %></th>
+    <th></th>
     <th></th>
     <th></th>
   </thead>
   <tbody>
     <% @challenges.each do |c| %>
       <tr>
-        <td><%= c.title %></td>
-        <td><%= "ここにパーセント表示" %></td>
-        <td><%= link_to t('activerecord.attributes.button.show'), challenge_path(id: c.id), class:"btn btn-success btn-sm" %></td>
+        <td style="width:25%"><%= c.title %></td>
+        <td>
+          <div class="progress" style="height: 30px;">
+            <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+          </div>
+        </td>
+        <td style="width:10%">
+          <%= link_to t('activerecord.attributes.button.show'), challenge_path(id: c.id, status: c.status), class:"btn btn-success btn-sm" %>
+        </td>
       </tr>
     <% end %>
   </tbody>

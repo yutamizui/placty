@@ -9,7 +9,8 @@ class ItemsController < ApplicationController
     @item = Item.new(
       name: params[:item][:name],
       note: params[:item][:note],
-      challenge_id: @challenge.id
+      challenge_id: @challenge.id,
+      percentage: 0
     )
     if @item.save
       redirect_to challenge_path(id: @challenge.id), notice: t('activerecord.attributes.notification.created')
@@ -19,16 +20,27 @@ class ItemsController < ApplicationController
     end
   end
 
+  def update
+    @item = Item.find(params[:item][:item_id])
+    @challenge = Challenge.find(params[:item][:challenge_id])
+    @item.update(
+      percentage: params[:item][:percentage]
+    )
+    redirect_to challenge_path(id: @challenge.id)
+  end
+
   def destroy
     @item.destroy
     redirect_to challenges_path, notice: t('activerecord.attributes.notification.deleted')
   end
 
   def report_update
+    @item = Item.find(params[:item_id])
     @report = Challenge.find(params[:challenge_id]).reports.last
     @report.update(
-      completed_item: ((@report.completed_item.map(&:to_i).push(params[:item_id].to_i).uniq))
+      completed_item: ((@report.completed_item.map(&:to_i).push(params[:item_id].to_i).uniq)),
+      total_percentage: @report.total_percentage + @item.percentage
     )
-    redirect_to challenge_path(id: params[:challenge_id])
+     redirect_to challenge_path(id: params[:challenge_id])
   end
 end

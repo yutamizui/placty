@@ -5,6 +5,11 @@ en:
         Futsuu: General
         Checking: Checking
         Saving: Saving
+    challenge:
+      status:
+        assignment: Assignment
+        seven_days: Seven Days
+
   activerecord:
     models:
       user: User
@@ -28,6 +33,7 @@ en:
         save: Save
         delete: Delete
         update: Update
+        update_title: Update
         back: Back
         duplicate: Duplicate
         click: Click here
@@ -166,7 +172,12 @@ en:
         
 
       challenge:
-        page_title: 7days Challenge
+        title: Title
+        status: Challenge Type
+        deadline: Deadline
+        page_title: Challenge
+        7days: 7days Challenge
+        assignment: Assignment
         content: ( Aggregate activity data for the past 7 days )
         send_assignment: Give a challenge
         detail: Details
@@ -178,7 +189,7 @@ en:
         create: Create Challenge Item
         name: Item Name
         note: Details
-        percentage: Percentage of this item
+        percentage: Percentage of achievement
         complete: Complete
         complete_status: Achievement Status
 
