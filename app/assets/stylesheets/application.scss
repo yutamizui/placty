@@ -349,3 +349,22 @@ textarea {
   width: 70px;
   height: 30px;
 }
+
+.button-border {
+  border: 1px solid #333;
+  border-color: #8c8c8c;
+}
+
+.shared-button {
+  color: #228B22;
+  border-style: solid;
+  border-width: 1px;
+  padding: 1px 7px 2px;
+}
+
+.personal-button {
+  color: hwb(330 13% 45%);
+  border-style: solid;
+  border-width: 1px;
+  padding: 1px 7px 2px;
+} 

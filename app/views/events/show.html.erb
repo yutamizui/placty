@@ -53,18 +53,18 @@
       <span><%= "~" %></span>
     </h3>
     <% @event.tickets.each do |t| %>
-      <%= User.find(t.user_id).translated_name %>
+      <div><%= User.find(t.user_id).translated_name %></div>
     <% end %>
     <hr>
     
     <!-- チャレンジ提供 -->
     <div>
-      <%= link_to t('activerecord.attributes.challenge.send_assignment'), new_challenge_path(event_id: @event.id), class:"btn btn-success button-margin" %>
+      <%= link_to t('activerecord.attributes.challenge.share_challenge'), new_challenge_path(event_id: @event.id), class:"btn btn-success button-margin" %>
     </div>
     
     <!-- 参加者との共有メモ　-->
     <p>
-      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+      <button class="btn btn-primary button-margin" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
         <%= t('activerecord.attributes.event.shared_memo') %>
       </button>
     </p>

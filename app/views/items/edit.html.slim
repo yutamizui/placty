@@ -1,10 +1,10 @@
 div.col-md-12
   div class="card"
     div class="card-header text-white bg-secondary text-center" 
-      h4 = t('activerecord.attributes.item.create')
+      h4 = t('activerecord.attributes.item.edit')
     div class="card-body"
       == render 'shared/errors', obj: @item
-      = form_for @item do |f|
+      = form_for @item, url: item_path do |f|
         == render 'items/form', f: f
-        = f.submit  t('activerecord.attributes.button.create'), class:"btn btn-info"
+        = f.submit  t('activerecord.attributes.button.edit'), class:"btn btn-info"
 

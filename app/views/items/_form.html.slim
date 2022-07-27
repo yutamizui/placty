@@ -1,0 +1,8 @@
+div.form-group
+  = f.label :name
+  = f.text_field :name, class:"form-control"
+div.form-group
+  = f.label :note
+  = f.text_area :note, class:"form-control"
+  = f.hidden_field :challenge_id, value: @challenge.id
+  = f.hidden_field :item_id, value: @item.id

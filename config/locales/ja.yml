@@ -8,7 +8,7 @@ ja:
     
     challenge:
       status:
-        assignment: 課題
+        one_shot: 単発
         seven_days: ７日間
 
   activerecord:
@@ -39,6 +39,7 @@ ja:
         back: 戻る
         click: こちらをクリック
         are_you_sure_to_delete: 本当に削除しますか？
+        share: 共有する
      
       notification:
         created: 内容を作成しました
@@ -170,18 +171,25 @@ ja:
         point_detail: 1ポイント = 120円
         commission: 手数料
         google_calendar: Googleカレンダー
+       
 
       challenge:
         title: タイトル
         status: チャレンジタイプ
         deadline: 締め切り期限
         page_title: チャレンジ
-        7days: ７日間チャレンジ
-        assignment: 課題
+        seven_days: ７日間チャレンジ
+        one_shot: 単発チャレンジ
         content: (過去７日間の活動データを集計)
-        send_assignment: 課題を出す
+        share_challenge: チャレンジを共有
+        share: 共有する
         detail: チャレンジ内容
         create: チャレンジを作成する
+        achievement_rate: 達成率
+        seven_days_achievement_rate: ７日間達成率
+        target_user: チャレンジを共有したい人をチェック
+        confirm: 内容を確定する
+        updated: 内容を確定しました。チャレンジを達成して一緒に成長していきましょう！
 
       item:
        title: チャレンジアイテム
@@ -191,10 +199,8 @@ ja:
        percentage: 達成率
        complete: 達成
        complete_status: 達成状況
+       complete_rate_change: 一度達成率を変更すると、達成率の合計は０スタートになります。
 
-
-       
-        
       payment:
         user_list: ポイント換金希望のユーザー
         redeem_point: 現在所有のポイントを換金する

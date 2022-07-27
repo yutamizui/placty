@@ -12,7 +12,13 @@ Rails.application.routes.draw do
         post :memo
       end
     end
-    resources :challenges
+
+    resources :challenges do
+      collection do
+        post :progress
+      end
+    end
+
     resources :items do
       collection do
         post :report_update

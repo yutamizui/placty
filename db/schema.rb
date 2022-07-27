@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_15_020422) do
+ActiveRecord::Schema.define(version: 2022_07_26_014439) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 2022_07_15_020422) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "status", default: 0
     t.datetime "deadline"
+    t.integer "progress", default: 0
   end
 
   create_table "events", force: :cascade do |t|
@@ -125,6 +126,7 @@ ActiveRecord::Schema.define(version: 2022_07_15_020422) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "total_percentage", default: 0
     t.datetime "target_date"
+    t.integer "completed_percentage", default: 0
     t.index ["challenge_id"], name: "index_reports_on_challenge_id"
     t.index ["user_id"], name: "index_reports_on_user_id"
   end

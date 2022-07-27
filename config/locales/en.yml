@@ -7,7 +7,7 @@ en:
         Saving: Saving
     challenge:
       status:
-        assignment: Assignment
+        one_shot: One Shot
         seven_days: Seven Days
 
   activerecord:
@@ -38,6 +38,7 @@ en:
         duplicate: Duplicate
         click: Click here
         are_you_sure_to_delete: Are you sure to delete?
+        share: Share
 
       notification:
         created: Created successfully
@@ -169,6 +170,7 @@ en:
         point_detail: 1pt = 120yen
         commission: Commission fees
         google_calendar: Google Calendar
+       
         
 
       challenge:
@@ -176,13 +178,18 @@ en:
         status: Challenge Type
         deadline: Deadline
         page_title: Challenge
-        7days: 7days Challenge
-        assignment: Assignment
+        seven_days: 7days Challenge
+        one_shot: One Shot
         content: ( Aggregate activity data for the past 7 days )
-        send_assignment: Give a challenge
+        share_challenge: Share a challenge
+        share: Share
         detail: Details
         create: Create Challenge
-        
+        achievement_rate: Achievement rate
+        seven_days_achievement_rate: Seven days achievement rate
+        target_user: Check who you want to share
+        confirm: Finalize the content
+        updated: The contents have been finalized. Let's accomplish the challenge and grow together!
        
       item:
         title: Challenge Item
@@ -192,6 +199,7 @@ en:
         percentage: Percentage of achievement
         complete: Complete
         complete_status: Achievement Status
+        complete_rate_change: Once the achievement rate is changed, the total achievement rate will start at zero.
 
       payment:
         user_list: Users wishing to redeem points

@@ -1,24 +1,46 @@
-<%= link_to t('activerecord.attributes.challenge.assignment'), challenges_path(name: "assignment"), class:"btn btn-success" %>
-<%= link_to t('activerecord.attributes.challenge.7days'), challenges_path(name: "seven_days"), class:"btn btn-warning" %>
+
+<% if params[:status] == "one_shot" %>
+  <% one_shot_button_color = "btn-warning button-border" %>
+  <% seven_days_button_color = "btn-outline-secondary button-border" %>
+  <% achievement_title = "activerecord.attributes.challenge.achievement_rate" %>
+<% else %>
+  <% one_shot_button_color = "btn-outline-secondary button-border" %>
+  <% seven_days_button_color = "btn-warning button-border" %>
+  <% achievement_title = "activerecord.attributes.challenge.seven_days_achievement_rate" %>
+<% end %>
+
+<%= link_to t('activerecord.attributes.challenge.one_shot'), challenges_path(status: "one_shot"), class:"btn #{one_shot_button_color}" %>
+<%= link_to t('activerecord.attributes.challenge.seven_days'), challenges_path(status: "seven_days"), class:"btn #{seven_days_button_color}" %>
 <%= link_to t('activerecord.attributes.challenge.create'), new_challenge_path, class:'btn btn-info button-margin pull-right' %>
 
 <table class="table table-default table-striped">
   <thead>
     <th></th>
-    <th></th>
+    <th><%= t('activerecord.attributes.challenge.title') %></th>
+    <th><%= t("#{achievement_title}") %></th>
     <th></th>
   </thead>
   <tbody>
     <% @challenges.each do |c| %>
       <tr>
-        <td style="width:25%"><%= c.title %></td>
         <td>
+          <% if c.target_user.count > 1 %>
+            <span class="shared-button"><%= "Shared" %></span>
+          <% else %>
+            <span class="personal-button"><%= "Personal" %></span>
+          <% end %>
+        </td>
+        <td style="width:30%"><%= c.title %></td>
+        <td style="width:50%">
           <div class="progress" style="height: 30px;">
-            <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+            <div class="progress-bar" role="progressbar" style='width: <%= c.reports.last.total_percentage %>%;' aria-valuenow="4" aria-valuemin="0" aria-valuemax="100"><%= c.reports.last.total_percentage %>%</div>
           </div>
         </td>
         <td style="width:10%">
-          <%= link_to t('activerecord.attributes.button.show'), challenge_path(id: c.id, status: c.status), class:"btn btn-success btn-sm" %>
+          <%= link_to t('activerecord.attributes.button.show'), challenge_path(id: c.id, status: c.status), class:"btn btn-success btn-sm button-margin" %>
+          <% if c.author_id == current_user.id %>
+            <%= link_to t('activerecord.attributes.button.delete'), challenge_path(id: c.id), method: :delete, data: {confirm:"#{t('activerecord.attributes.button.are_you_sure_to_delete')}"},class:"btn btn-danger btn-sm" %>
+          <% end %>
         </td>
       </tr>
     <% end %>
