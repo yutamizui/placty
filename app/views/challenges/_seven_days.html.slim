@@ -58,7 +58,7 @@ br
 table class="table table-default table-striped"
   thead
     th = @challenge.title
-    - if current_user.id == @challenge.author_id && @challenge.progress == "ongoing"
+    - if @challenge.progress == "ongoing"
       th = t('activerecord.attributes.item.complete_status')
     - if current_user.id == @challenge.author_id && @challenge.progress == "awaiting"
       th = t('activerecord.attributes.item.percentage')
@@ -67,7 +67,7 @@ table class="table table-default table-striped"
       tr
         td
           = i.name
-        - if current_user.id == @challenge.author_id && @challenge.progress == "ongoing"
+        - if @challenge.progress == "ongoing"
           td
             - if i.challenge.reports.where(user_id: current_user.id).last.created_at.end_of_day == Date.today.end_of_day && i.challenge.reports.where(user_id: current_user.id).last.completed_item.map(&:to_i).include?(i.id)
               button type="button" class="btn btn-primary disabled"

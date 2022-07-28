@@ -16,15 +16,34 @@ div.col-md-12
       = f.label :target_user
       div
       - @users.each do |u|
-        label.check_lb#all_user
+        label.check_lb
           input type="checkbox" name="target_user_id[#{u.id}]" value="#{u.id}"
           = u.translated_name
           br
     - else
       input type="hidden" name="target_user_id[#{current_user.id}]" value="#{current_user.id}"
-    input type="hidden" name="author_id" value="#{current_user.id}"
+    input type="hidden" name="author_id" value="#{current_user.id}" 
 
 javascript:
+  
+  $(function(){
+    $('#challenge_create_button').prop("disabled", true);
+  });
+
+  $('input').change(function() {
+    $('#challenge_create_button').prop("disabled", true);
+    let a = 0;
+    $('input:checked').each(function() {
+        let r = $(this).val();
+        let number = a+=1;
+        console.log(number);
+       if (number > 0){
+         $('#challenge_create_button').prop("disabled", false);
+       }  
+    })
+  })
+
+
   $('#challenge_status').change(function() {
     var r = $('option:selected').val();
     if (r == "seven_days") {
@@ -33,5 +52,4 @@ javascript:
       $('#deadline').show();
     }
   })
-
-     
+ 

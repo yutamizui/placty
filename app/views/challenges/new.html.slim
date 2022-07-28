@@ -6,4 +6,4 @@ div.col-md-12
       == render 'shared/errors', obj: @challenge
       = form_for @challenge do |f|
         == render 'challenges/form', f: f
-        = f.submit  t('activerecord.attributes.button.create'), class:"btn btn-info"
+        = f.submit  t('activerecord.attributes.button.create'), class:"btn btn-info", id:"challenge_create_button"

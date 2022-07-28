@@ -28,17 +28,30 @@ class ChallengesController < ApplicationController
     @target_report = @challenge.reports.where(user_id: current_user.id).last.total_percentage   # Today's report
   end
 
+  def management
+    @challenge = Challenge.find(params[:id])
+    @users = User.where(id: @challenge.target_user)
+  end
+
   def new
     @challenge = Challenge.new
     if params[:event_id].present?
       @event = Event.find(params[:event_id])
       @users = User.where(id: @event.tickets.pluck(:user_id) )
+      @user_ids = @users.pluck(:id)
     end
   end
 
   def create
-    @target_user_ids =  (params[:target_user_id].values.map(&:to_i)).push(params[:author_id].to_i).uniq.sort ## ユーザーの配列
-    # @users = User.where(id: @target_user_ids) ## 今回対象のユーザー
+    if params[:target_user_id] !=nil
+      @target_user_ids =  (params[:target_user_id].values.map(&:to_i)).push(params[:author_id].to_i).uniq.sort ## ユーザーの配列
+      @category = 1
+    else
+      target_user_id = []
+      @target_user_ids = target_user_id.push(params[:author_id].to_i)
+      @category = 0
+    end
+      # @users = User.where(id: @target_user_ids) ## 今回対象のユーザー
     
     year = params[:challenge]["deadline(1i)"].to_s
     month = params[:challenge]["deadline(2i)"].to_s
@@ -52,7 +65,8 @@ class ChallengesController < ApplicationController
       target_user: @target_user_ids,
       author_id: params[:author_id].to_i,
       deadline: @target_date,
-      status: params[:challenge][:status]
+      status: params[:challenge][:status],
+      category: @category
     )
 
     if @challenge.save
@@ -115,7 +129,7 @@ class ChallengesController < ApplicationController
     @challenge.update(
       progress: "ongoing"
     )
-    redirect_to challenge_path(id: @challenge.id), notice: t('activerecord.attributes.challenge.updated')
+    redirect_to challenge_path(id: @challenge.id,status: @challenge.status), notice: t('activerecord.attributes.challenge.updated')
   end
 
   private

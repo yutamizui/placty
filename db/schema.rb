@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_26_014439) do
+ActiveRecord::Schema.define(version: 2022_07_27_081616) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 2022_07_26_014439) do
     t.integer "status", default: 0
     t.datetime "deadline"
     t.integer "progress", default: 0
+    t.integer "category", default: 0
   end
 
   create_table "events", force: :cascade do |t|
