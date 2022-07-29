@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_27_081616) do
+ActiveRecord::Schema.define(version: 2022_07_28_091444) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -125,9 +125,9 @@ ActiveRecord::Schema.define(version: 2022_07_27_081616) do
     t.string "completed_item"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "total_percentage", default: 0
+    t.float "total_percentage", default: 0.0
     t.datetime "target_date"
-    t.integer "completed_percentage", default: 0
+    t.float "completed_percentage", default: 0.0
     t.index ["challenge_id"], name: "index_reports_on_challenge_id"
     t.index ["user_id"], name: "index_reports_on_user_id"
   end

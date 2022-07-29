@@ -16,7 +16,6 @@ Rails.application.routes.draw do
     resources :challenges do
       collection do
         post :progress
-        get :management
       end
     end
 

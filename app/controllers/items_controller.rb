@@ -29,23 +29,6 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:item][:item_id])
     @challenge = Challenge.find(params[:item][:challenge_id])
     @item.update(item_params)
-    set_percentage = []
-    @challenge.items.each do |i|
-      set_percentage << i.percentage * 7
-    end
-    @set_percentage = set_percentage
-
-    @total_completed_item_id = @challenge.reports.where(user_id: current_user.id).pluck(:completed_item).sum
-    completed_percentage = []
-    @total_completed_item_id.each do |item_id|
-      completed_percentage << Item.find(item_id).percentage
-    end
-    @completed_percentage = completed_percentage
-    
-    @challenge.reports.where(user_id: current_user.id).last.update(
-      total_percentage: @completed_percentage.sum.to_f / @set_percentage.sum.to_f * 100
-    )
-
     redirect_to challenge_path(id: @challenge.id, status: @challenge.status)
   end
 
@@ -62,6 +45,7 @@ class ItemsController < ApplicationController
   end
 
   def report_update
+
     @item = Item.find(params[:item_id])
     @challenge = Challenge.find(params[:challenge_id])
     @report = @challenge.reports.where(user_id: current_user.id).last
@@ -70,7 +54,6 @@ class ItemsController < ApplicationController
       @report.update(
         completed_percentage: @report.completed_percentage + @item.percentage,
         completed_item: ((@report.completed_item.map(&:to_i).push(params[:item_id].to_i).uniq)),
-        total_percentage: @report.total_percentage + @item.percentage
       )
     else
       
@@ -78,13 +61,13 @@ class ItemsController < ApplicationController
         completed_percentage: @report.completed_percentage + @item.percentage,
         completed_item: ((@report.completed_item.map(&:to_i).push(params[:item_id].to_i).uniq)),
       )
-
+      
       set_percentage = []
       @challenge.items.each do |i|
         set_percentage << i.percentage * 7
       end
       @set_percentage = set_percentage
-
+      
       @total_completed_item_id = @challenge.reports.where(user_id: current_user.id).pluck(:completed_item).sum
       completed_percentage = []
       @total_completed_item_id.each do |item_id|

@@ -33,16 +33,17 @@
         <td style="width:30%"><%= c.title %></td>
         <td style="width:50%">
           <div class="progress" style="height: 30px;">
-            <div class="progress-bar" role="progressbar" style='width: <%= c.reports.where(user_id: current_user.id).last.total_percentage %>%;' aria-valuenow="4" aria-valuemin="0" aria-valuemax="100"><%= c.reports.where(user_id: current_user.id).last.total_percentage %>%</div>
+            <% if c.status == "one_shot" %>
+              <% @total_average = c.reports.where(user_id: current_user.id).last.completed_percentage.round(0) %>
+            <% elsif c.status == "seven_days" %>
+              <% @total_average = c.reports.where(user_id: current_user.id).last.total_percentage.round(0) %>
+            <% end %>
+
+            <div class="progress-bar" role="progressbar" style='width: <%=  @total_average %>%;' aria-valuenow="4" aria-valuemin="0" aria-valuemax="100"><%=  @total_average %>%</div>
           </div>
         </td>
         <td style="width:10%">
-          <% if c.category == "shared" && c.author_id == current_user.id && c.progress == "ongoing"  %>
-            <%= link_to t('activerecord.attributes.button.show'), management_challenges_path(id: c.id, status: c.status), class:"btn btn-success btn-sm button-margin" %>
-          <% else %>
-            <%= link_to t('activerecord.attributes.button.show'), challenge_path(id: c.id, status: c.status), class:"btn btn-success btn-sm button-margin" %>
-          <% end %>
-          
+          <%= link_to t('activerecord.attributes.button.show'), challenge_path(id: c.id, status: c.status), class:"btn btn-success btn-sm button-margin" %>
           <% if c.author_id == current_user.id %>
             <%= link_to t('activerecord.attributes.button.delete'), challenge_path(id: c.id), method: :delete, data: {confirm:"#{t('activerecord.attributes.button.are_you_sure_to_delete')}"},class:"btn btn-danger btn-sm" %>
           <% end %>
