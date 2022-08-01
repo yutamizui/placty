@@ -22,13 +22,13 @@ class ChallengesController < ApplicationController
       @users.each do |u|
         @user = User.find(u.id) 
         @reports = Report.where(challenge_id: @challenge.id, user_id: u.id)
-        t = @reports.pluck(:target_date)
-        unless t.include?(Date.today.end_of_day)
+        @target_date = @reports.last.target_date
+        if @target_date.in_time_zone(TimeZone.find(u.time_zone_id).en_name) != Time.current.in_time_zone(TimeZone.find(u.time_zone_id).en_name).beginning_of_day
           Report.create(
             challenge_id: @challenge.id,
             user_id: u.id,
             completed_item: [],
-            target_date: Date.today.end_of_day
+            target_date: Time.current.beginning_of_day
           )
         end
       end
@@ -81,19 +81,18 @@ class ChallengesController < ApplicationController
             challenge_id: @challenge.id,
             user_id: u,
             completed_item: [],
-            target_date: Date.today.end_of_day
+            target_date: Time.current.beginning_of_day
           )
         end
-        
       elsif @challenge.status == "seven_days"
-        [0,1,2,3,4,5,6].each do |i|
+        [6,5,4,3,2,1,0].each do |i|
           @target_user_ids.each do |u|
             @user = User.find(u)
             Report.create(
               challenge_id: @challenge.id,
               user_id: u,
               completed_item: [],
-              target_date:  Date.today.end_of_day + i
+              target_date: Time.current.beginning_of_day - i.days
             )
           end
         end

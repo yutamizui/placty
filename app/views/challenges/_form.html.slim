@@ -10,7 +10,7 @@ div.col-md-12
   div.form-group#deadline
     = f.label :deadline
     br
-    = f.datetime_select :deadline, default: Time.zone.now.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).to_time, :start_year => Time.zone.now.year - 1, :end_year => Time.zone.now.year + 1, :minute_step => 5, class:"form-control"
+    = f.datetime_select :deadline, default: Time.current.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name), :start_year => Time.zone.now.year - 1, :end_year => Time.zone.now.year + 1, :minute_step => 5, class:"form-control"
   div.form-group
     - if params[:event_id].present?
       = f.label :target_user
