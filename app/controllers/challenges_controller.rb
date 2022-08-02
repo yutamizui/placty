@@ -33,6 +33,7 @@ class ChallengesController < ApplicationController
             completed_item: [],
             target_date: Time.current.beginning_of_day
           )
+          @reports.first.destroy
         end
       end
     end
