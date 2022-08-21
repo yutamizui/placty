@@ -48,7 +48,9 @@ class EventsController < ApplicationController
     date = params[:event]["date(3i)"].to_s
     hour = params[:event]["date(4i)"].to_s
     min = params[:event]["date(5i)"].to_s
-    @event.date = Time.new(year, month, date, hour, min).to_time.to_s
+    original_time_zone = Date.today.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).strftime("%:z")
+    @event.date = Time.new(year, month, date, hour, min, "00", original_time_zone).to_time.to_s
+
     if @event.save
       redirect_to hosting_events_path, notice: t('activerecord.attributes.notification.created')
     else
