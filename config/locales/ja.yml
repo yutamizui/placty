@@ -171,7 +171,9 @@ ja:
         point_detail: 1ポイント = 120円
         commission: 手数料
         google_calendar: Googleカレンダー
-       
+        time_limit: イベント参加締め切り時間
+        time_limit_value: 時間前まで
+        application_closed: 募集締め切り
 
       challenge:
         title: タイトル

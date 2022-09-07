@@ -170,6 +170,9 @@ en:
         point_detail: 1pt = 120yen
         commission: Commission fees
         google_calendar: Google Calendar
+        time_limit: Event Participation Deadline
+        time_limit_value: hour before start time 
+        application_closed: Application Closed
        
         
 
