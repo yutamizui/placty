@@ -41,12 +41,14 @@
               <%= link_to t('activerecord.attributes.event.fully_booked'), event_path(id: e.id), class:"btn btn-warning btn-sm disabled button-margin" %>
             <% elsif current_user.present? && e.user_id == current_user.id %>
               <%= link_to t('activerecord.attributes.event.hosting'), event_path(id: e.id), class:"btn btn-success btn-sm disabled button-margin" %>
-            <% else %>
+            <% elsif current_user.present? %>
               <% if e.date.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).to_datetime - (e.time_limit).hour > Time.now.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).to_datetime %>
                 <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id), class:"btn btn-success btn-sm button-margin" %>
               <% else %>
                 <%= link_to t('activerecord.attributes.event.application_closed'), event_path(id: e.id), class:"btn btn-danger btn-sm disabled button-margin" %>
               <% end %>
+            <% else %>
+            
             <% end %>
             <% if e.point == 0 %>
               <%= link_to t('activerecord.attributes.event.free'), events_path, class:"btn btn-warning button-circle btn-sm disabled button-margin" %>
@@ -90,12 +92,13 @@
               <%= link_to t('activerecord.attributes.event.fully_booked'), event_path(id: e.id), class:"btn btn-warning btn-sm disabled button-margin" %>
             <% elsif current_user.present? && e.user_id == current_user.id %>
               <%= link_to t('activerecord.attributes.event.hosting'), event_path(id: e.id), class:"btn btn-success btn-sm disabled button-margin" %>
-            <% else %>
+            <% elsif current_user.present? %>
               <% if e.date.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).to_datetime - (e.time_limit).hour > Time.now.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).to_datetime %>
                 <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id), class:"btn btn-success btn-sm button-margin" %>
               <% else %>
                 <%= link_to t('activerecord.attributes.event.application_closed'), event_path(id: e.id), class:"btn btn-danger btn-sm disabled button-margin" %>
               <% end %>
+            <% else %>
             <% end %>
             <% if e.point == 0 %>
               <%= link_to t('activerecord.attributes.event.free'), events_path, class:"btn btn-warning button-circle btn-sm disabled button-margin" %>
