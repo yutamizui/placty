@@ -48,7 +48,7 @@
                 <%= link_to t('activerecord.attributes.event.application_closed'), event_path(id: e.id), class:"btn btn-danger btn-sm disabled button-margin" %>
               <% end %>
             <% else %>
-            
+              <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id), class:"btn btn-success btn-sm button-margin" %>
             <% end %>
             <% if e.point == 0 %>
               <%= link_to t('activerecord.attributes.event.free'), events_path, class:"btn btn-warning button-circle btn-sm disabled button-margin" %>
@@ -99,6 +99,7 @@
                 <%= link_to t('activerecord.attributes.event.application_closed'), event_path(id: e.id), class:"btn btn-danger btn-sm disabled button-margin" %>
               <% end %>
             <% else %>
+              <%= link_to t('activerecord.attributes.button.show'), event_path(id: e.id), class:"btn btn-success btn-sm button-margin" %>
             <% end %>
             <% if e.point == 0 %>
               <%= link_to t('activerecord.attributes.event.free'), events_path, class:"btn btn-warning button-circle btn-sm disabled button-margin" %>
