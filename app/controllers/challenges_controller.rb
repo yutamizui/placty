@@ -1,4 +1,6 @@
 class ChallengesController < ApplicationController
+  before_action :authenticate_user!
+  
   def index
     target_challenges = []
     Challenge.all.each do |c|

@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   before_action :find_event, only: [:show, :edit, :update, :destroy, :add_point, :duplication]
+  before_action :authenticate_user!, except: [:index, :show]
 
   def index
     @events = Event.where('date >= ?', Time.zone.now-900).order(date: "ASC")  ##現在時刻から１５分をマイナスした時間より大きい開始時間のイベント

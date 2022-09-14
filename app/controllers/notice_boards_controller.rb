@@ -1,5 +1,6 @@
 class NoticeBoardsController < ApplicationController
   before_action :find_notice_board, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   def index
     @notice_boards = NoticeBoard.all.order(created_at: :DESC)
