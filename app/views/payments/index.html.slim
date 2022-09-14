@@ -43,21 +43,39 @@ br
 
 - if current_user == User.first 
   hr
-  h3 = t('activerecord.attributes.payment.user_list')
-  // 画面サイズが md lg xlの時に表示
-  table class="table table-bordered"
-    thead class="thead-dark table-active"
-      tr
-        th = t('activerecord.attributes.payment.name') 
-        th = t('activerecord.attributes.payment.point')
-        th = t('activerecord.attributes.button.show')
-    tbody
-      - @users.each do |u| 
-        tr
-          td = u.translated_name 
-          td = u.redeem_point
-          / td = link_to t('activerecord.attributes.payment.completed'), payments_redeem_completed_path(user_id: u.id), method: :post, class:"btn btn-warning button-margin-sm"
-          td = link_to t('activerecord.attributes.button.show'), payment_path(user_id: u.id), class:"btn btn-success button-margin-sm"
+  div.col-md-12
+    div.col-md-6
+      h3 = t('activerecord.attributes.payment.billing_user_list')
+      // 画面サイズが md lg xlの時に表示
+      table class="table table-bordered point-border"
+        thead class="thead-dark table-active"
+          tr class="table-warning"
+            th = t('activerecord.attributes.payment.name') 
+            th = t('activerecord.attributes.payment.point')
+            th = t('activerecord.attributes.button.show')
+        tbody
+          - @users.each do |u| 
+            tr
+              td = u.translated_name 
+              td = u.redeem_point
+              / td = link_to t('activerecord.attributes.payment.completed'), payments_redeem_completed_path(user_id: u.id), method: :post, class:"btn btn-warning button-margin-sm"
+              td = link_to t('activerecord.attributes.button.show'), payment_path(user_id: u.id), class:"btn btn-success button-margin-sm"
+
+    div.col-md-6
+      h3 = t('activerecord.attributes.payment.all_user_list')
+      // 画面サイズが md lg xlの時に表示
+      table class="table table-bordered point-border"
+        thead class="thead-dark table-active"
+          tr class="table-success"
+            th = t('activerecord.attributes.payment.name') 
+            th = t('activerecord.attributes.payment.current_owned_point')
+
+        tbody
+          - User.all.where.not(id: User.first.id).each do |u| 
+            tr
+              td = u.translated_name 
+              td = u.points.count
+
 javascript:
   $('#number_of_buying_points').on('change', function(){
     var e = document.getElementById("number_of_buying_points");

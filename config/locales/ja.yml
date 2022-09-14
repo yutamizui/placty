@@ -204,7 +204,9 @@ ja:
        complete_rate_change: 一度達成率を変更すると、達成率の合計は０スタートになります。
 
       payment:
-        user_list: ポイント換金希望のユーザー
+        billing_user_list: ポイント換金希望のユーザー
+        all_user_list: すべてのユーザー
+        current_owned_point: 現在の保有ポイント
         redeem_point: 現在所有のポイントを換金する
         being_redeemed: 現在ポイントを換金しています
         completed: 送金完了✔︎

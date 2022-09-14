@@ -205,8 +205,10 @@ en:
         complete_rate_change: Once the achievement rate is changed, the total achievement rate will start at zero.
 
       payment:
-        user_list: Users wishing to redeem points
+        billing_user_list: Users wishing to redeem points
+        all_user_list: All users
         redeem_point: Redeem currently owned points
+        current_owned_point: Current Owned Points
         being_redeemed: Points are redeemed for cash
         completed: Remittance Completed✔︎
         name: Name
