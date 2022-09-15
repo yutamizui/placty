@@ -7,11 +7,7 @@ namespace :challenges do
       @users.each do |u|
         @user = User.find(u.id) 
         @reports = Report.where(challenge_id: c, user_id: u.id)
-        target_date = @reports.last.target_date.in_time_zone(TimeZone.find(@user.time_zone_id).en_name)
-        t = Date.new(target_date.year, target_date.month, target_date.day)
-        current_time = Time.current.in_time_zone(TimeZone.find(@user.time_zone_id).en_name)
-        c = Date.new(current_time.year, current_time.month, current_time.day)
-        if t != c 
+        if @reports.last.target_date != Time.current.beginning_of_day
           Report.create(
             challenge_id: c.id,
             user_id: u.id,
