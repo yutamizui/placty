@@ -95,7 +95,7 @@ class ChallengesController < ApplicationController
               challenge_id: @challenge.id,
               user_id: u,
               completed_item: [],
-              target_date: Time.current.beginning_of_day - i.days
+              target_date: Time.current.in_time_zone(TimeZone.find(@user.time_zone_id).en_name).beginning_of_day.in_time_zone('UTC') - i.days
             )
           end
         end
