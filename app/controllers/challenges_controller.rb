@@ -24,19 +24,16 @@ class ChallengesController < ApplicationController
       @users.each do |u|
         @user = User.find(u.id) 
         @reports = Report.where(challenge_id: @challenge.id, user_id: u.id)
-        target_date = @reports.last.target_date.in_time_zone(TimeZone.find(u.time_zone_id).en_name)
-        t = Date.new(target_date.year, target_date.month, target_date.day)
-        current_time = Time.current.in_time_zone(TimeZone.find(u.time_zone_id).en_name)
-        c = Date.new(current_time.year, current_time.month, current_time.day)
-        if t != c 
+        if @reports.last.target_date != Time.current.in_time_zone(TimeZone.find(u.time_zone_id).en_name).beginning_of_day.in_time_zone('UTC')
           Report.create(
             challenge_id: @challenge.id,
             user_id: u.id,
             completed_item: [],
-            target_date: Time.current.beginning_of_day
+            target_date: Time.current.in_time_zone(TimeZone.find(u.time_zone_id).en_name).beginning_of_day.in_time_zone('UTC')
           )
           @reports.first.destroy
         end
+        ## どこの時刻をtarget_dateに保存するか？　どの時間を比較するか？
       end
     end
     @items = @challenge.items
