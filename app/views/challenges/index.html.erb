@@ -17,6 +17,9 @@
   <thead>
     <th></th>
     <th><%= t('activerecord.attributes.challenge.title') %></th>
+    <% if params[:status] == "one_shot" %>
+      <th><%= t('activerecord.attributes.challenge.deadline') %></th>
+    <% end %>
     <th><%= t("#{achievement_title}") %></th>
     <th></th>
   </thead>
@@ -31,6 +34,9 @@
           <% end %>
         </td>
         <td style="width:30%"><%= c.title %></td>
+        <% if params[:status] == "one_shot" %>
+          <th><%= c.deadline.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).strftime("%Y/%m/%d %H:%M") %></th>
+        <% end %>
         <td style="width:50%">
           <div class="progress" style="height: 30px;">
             <% if c.status == "one_shot" %>

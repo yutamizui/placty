@@ -11,7 +11,8 @@ class ChallengesController < ApplicationController
     @one_shot_challenges = target_challenges.select { |target_challenge| target_challenge[:status] == "one_shot" }
     @seven_days_challenges = target_challenges.select { |target_challenge| target_challenge[:status] == "seven_days" }
     if params[:status] == "one_shot"
-      @challenges = @one_shot_challenges ## 単発
+      
+      @challenges = @one_shot_challenges.sort_by(&:deadline) ## 単発
     elsif params[:status] == "seven_days"
       @challenges = @seven_days_challenges ## ７日間
     end

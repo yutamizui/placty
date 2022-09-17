@@ -178,7 +178,7 @@ ja:
       challenge:
         title: タイトル
         status: チャレンジタイプ
-        deadline: 締め切り期限
+        deadline: 締め切り
         page_title: チャレンジ
         seven_days: ７日間チャレンジ
         one_shot: 単発チャレンジ
