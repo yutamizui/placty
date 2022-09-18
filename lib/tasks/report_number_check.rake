@@ -7,12 +7,12 @@ namespace :challenges do
       @users.each do |u|
         @user = User.find(u.id) 
         @reports = Report.where(challenge_id: c, user_id: u.id)
-        if Report.last.target_date.next_day.strftime("%Y-%m-%d-%H:00:00") == Time.current.to_datetime.strftime("%Y-%m-%d-%H:00:00") 
+        if Time.current.in_time_zone(TimeZone.find(@user.time_zone_id).en_name).strftime("%H") == "00"
           Report.create(
             challenge_id: c.id,
             user_id: u.id,
             completed_item: [],
-            target_date: Time.current.to_datetime.strftime("%Y-%m-%d-%H:00:00")
+            target_date: Time.current
           )
           @reports.first.destroy
         end

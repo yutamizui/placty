@@ -21,22 +21,6 @@ class ChallengesController < ApplicationController
   def show
     @challenge = Challenge.find(params[:id])
     @users = User.where(id: @challenge.target_user)
-    if @challenge.status == "seven_days"
-      @users.each do |u|
-        @user = User.find(u.id) 
-        @reports = Report.where(challenge_id: @challenge.id, user_id: u.id)
-        if Report.last.target_date.next_day.strftime("%Y-%m-%d-%H:00:00") == Time.current.to_datetime.strftime("%Y-%m-%d-%H:00:00")
-          Report.create(
-            challenge_id: @challenge.id,
-            user_id: u.id,
-            completed_item: [],
-            target_date: Time.current.to_datetime.strftime("%Y-%m-%d-%H:00:00")
-          )
-          @reports.first.destroy
-        end
-        ## どこの時刻をtarget_dateに保存するか？　どの時間を比較するか？
-      end
-    end
     @items = @challenge.items
     @days = ["日", "月", "火", "水", "木", "金", "土"]
     @target_report6 = @challenge.reports.where(user_id: current_user.id).last(7).first.completed_percentage
@@ -78,14 +62,14 @@ class ChallengesController < ApplicationController
     )
 
     if @challenge.save
-      if @challenge.status == "one_shot" 
-        @target_user_ids.each_with_index do |u, i|
+      if @challenge.status == "one_shot"
+        @target_user_ids.each_with_index do |u|
           @user = User.find(u)
           Report.create(
             challenge_id: @challenge.id,
             user_id: u,
             completed_item: [],
-            target_date: Time.current.beginning_of_day
+            target_date: Time.current
           )
         end
       elsif @challenge.status == "seven_days"
@@ -96,7 +80,7 @@ class ChallengesController < ApplicationController
               challenge_id: @challenge.id,
               user_id: u,
               completed_item: [],
-              target_date: Time.current.in_time_zone(TimeZone.find(@user.time_zone_id).en_name).beginning_of_day.in_time_zone('UTC') - i.days
+              target_date: Time.current - i.days
             )
           end
         end
