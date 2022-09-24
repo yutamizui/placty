@@ -47,7 +47,6 @@ class ItemsController < ApplicationController
   end
 
   def report_update
-
     @item = Item.find(params[:item_id])
     @challenge = Challenge.find(params[:challenge_id])
     @report = @challenge.reports.where(user_id: current_user.id).last

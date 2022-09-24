@@ -14,9 +14,28 @@ namespace :challenges do
             user_id: u.id,
             completed_item: [],
             target_date: Time.current,
-            total_percentage:  @last_report.total_percentage
           )
+
           @reports.first.destroy
+
+          @report = c.reports.where(user_id: @user.id).last
+          set_percentage = []
+          c.items.each do |i|
+            set_percentage << i.percentage * 7
+          end
+          @set_percentage = set_percentage
+
+          @total_completed_item_id = c.reports.where(user_id: @user.id).pluck(:completed_item).sum
+          completed_percentage = []
+          @total_completed_item_id.each do |item_id|
+            completed_percentage << Item.find(item_id).percentage
+          end
+          @completed_percentage = completed_percentage
+
+          @report.update(
+            total_percentage: @completed_percentage.sum.to_f / @set_percentage.sum.to_f * 100
+          )
+
         end
       end
     end
