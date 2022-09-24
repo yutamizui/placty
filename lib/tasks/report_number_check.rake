@@ -6,7 +6,7 @@ namespace :challenges do
       @users = User.where(id: c.target_user)
       @users.each do |u|
         @user = User.find(u.id) 
-        @reports = Report.where(challenge_id: c, user_id: u.id)
+        @reports = Report.where(challenge_id: c, user_id: u.id).order(:created_at)
         @last_report = @reports.last ##　レポート新規作成前の最後のレポート
         if Time.current.in_time_zone(TimeZone.find(@user.time_zone_id).en_name).strftime("%H") == "00"
           Report.create(
@@ -15,24 +15,23 @@ namespace :challenges do
             completed_item: [],
             target_date: Time.current,
           )
+          @reports.first.destroy ##  -- ここまででレポートの新規作成、一番古いレポートを削除 -- ##
 
-          @reports.first.destroy
-
-          @report = c.reports.where(user_id: @user.id).last
+          @latest_last_report = Report.where(challenge_id: c, user_id: u.id).order(:created_at).last##  -- 一番最新のレポートを取得 -- ##
           set_percentage = []
           c.items.each do |i|
             set_percentage << i.percentage * 7
           end
           @set_percentage = set_percentage
 
-          @total_completed_item_id = c.reports.where(user_id: @user.id).pluck(:completed_item).sum
+          @total_completed_item_id = c.reports.where(user_id: u.id).pluck(:completed_item).sum
           completed_percentage = []
           @total_completed_item_id.each do |item_id|
             completed_percentage << Item.find(item_id).percentage
           end
           @completed_percentage = completed_percentage
 
-          @report.update(
+          @latest_last_report.update(
             total_percentage: @completed_percentage.sum.to_f / @set_percentage.sum.to_f * 100
           )
 
