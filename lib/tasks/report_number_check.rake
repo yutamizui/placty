@@ -18,21 +18,11 @@ namespace :challenges do
           @reports.first.destroy ##  -- ここまででレポートの新規作成、一番古いレポートを削除 -- ##
 
           @latest_last_report = Report.where(challenge_id: c, user_id: u.id).order(:created_at).last##  -- 一番最新のレポートを取得 -- ##
-          set_percentage = []
-          c.items.each do |i|
-            set_percentage << i.percentage * 7
-          end
-          @set_percentage = set_percentage
-
-          @total_completed_item_id = c.reports.where(user_id: u.id).pluck(:completed_item).sum
-          completed_percentage = []
-          @total_completed_item_id.each do |item_id|
-            completed_percentage << Item.find(item_id).percentage
-          end
-          @completed_percentage = completed_percentage
+          @set_percentage = c.items.pluck(:percentage).sum * 7
+          @total_completed_precentage = c.reports.where(user_id: u.id).pluck(:completed_percentage).sum
 
           @latest_last_report.update(
-            total_percentage: @completed_percentage.sum.to_f / @set_percentage.sum.to_f * 100
+            total_percentage: @total_completed_precentage.sum.to_f / @set_percentage.sum.to_f * 100
           )
 
         end
