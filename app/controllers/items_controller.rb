@@ -67,7 +67,7 @@ class ItemsController < ApplicationController
       @total_completed_precentage = @challenge.reports.where(user_id: current_user.id).pluck(:completed_percentage).sum
 
       @report.update(
-        total_percentage: @total_completed_precentage.to_f / @set_percentage.sum.to_f * 100
+        total_percentage: @total_completed_precentage.to_f / @set_percentage.to_f * 100
       )
     end
     redirect_to challenge_path(id: params[:challenge_id], status: @challenge.status)
