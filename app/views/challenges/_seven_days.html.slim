@@ -89,20 +89,18 @@ table class="table table-default table-striped"
             = link_to t('activerecord.attributes.button.delete'), item_path(item_id: i.id, challenge_id: @challenge.id), method: :delete, class:"btn btn-danger btn-sm button-margin"
 br
   tbody
-  　// 自身のデータ
     tr
-      td style="width:30%" = current_user.translated_name
+      td style="width:30%" = current_user.translated_name  ## 自身のデータ
       td style="width:50%"
         div class="progress" style="height: 30px; width:100%;"
           - if @challenge.reports.where(user_id: u.id).last.total_percentage != 0
             div class="progress-bar" role="progressbar" style="width: #{ @challenge.reports.where(user_id: current_user.id).last.total_percentage.round(0) }%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"
               span = "#{@challenge.reports.where(user_id: current_user.id).last.total_percentage.round(0)}%"
-          - else 
+          - else
             div class="progress-bar" role="progressbar" style="width: #{ @challenge.reports.where(user_id: current_user.id).last(2).first.total_percentage.round(0) }%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"
               span = "#{@challenge.reports.where(user_id: current_user.id).last(2).first.total_percentage.round(0)}%"
-    
-    // 同じタスクの共有者
-    - @users.where.not(id: current_user.id).each do |u|
+
+    - @users.where.not(id: current_user.id).each do |u|  ## 同じタスクの共有者
       tr
         td style="width:30%" = u.translated_name
         td style="width:50%"
