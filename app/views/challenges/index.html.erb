@@ -42,7 +42,7 @@
             <% if c.status == "one_shot" %>
               <% @total_average = c.reports.where(user_id: current_user.id).last.completed_percentage.round(0) %>
             <% elsif c.status == "seven_days" %>
-              <% if @challenge.reports.where(user_id: u.id).last.total_percentage != 0 %>
+              <% if c.reports.where(user_id: u.id).last.total_percentage != 0 %>
                 <% @total_average = c.reports.where(user_id: current_user.id).last.total_percentage.round(0) %>
               <% else %>
                 <% @total_average = c.reports.where(user_id: current_user.id).last(2).first.total_percentage.round(0) %>
