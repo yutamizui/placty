@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   before_action :find_event, only: [:show, :edit, :update, :destroy, :add_point, :duplication]
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show, :memo]
 
   def index
     @events = Event.where('date >= ?', Time.zone.now-900).order(date: "ASC")  ##現在時刻から１５分をマイナスした時間より大きい開始時間のイベント
@@ -115,11 +115,10 @@ class EventsController < ApplicationController
     @users = User.where(id: @users_id)
     @users.each do |u|
       u.notes.first.update(
-        content: params[:memo_content] + "\n" + (u.notes.first.content).to_s 
+        content: params[:memo_content] + "\n" + (u.notes.first.content).to_s
       )
     end
-    redirect_to event_path(id: @event.id), notice: "イベントメモを共有しました！"
-    return
+    redirect_to event_path(id: @event.id), notice: "イベントメモを送信しました！"
   end
 
   def how_to_use
