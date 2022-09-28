@@ -16,13 +16,13 @@ table class="table table-default table-striped"
     - if current_user.id == @challenge.author_id && @challenge.progress == "awaiting"
       th = t('activerecord.attributes.item.percentage')
   tbody
-    - @items.each do |i|
+    - @items.each_with_index do |i, n|
       tr
         td
-          a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" = i.name
-          div class="collapse" id="collapseExample"
+          a data-toggle="collapse" href="#item#{n}" role="button" aria-expanded="false" aria-controls="item" = i.name
+          div class="collapse" id="item#{n}"
             div class="card card-body"
-              = i.note
+              = simple_format(i.note)
 
         - if @challenge.progress == "ongoing"
           td
