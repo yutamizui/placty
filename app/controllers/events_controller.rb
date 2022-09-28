@@ -113,12 +113,17 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     @users_id = @event.tickets.pluck(:user_id)
     @users = User.where(id: @users_id)
-    @users.each do |u|
-      u.notes.first.update(
-        content: params[:memo_content] + "\n" + (u.notes.first.content).to_s
-      )
+    if @users.present?
+      @users.each do |u|
+        u.notes.first.update(
+          content: params[:memo_content] + "\n" + (u.notes.first.content).to_s
+        )
+      end
+      redirect_to event_path(id: @event.id), notice: "イベントメモを送信しました！"
+    else
+      flash[:notice] = t('activerecord.attributes.link.failed_to_create')
+      render 'events/show'
     end
-    redirect_to event_path(id: @event.id), notice: "イベントメモを送信しました！"
   end
 
   def how_to_use

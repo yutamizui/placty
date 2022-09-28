@@ -17,7 +17,7 @@ namespace :challenges do
           )
           @reports.first.destroy ##  -- ここまででレポートの新規作成、一番古いレポートを削除 -- ##
 
-          @latest_last_report = Report.where(challenge_id: c).where(user_id: u.id).order(:created_at).last##  -- 一番最新のレポートを取得 -- ##
+          @latest_last_report = Report.where(challenge_id: c.id).where(user_id: u.id).order(:created_at).last##  -- 一番最新のレポートを取得 -- ##
           @set_percentage = c.items.pluck(:percentage).sum * 7
           @total_completed_precentage = c.reports.where(user_id: u.id).pluck(:completed_percentage).sum
 
