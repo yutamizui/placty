@@ -21,9 +21,8 @@ namespace :challenges do
           @total_completed_precentage = c.reports.where(user_id: u.id).pluck(:completed_percentage).sum
 
           @latest_last_report.update(
-            total_percentage: @total_completed_precentage.sum.to_f / @set_percentage.to_f * 100
+            total_percentage: @total_completed_precentage.to_f / @set_percentage.to_f * 100
           )
-
         end
       end
     end
