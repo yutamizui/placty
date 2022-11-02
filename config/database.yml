@@ -14,6 +14,5 @@ test:
 
 production:
   <<: *default
-  database: _production
-  username: placty
-  password: <%= ENV['PLACTY_DATABASE_PASSWORD'] %>
+  url: <%= ENV['HEROKU_POSTGRESQL_ROSE_URL'] %>
+  adapter: postgresql
