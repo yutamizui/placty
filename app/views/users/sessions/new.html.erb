@@ -1,33 +1,36 @@
 <div row>
-  <div class="col-md-6">
-    <div class="card worksheet-basic-setting">
-      <h3 class="card-header worksheet-bg"><%= t('activerecord.attributes.user.login') %></h3>
-      <div class="card-body">
-        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-          <div class="form-group">
-            <%= f.label :email %><br />
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control" %>
-          </div>
-
-          <div class="form-group">
-            <%= f.label :password %><br />
-            <%= f.password_field :password, autocomplete: "current-password", class:"form-control" %>
-          </div>
-
-          <% if devise_mapping.rememberable? %>
+  <div class="col-md-12">
+    <div class="col-md-6">
+      <div class="card worksheet-basic-setting">
+        <h3 class="card-header worksheet-bg"><%= t('activerecord.attributes.user.login') %></h3>
+        <div class="card-body">
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
             <div class="form-group">
-              <%= f.check_box :remember_me %>
-              <%= f.label :remember_me %>
+              <%= f.label :email %><br />
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control" %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :password %><br />
+              <%= f.password_field :password, autocomplete: "current-password", class:"form-control" %>
+            </div>
+
+            <% if devise_mapping.rememberable? %>
+              <div class="form-group">
+                <%= f.check_box :remember_me %>
+                <%= f.label :remember_me %>
+              </div>
+            <% end %>
+
+            <div class="actions">
+              <%= f.submit t('activerecord.attributes.user.login'), class:"btn btn-info" %>
             </div>
           <% end %>
-
-          <div class="actions">
-            <%= f.submit t('activerecord.attributes.user.login'), class:"btn btn-info" %>
-          </div>
-        <% end %>
-        <br>
-        <%= link_to t('activerecord.attributes.user.sign_up'), new_user_registration_path %>
+          <br>
+          <%= render "users/shared/links" %>
+        </div>
       </div>
     </div>
   </div>
 </div>
+

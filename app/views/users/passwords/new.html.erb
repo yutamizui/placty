@@ -1,16 +1,26 @@
-<h2>Forgot your password?</h2>
+<h2><%= t('devise.passwords.new.forgot_your_password') %></h2>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
+<div row>
+  <div class="col-md-12">
+    <div class="col-md-6">
+      <div class="card worksheet-basic-setting">
+        <h4 class="card-header worksheet-bg"><%= t('devise.passwords.new.your_email_address') %></h3>
+        <div class="card-body">
+          <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+            <%= render "users/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+            <div class="form-group">
+              <%= f.label :email %><br />
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control"  %>
+            </div>
+
+            <div class="actions">
+              <%= f.submit t('devise.passwords.new.send_me_reset_password_instructions'), class:"btn btn-info"%>
+            </div>
+          <% end %>
+          <%= render "users/shared/links" %>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %>
+</div>

@@ -1,25 +1,35 @@
-<h2>Change your password</h2>
+<h2><%= t('devise.mailer.reset_password_instructions.action') %></h2>
+<div row>
+  <div class="col-md-12">
+    <div class="col-md-6">
+      <div class="card worksheet-basic-setting">
+        <h4 class="card-header worksheet-bg"><%= t('devise.passwords.new.your_email_address') %></h3>
+        <div class="card-body">
+          <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+            <%= render "users/shared/error_messages", resource: resource %>
+            <%= f.hidden_field :reset_password_token %>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
-  <%= f.hidden_field :reset_password_token %>
+            <div class="field">
+              <%= f.label :password, t('devise.passwords.edit.new_password') %><br />
+              <% if @minimum_password_length %>
+                <em>(<%= @minimum_password_length %> <%= t('devise.passwords.edit.word_limit') %>)</em><br />
+              <% end %>
+              <%= f.password_field :password, autofocus: true, autocomplete: "new-password",  class:"form-control"  %>
+            </div>
+            <br>
+            <div class="field">
+              <%= f.label :password_confirmation,  t('devise.passwords.edit.confirm_new_password') %><br />
+              <%= f.password_field :password_confirmation, autocomplete: "new-password",  class:"form-control"  %>
+            </div>
+            <br>
+            <div class="actions">
+              <%= f.submit t('devise.passwords.edit.change_my_password'), class:"btn btn-primary button-margin" %>
+            </div>
+          <% end %>
 
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
-    <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "new-password" %>
+          <%= render "users/shared/links" %>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Change my password" %>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %>
+</div>  

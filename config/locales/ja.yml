@@ -294,7 +294,6 @@ ja:
        send: 送信する
        sent_successfully: メッセージが送信されました
        
-      
   devise:
     password_length: 文字以上
     blank_for_no_change: もしパスワードを変更しない場合は空欄にしてください。
@@ -352,7 +351,9 @@ ja:
         change_your_password: パスワードを変更
         confirm_new_password: 確認用新しいパスワード
         new_password: 新しいパスワード
+        word_limit: 文字以上
       new:
+        your_email_address: あなたのご登録頂いたメールアドレスをご入力ください
         forgot_your_password: パスワードを忘れましたか？
         send_me_reset_password_instructions: パスワードの再設定方法を送信する
       no_token: このページにはアクセスできません。パスワード再設定メールのリンクからアクセスされた場合には、URL をご確認ください。
