@@ -14,6 +14,7 @@ class NotesController < ApplicationController
     @note = Note.new(note_params)
     if @note.save
       redirect_to note_path(@note)
+      UserActionMailer.note_creation_notifier(@note).deliver
     else
       flash.now[:alert] = t('activerecord.attirbutes.activity.failed_to_create')
       render 'new'

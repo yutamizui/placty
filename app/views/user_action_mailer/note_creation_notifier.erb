@@ -3,13 +3,11 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h3>お問い合わせ内容</h3>
+    <h3><%= @note.title %></h3>
 
     <div class="container">
       <ul>
-        <li>ユーザー名 <%= @name %></li>
-        <li>メールアドレス <%= @email %></li>
-        <li>内容: <%= @content %></li>
+        <li>内容 <%= @note.content %></li>
       </ul>
     </div>
   </body>

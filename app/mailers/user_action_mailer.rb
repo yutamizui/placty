@@ -1,18 +1,12 @@
 class UserActionMailer < ApplicationMailer
-  default :from => 'info@calahe.com'
+  default :from => 'info@placty.com'
 
   # send a signup email to the user, pass in the user object that   contains the user's email address
-  def inquiry_mail(name, email, title, content)
-    @name = name
-    @email = email
-    @title = title
-    @content = content
-    mail( 
-      :to => "info@calahe.com",
-      :subject => @title,
-      :name => @name,
-      :email => @email,
-      :content => @content
+  def note_creation_notifier(note)
+    @note =  note
+    mail(
+      :to => "info@placty.com",
+      :subject => @note.title,
     )
   end
 end
