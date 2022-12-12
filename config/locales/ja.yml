@@ -198,6 +198,7 @@ ja:
        create: チャレンジアイテムを作成する
        name: アイテム名
        note: 内容の詳細
+       day: 対象曜日
        percentage: 達成率
        complete: 達成
        complete_status: 達成状況

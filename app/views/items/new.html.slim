@@ -4,7 +4,71 @@ div.col-md-12
       h4 = t('activerecord.attributes.item.create')
     div class="card-body"
       == render 'shared/errors', obj: @item
-      = form_for @item do |f|
+      = form_with model: @item do |f|
         == render 'items/form', f: f
         = f.submit  t('activerecord.attributes.button.create'), class:"btn btn-info"
 
+  - if @challenge.status == "seven_days"
+    h3 = @days[params[:day].to_i]+ "のチャレンジ内容"
+  - else
+    h3 = "チャレンジ内容"
+
+  table class="table table-default table-striped"
+    thead
+      th = @challenge.title
+      - if @challenge.progress == "ongoing"
+        th = t('activerecord.attributes.item.complete_status')
+      - if current_user.id == @challenge.author_id && @challenge.progress == "awaiting"
+        th = t('activerecord.attributes.item.percentage')
+      th
+    tbody
+      = @items.count
+
+      - @items.each do |i|
+        tr
+          td
+            = i.name
+          - if @challenge.progress == "ongoing"
+            td
+              - if i.challenge.reports.where(user_id: current_user.id).last.completed_item.map(&:to_i).include?(i.id)
+                button type="button" class="btn btn-primary disabled"
+                  = "◯"
+              - else 
+                = link_to "❌", report_update_items_path(item_id: i.id, challenge_id: i.challenge.id), method: :post, data:{alert:"dfdsfdsfds"}, class:"btn btn-warning"
+              = " ( " + "#{i.percentage}" + "% )"  
+
+          - if current_user.id == @challenge.author_id && @challenge.progress == "awaiting"
+            td
+              = form_for(i, url: {controller: 'items', action: 'update', id: i.id}) do |f|
+                span style="display:inline-flex"
+                  = f.number_field :percentage, value: i.percentage, class:"form-control"
+                  = f.hidden_field :item_id, value: i.id
+                  = f.hidden_field :challenge_id, value: @challenge.id
+                  = f.hidden_field :day, value: params[:day]
+
+                  | &nbsp;
+                  = f.submit  t('activerecord.attributes.button.update_title'), class:"btn btn-info btn-sm"
+            td style="width:30%;"
+              = link_to t('activerecord.attributes.button.edit'), edit_item_path(id: i.id, challenge_id: @challenge.id), class:"btn btn-warning btn-sm button-margin"
+              = link_to t('activerecord.attributes.button.delete'), item_path(id: i.id, challenge_id: @challenge.id, day: params[:day]), method: :delete, class:"btn btn-danger btn-sm button-margin"
+  br
+    tbody
+      tr
+        td style="width:30%" = current_user.translated_name
+        td style="width:50%"
+          div class="progress" style="height: 30px; width:100%;"
+            div class="progress-bar" role="progressbar" style="width: #{ Report.where(day_frame_id: @challenge.day_frames.pluck(:id)).where(user_id: current_user.id).last.total_percentage.round(0) }%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"
+              span = "#{Report.where(day_frame_id: @challenge.day_frames.pluck(:id)).where(user_id: current_user.id).last.total_percentage.round(0)}%"
+
+      - @users.where.not(id: current_user.id).each do |u|
+        tr
+          td style="width:30%" = u.translated_name
+          td style="width:50%"
+            div class="progress" style="height: 30px; width:100%;"
+              div class="progress-bar" role="progressbar" style="width: #{ @challenge.reports.where(user_id: u.id).last.total_percentage.round(0) }%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"
+                span = "#{Report.where(day_frame_id: @challenge.day_frames.pluck(:id)).where(user_id: u.id).last.total_percentage.round(0)}%" 
+
+- if current_user.id == @challenge.author_id && @challenge.progress == "awaiting"
+  = link_to t('activerecord.attributes.challenge.confirm'), progress_challenges_path(id: @challenge.id), method: :post, class:"btn btn-primary btn-lg pull-right button-margin"
+
+= link_to t('activerecord.attributes.button.back'), challenge_path(id: @challenge.id, status: "seven_days"), class:"btn btn-secondary button-margin"

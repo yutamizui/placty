@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_07_081632) do
+ActiveRecord::Schema.define(version: 2022_11_18_002414) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,14 @@ ActiveRecord::Schema.define(version: 2022_09_07_081632) do
     t.integer "category", default: 0
   end
 
+  create_table "day_frames", force: :cascade do |t|
+    t.bigint "challenge_id"
+    t.integer "day"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["challenge_id"], name: "index_day_frames_on_challenge_id"
+  end
+
   create_table "events", force: :cascade do |t|
     t.string "title"
     t.text "content"
@@ -83,6 +91,7 @@ ActiveRecord::Schema.define(version: 2022_09_07_081632) do
     t.bigint "challenge_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "day_frame_id"
     t.index ["challenge_id"], name: "index_items_on_challenge_id"
   end
 
@@ -129,6 +138,7 @@ ActiveRecord::Schema.define(version: 2022_09_07_081632) do
     t.float "total_percentage", default: 0.0
     t.datetime "target_date"
     t.float "completed_percentage", default: 0.0
+    t.integer "day_frame_id"
     t.index ["challenge_id"], name: "index_reports_on_challenge_id"
     t.index ["user_id"], name: "index_reports_on_user_id"
   end
@@ -161,6 +171,7 @@ ActiveRecord::Schema.define(version: 2022_09_07_081632) do
   end
 
   add_foreign_key "bank_accounts", "users"
+  add_foreign_key "day_frames", "challenges"
   add_foreign_key "events", "languages"
   add_foreign_key "invoices", "users"
   add_foreign_key "items", "challenges"

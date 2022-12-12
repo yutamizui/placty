@@ -40,9 +40,9 @@
         <td style="width:50%">
           <div class="progress" style="height: 30px;">
             <% if c.status == "one_shot" %>
-              <% @total_average = c.reports.where(user_id: current_user.id).last.completed_percentage.round(0) %>
+              <% @total_average =  Report.where(day_frame_id: c.day_frames.pluck(:id)).where(user_id: current_user.id).last.completed_percentage.round(0) %>
             <% elsif c.status == "seven_days" %>
-              <% @total_average = c.reports.where(user_id: current_user.id).last.total_percentage.round(0) %>
+              <% @total_average = Report.where(day_frame_id: c.day_frames.pluck(:id)).where(user_id: current_user.id).last.total_percentage.round(0) %>
             <% end %>
 
             <div class="progress-bar" role="progressbar" style='width: <%=  @total_average %>%;' aria-valuenow="4" aria-valuemin="0" aria-valuemax="100"><%=  @total_average %>%</div>

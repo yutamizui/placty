@@ -199,6 +199,7 @@ en:
         create: Create Challenge Item
         name: Item Name
         note: Details
+        day: target_day
         percentage: Percentage of achievement
         complete: Complete
         complete_status: Achievement Status

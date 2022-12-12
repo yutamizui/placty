@@ -1,3 +1,11 @@
+
+- if @challenge.status == "seven_days"
+  ul class="nav nav-tabs" id="day-button"
+    - @days.each_with_index do |d,i|
+      li class="nav-item"
+        h4 = link_to "#{@days[i]}", new_item_path(challenge_id: @challenge.id, day: i), class:"nav-link wday-list",  day_num: i
+  br
+
 div.form-group
   = f.label :name
   = f.text_field :name, class:"form-control"
@@ -5,4 +13,20 @@ div.form-group
   = f.label :note
   = f.text_area :note, class:"form-control"
   = f.hidden_field :challenge_id, value: @challenge.id
+  = f.hidden_field :day_frame_id, value: params[:day]
   = f.hidden_field :item_id, value: @item.id
+  = f.hidden_field :day, value: params[:day]
+
+
+javascript:
+  jQuery(function(){
+    var params = (new URL(document.location)).searchParams;
+    var day = params.get('day');
+    $('#day-button a').each(function(){
+      var buttontype = $(this).attr('day_num');
+      if( buttontype == day ){
+        $( $(this)).addClass("active");
+      }
+    });
+    //var branches = #{raw @branches.to_json};
+  }) 

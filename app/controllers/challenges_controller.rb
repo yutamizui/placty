@@ -1,5 +1,6 @@
 class ChallengesController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_week, only: [:show]
   
   def index
     target_challenges = []
@@ -21,15 +22,18 @@ class ChallengesController < ApplicationController
   def show
     @challenge = Challenge.find(params[:id])
     @users = User.where(id: @challenge.target_user)
-    @items = @challenge.items
-    @days = ["日", "月", "火", "水", "木", "金", "土"]
-    @target_report6 = @challenge.reports.where(user_id: current_user.id).last(7).first.completed_percentage
-    @target_report5 = @challenge.reports.where(user_id: current_user.id).last(6).first.completed_percentage
-    @target_report4 = @challenge.reports.where(user_id: current_user.id).last(5).first.completed_percentage
-    @target_report3 = @challenge.reports.where(user_id: current_user.id).last(4).first.completed_percentage
-    @target_report2 = @challenge.reports.where(user_id: current_user.id).last(3).first.completed_percentage
-    @target_report1 = @challenge.reports.where(user_id: current_user.id).last(2).first.completed_percentage
-    @target_report = @challenge.reports.where(user_id: current_user.id).last.completed_percentage   # Today's report
+    @items = Item.where(day_frame_id: @challenge.day_frames.pluck(:id))
+    if @challenge.status == "seven_days"
+      @reports = Report.where(day_frame_id: @challenge.day_frames.pluck(:id))
+      day_of_week = ["日", "月", "火", "水", "木", "金", "土"]
+      @target_day = day_of_week[@days[0].wday]
+      @target_day1 = day_of_week[@days[1].wday]
+      @target_day2 = day_of_week[@days[2].wday]
+      @target_day3 = day_of_week[@days[3].wday]
+      @target_day4 = day_of_week[@days[4].wday]
+      @target_day5 = day_of_week[@days[5].wday]
+      @target_day6 = day_of_week[@days[6].wday]
+    end
   end
 
   def new
@@ -63,24 +67,37 @@ class ChallengesController < ApplicationController
 
     if @challenge.save
       if @challenge.status == "one_shot"
+        DayFrame.create(
+          challenge_id: @challenge.id,
+          day: 7
+        )
         @target_user_ids.each_with_index do |u|
           @user = User.find(u)
           Report.create(
-            challenge_id: @challenge.id,
+            day_frame_id: @challenge.day_frames.first.id,
             user_id: u,
             completed_item: [],
             target_date: Time.current
           )
         end
+      
+        # ７日間チャレンジ
       elsif @challenge.status == "seven_days"
-        [6,5,4,3,2,1,0].each do |i|
+        7.times do |n|  ## 曜日枠を作成
+          DayFrame.create(
+            challenge_id: @challenge.id,
+            day: n
+          )
+        end
+
+        @challenge.day_frames.each do |d|    ## 曜日枠をベースにユーザーごとのレポートを作成
           @target_user_ids.each do |u|
             @user = User.find(u)
             Report.create(
-              challenge_id: @challenge.id,
+              day_frame_id: d.id,
               user_id: u,
               completed_item: [],
-              target_date: Time.current - i.days
+              day_frame_id: d.id
             )
           end
         end
@@ -124,4 +141,7 @@ class ChallengesController < ApplicationController
     params.require(:challenge).permit(:title, {target_user: []}, :author_id)
   end
 
+  def set_week
+    @days = (0..6).map {|i| Date.today.since(i.days)}
+  end
 end

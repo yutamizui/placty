@@ -3,23 +3,31 @@ h3 = t('activerecord.attributes.challenge.seven_days')
 script src="https://cdn.jsdelivr.net/npm/chart.js"
 canvas id="myChart" width="400" height="200"
 javascript:
-  var target_report6 = "#{@target_report6}";
-  var target_report5 = "#{@target_report5}";
-  var target_report4 = "#{@target_report4}";
-  var target_report3 = "#{@target_report3}";
-  var target_report2 = "#{@target_report2}";
-  var target_report1 = "#{@target_report1}";
-  var target_report = "#{@target_report}";
-
+  const days_of_week = ["日曜日", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日"]
+  var target_report = "#{@days[0]}";
+  var target_day = "#{@target_day}";
+  var target_report1 = "#{@days[1]}";
+  var target_day1 = "#{@target_day1}";
+  var target_report2 = "#{@days[2]}";
+  var target_day2 = "#{@target_day2}";
+  var target_report3 = "#{@days[3]}";
+  var target_day3 = "#{@target_day3}";
+  var target_report4 = "#{@days[4]}";
+  var target_day4 = "#{@target_day4}";
+  var target_report5 = "#{@days[5]}";
+  var target_day5 = "#{@target_day5}";
+  var target_report6 = "#{@days[6]}";
+  var target_day6 = "#{@target_day6}";
+  
   var ctx = document.getElementById('myChart');
   
   var myChart = new Chart(ctx, {
       type: 'bar',
       data: {
-          labels: ['#{(Date.today-6).strftime("%m/%d")} (#{@days[(Date.today-6).wday]})', '#{(Date.today-5).strftime("%m/%d")} (#{@days[(Date.today-5).wday]})', '#{(Date.today-4).strftime("%m/%d")} (#{@days[(Date.today-4).wday]})', '#{(Date.today-3).strftime("%m/%d")} (#{@days[(Date.today-3).wday]})', '#{(Date.today-2).strftime("%m/%d")} (#{@days[(Date.today-2).wday]})', '#{(Date.today-1).strftime("%m/%d")} (#{@days[(Date.today-1).wday]})', '#{(Date.today).strftime("%m/%d")} (#{@days[(Date.today).wday]})'],
+          labels: ['#{(@days[0]).strftime("%m/%d")} (#{@target_day})', '#{(@days[1]).strftime("%m/%d")} (#{@target_day1})', '#{(@days[2]).strftime("%m/%d")} (#{@target_day2})', '#{(@days[3]).strftime("%m/%d")} (#{@target_day3})', '#{(@days[4]).strftime("%m/%d")} (#{@target_day4})', '#{(@days[5]).strftime("%m/%d")} (#{@target_day5})', '#{(@days[6]).strftime("%m/%d")} (#{@target_day6})'],
           datasets: [{
               label: '#{@challenge.title}',
-              data: [target_report6, target_report5, target_report4, target_report3, target_report2, target_report1, target_report],
+              data: [target_report, target_report1, target_report2, target_report3, target_report4, target_report5, target_report6],
               backgroundColor: [
                   'rgba(255, 99, 132, 0.2)',
                   'rgba(54, 162, 235, 0.2)',
@@ -53,58 +61,9 @@ javascript:
 
 br
 - if current_user.id == @challenge.author_id && @challenge.progress == "awaiting"
-   = link_to t('activerecord.attributes.item.create'), new_item_path(challenge_id: @challenge.id), class:"btn btn-info btn-sm button-margin pull-right" 
-br
-table class="table table-default table-striped"
-  thead
-    th = @challenge.title
-    - if @challenge.progress == "ongoing"
-      th = t('activerecord.attributes.item.complete_status')
-    - if current_user.id == @challenge.author_id && @challenge.progress == "awaiting"
-      th = t('activerecord.attributes.item.percentage')
-  tbody
-    - @items.each do |i|
-      tr
-        td
-          = i.name
-        - if @challenge.progress == "ongoing"
-          td
-            - if i.challenge.reports.where(user_id: current_user.id).last.completed_item.map(&:to_i).include?(i.id)
-              button type="button" class="btn btn-primary disabled"
-                = "◯"
-            - else 
-              = link_to "❌", report_update_items_path(item_id: i.id, challenge_id: i.challenge.id), method: :post, data:{alert:"dfdsfdsfds"}, class:"btn btn-warning"
-            = " ( " + "#{i.percentage}" + "% )"  
-        - if current_user.id == @challenge.author_id && @challenge.progress == "awaiting"
-          td
-            = form_for(i, url: {controller: 'items', action: 'update' }) do |f|
-              span style="display:inline-flex"
-                = f.number_field :percentage, value: i.percentage, class:"form-control"
-                = f.hidden_field :item_id, value: i.id
-                = f.hidden_field :challenge_id, value: @challenge.id
-                | &nbsp;
-                = f.submit  t('activerecord.attributes.button.update_title'), class:"btn btn-info btn-sm"
-          td style="width:30%;"
-            = link_to t('activerecord.attributes.button.edit'), edit_item_path(item_id: i.id, challenge_id: @challenge.id), class:"btn btn-warning btn-sm button-margin"
-            = link_to t('activerecord.attributes.button.delete'), item_path(item_id: i.id, challenge_id: @challenge.id), method: :delete, class:"btn btn-danger btn-sm button-margin"
-br
-  tbody
-    tr
-      td style="width:30%" = current_user.translated_name
-      td style="width:50%"
-        div class="progress" style="height: 30px; width:100%;"
-          div class="progress-bar" role="progressbar" style="width: #{ @challenge.reports.where(user_id: current_user.id).last.total_percentage.round(0) }%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"
-            span = "#{@challenge.reports.where(user_id: current_user.id).last.total_percentage.round(0)}%"
+  = link_to "#{@day_name}" + t('activerecord.attributes.item.create'), new_item_path(challenge_id: @challenge.id, days: @days, day: Date.today.wday), class:"btn btn-info btn-sm button-margin pull-right" 
 
-    - @users.where.not(id: current_user.id).each do |u|
-      tr
-        td style="width:30%" = u.translated_name
-        td style="width:50%"
-          div class="progress" style="height: 30px; width:100%;"
-            div class="progress-bar" role="progressbar" style="width: #{ @challenge.reports.where(user_id: u.id).last.total_percentage.round(0) }%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"
-              span = "#{@challenge.reports.where(user_id: u.id).last.total_percentage.round(0)}%" 
+br
 
-- if current_user.id == @challenge.author_id && @challenge.progress == "awaiting"
-  = link_to t('activerecord.attributes.challenge.confirm'), progress_challenges_path(id: @challenge.id), method: :post, class:"btn btn-primary btn-lg pull-right button-margin"
 = link_to t('activerecord.attributes.button.back'), challenges_path(status: "seven_days"), class:"btn btn-secondary button-margin"
 
