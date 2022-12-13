@@ -6,7 +6,7 @@ h4
   = @challenge.deadline.in_time_zone(TimeZone.find(current_user.time_zone_id).en_name).to_datetime.strftime("%Y/%m/%d (%a) %H:%M")
   = ") "
 - if current_user.id == @challenge.author_id && @challenge.progress == "awaiting"
-  = link_to t('activerecord.attributes.item.create'), new_item_path(challenge_id: @challenge.id), class:"btn btn-info btn-sm pull-right button-margin"
+  = link_to t('activerecord.attributes.item.create'), new_item_path(challenge_id: @challenge.id, day: 7), class:"btn btn-info btn-sm pull-right button-margin"
 
 table class="table table-default table-striped"
   thead

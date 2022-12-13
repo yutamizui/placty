@@ -19,6 +19,7 @@ class ItemsController < ApplicationController
     @challenge = Challenge.find(params[:item][:challenge_id])
     day = params[:item][:day].to_i
     day_frame_id = @challenge.day_frames.where(day: day).last.id
+  
     
     if @challenge.status == "one_shot"
       @item = Item.new(

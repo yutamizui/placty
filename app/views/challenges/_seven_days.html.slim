@@ -64,6 +64,37 @@ br
   = link_to "#{@day_name}" + t('activerecord.attributes.item.create'), new_item_path(challenge_id: @challenge.id, days: @days, day: Date.today.wday), class:"btn btn-info btn-sm button-margin pull-right" 
 
 br
+- day_of_week = ["日曜日", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日"]
+h3 = @challenge.title
+- 7.times do |i|
+  = day_of_week[@days[i].wday] 
+  div class="card card-body"
+    table class="table table-default table-striped"
+        thead
+        - if @challenge.progress == "ongoing"
+            th = t('activerecord.attributes.item.complete_status')
+        - if current_user.id == @challenge.author_id && @challenge.progress == "awaiting"
+            th = t('activerecord.attributes.item.percentage')
+            th
+        tbody
+          - @items.joins(:day_frame).where(day_frame: { day: @days[i].wday }).each_with_index do |item, n|
+            tr
+              td
+                a data-toggle="collapse" href="#item#{item.id}" role="button" aria-expanded="false" aria-controls="item" = item.name
+                div class="collapse" id="item#{item.id}"
+                  div class="card card-body"
+                    = simple_format(item.note)
+              - if @challenge.progress == "ongoing" && Date.today.wday == @days[i].wday
+                td
+                  - day_frame_id = DayFrame.where(id: item.day_frame_id).pluck(:id)
+                  - if Report.where(day_frame_id: @challenge.day_frames.pluck(:id)).where(user_id: current_user.id).last.completed_item.map(&:to_i).include?(item.id)
+                    button type="button" class="btn btn-primary disabled" 
+                    = "◯"
+                  - else 
+                    = link_to "❌", report_update_items_path(item_id: item.id, challenge_id: item.challenge.id, status: @challenge.status), method: :post, data:{alert:"dfdsfdsfds"}, class:"btn btn-warning"
+                    = " ( " + "#{item.percentage}" + "% )"
 
+
+br
 = link_to t('activerecord.attributes.button.back'), challenges_path(status: "seven_days"), class:"btn btn-secondary button-margin"
 
