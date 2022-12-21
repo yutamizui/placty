@@ -6,40 +6,30 @@ class ItemsController < ApplicationController
     @users = User.where(id: @challenge.target_user)
     @day = params[:day].to_i
     @item = Item.new
-    if @challenge.status == "seven_days"
-      target_day_frame = @challenge.day_frames.where(day: params[:day])
-      @items = Item.where(day_frame_id: target_day_frame)
-    else
-      @items = Item.where(challenge_id: @challenge.id)
-    end
+    
+    @items = Item.where(day: params[:day])
+  
     @days = ["日曜日", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日"]
   end
 
   def create
     @challenge = Challenge.find(params[:item][:challenge_id])
-    day = params[:item][:day].to_i
-    day_frame_id = @challenge.day_frames.where(day: day).last.id
-  
-    
-    if @challenge.status == "one_shot"
-      @item = Item.new(
-        name: params[:item][:name],
-        note: params[:item][:note],
-        percentage: 0,
-        day_frame_id: @challenge.day_frames.last.id,
-        challenge_id: @challenge.id
-      )
+    if @challenge.status == "one_day"
+      day = 7
     else
-      @item = Item.new(
-        challenge_id: @challenge.id,
-        name: params[:item][:name],
-        note: params[:item][:note],
-        percentage: 0,
-        day_frame_id: day_frame_id
-      )
+      day = params[:item][:day].to_i
     end
+    report_id = Report.where(day: day).last.id
+    @item = Item.new(
+      name: params[:item][:name],
+      note: params[:item][:note],
+      percentage: 0,
+      day: day,
+      challenge_id: @challenge.id,
+      report_id: report_id
+    )
     if @item.save
-      redirect_to new_item_path(id: @challenge.id, status: @challenge.status, day: params[:item][:day_frame_id], challenge_id: @challenge.id), notice: t('activerecord.attributes.notification.created')
+      redirect_to new_item_path(id: @challenge.id, status: @challenge.status, day: params[:item][:day], challenge_id: @challenge.id), notice: t('activerecord.attributes.notification.created')
     else
       flash.now[:alert] = t('activerecord.attributes.notification.failed_to_create')
       render 'new'
@@ -70,27 +60,23 @@ class ItemsController < ApplicationController
   def report_update
     @item = Item.find(params[:item_id])
     @challenge = Challenge.find(params[:challenge_id])
-    @report = Report.where(day_frame_id: @challenge.day_frames.pluck(:id)).where(user_id: current_user.id).last
+    @report = Report.where(challenge_id: @challenge.id).where(user_id: current_user.id).where(day: @item.day).last
+    completed_percentage = @report.completed_percentage  + @item.percentage
+    completed_item = ((@report.completed_item.map(&:to_i).push(params[:item_id].to_i).uniq))
+    set_percentage = @report.items.pluck(:percentage).sum
 
-    if @challenge.status == "one_shot"
-      @report.update(
-        completed_percentage: @report.completed_percentage + @item.percentage,
-        completed_item: ((@report.completed_item.map(&:to_i).push(params[:item_id].to_i).uniq)),
-      )
+    if set_percentage == 0
+      total_percentage = 100
     else
-
-      @report.update(
-        completed_percentage: @report.completed_percentage + @item.percentage,
-        completed_item: ((@report.completed_item.map(&:to_i).push(params[:item_id].to_i).uniq)),
-      )
-      @day_frames = DayFrame.where(id: @challenge.day_frame_id)
-      @set_percentage = @challenge.items.pluck(:percentage).sum * 7
-      @total_completed_precentage = @challenge.reports.where(user_id: current_user.id).pluck(:completed_percentage).sum
-
-      @report.update(
-        total_percentage: @total_completed_precentage.to_f / @set_percentage.to_f * 100
-      )
+      total_percentage = completed_percentage.to_f / set_percentage.to_f * 100
     end
+
+    @report.update(
+      completed_percentage: completed_percentage,
+      completed_item: completed_item,
+      total_percentage: total_percentage
+    )
+
     redirect_to challenge_path(id: params[:challenge_id], status: @challenge.status)
   end
 

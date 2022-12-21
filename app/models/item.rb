@@ -1,6 +1,6 @@
 class Item < ApplicationRecord
   belongs_to :challenge
-  belongs_to :day_frame, optional: true
+  belongs_to :report
   validates :name, presence: true
   
 end

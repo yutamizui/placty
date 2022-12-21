@@ -1,6 +1,7 @@
 class ChallengesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_week, only: [:show]
+  before_action :set_reverse_days, only: [:show]
+  before_action :set_days, only: [:show]
   
   def index
     target_challenges = []
@@ -22,17 +23,25 @@ class ChallengesController < ApplicationController
   def show
     @challenge = Challenge.find(params[:id])
     @users = User.where(id: @challenge.target_user)
-    @items = Item.where(day_frame_id: @challenge.day_frames.pluck(:id))
+    @items = Item.where(challenge_id: @challenge.id)
     if @challenge.status == "seven_days"
-      @reports = Report.where(day_frame_id: @challenge.day_frames.pluck(:id))
-      day_of_week = ["日", "月", "火", "水", "木", "金", "土"]
-      @target_day = day_of_week[@days[0].wday]
-      @target_day1 = day_of_week[@days[1].wday]
-      @target_day2 = day_of_week[@days[2].wday]
-      @target_day3 = day_of_week[@days[3].wday]
-      @target_day4 = day_of_week[@days[4].wday]
-      @target_day5 = day_of_week[@days[5].wday]
-      @target_day6 = day_of_week[@days[6].wday]
+      @reports = Report.where(challenge_id: @challenge.id).where(user_id: current_user.id)
+      @target_day = Date.today
+      @target_report = @reports.where(day: @target_day.wday).first
+      @prev_day1 = Date.today.ago(1.days)
+      @prev_report1 = @reports.where(day: @prev_day1.wday).first
+      @prev_day2 = Date.today.ago(2.days)
+      @prev_report2 = @reports.where(day: @prev_day2.wday).first
+      @prev_day3 = Date.today.ago(3.days)
+      @prev_report3 = @reports.where(day: @prev_day3.wday).first
+      @prev_day4 = Date.today.ago(4.days)
+      @prev_report4 = @reports.where(day: @prev_day4.wday).first
+      @prev_day5 = Date.today.ago(5.days)
+      @prev_report5 = @reports.where(day: @prev_day5.wday).first
+      @prev_day6 = Date.today.ago(6.days)
+      @prev_report6 = @reports.where(day: @prev_day6.wday).first
+      
+
     end
   end
 
@@ -67,37 +76,27 @@ class ChallengesController < ApplicationController
 
     if @challenge.save
       if @challenge.status == "one_shot"
-        DayFrame.create(
-          challenge_id: @challenge.id,
-          day: 7
-        )
         @target_user_ids.each_with_index do |u|
           @user = User.find(u)
           Report.create(
-            day_frame_id: @challenge.day_frames.first.id,
+            challenge_id: @challenge.id,
             user_id: u,
             completed_item: [],
-            target_date: Time.current
+            target_date: Time.current,
+            day: 7
           )
         end
       
         # ７日間チャレンジ
-      elsif @challenge.status == "seven_days"
-        7.times do |n|  ## 曜日枠を作成
-          DayFrame.create(
-            challenge_id: @challenge.id,
-            day: n
-          )
-        end
-
-        @challenge.day_frames.each do |d|    ## 曜日枠をベースにユーザーごとのレポートを作成
-          @target_user_ids.each do |u|
-            @user = User.find(u)
+      elsif @challenge.status == "seven_days" # 曜日枠をベースにユーザーごとのレポートを作成
+        @target_user_ids.each do |u|
+          @user = User.find(u)
+          7.times do |n|  ##
             Report.create(
-              day_frame_id: d.id,
+              challenge_id: @challenge.id,
               user_id: u,
               completed_item: [],
-              day_frame_id: d.id
+              day: n
             )
           end
         end
@@ -140,8 +139,12 @@ class ChallengesController < ApplicationController
   def challenge_params
     params.require(:challenge).permit(:title, {target_user: []}, :author_id)
   end
-
-  def set_week
+  
+  def set_days
     @days = (0..6).map {|i| Date.today.since(i.days)}
   end
+
+  def set_reverse_days
+    @reverse_days = (0..6).map {|i| Date.today.ago(i.days)}
+  end 
 end

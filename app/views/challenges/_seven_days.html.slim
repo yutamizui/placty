@@ -3,31 +3,21 @@ h3 = t('activerecord.attributes.challenge.seven_days')
 script src="https://cdn.jsdelivr.net/npm/chart.js"
 canvas id="myChart" width="400" height="200"
 javascript:
-  const days_of_week = ["日曜日", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日"]
-  var target_report = "#{@days[0]}";
-  var target_day = "#{@target_day}";
-  var target_report1 = "#{@days[1]}";
-  var target_day1 = "#{@target_day1}";
-  var target_report2 = "#{@days[2]}";
-  var target_day2 = "#{@target_day2}";
-  var target_report3 = "#{@days[3]}";
-  var target_day3 = "#{@target_day3}";
-  var target_report4 = "#{@days[4]}";
-  var target_day4 = "#{@target_day4}";
-  var target_report5 = "#{@days[5]}";
-  var target_day5 = "#{@target_day5}";
-  var target_report6 = "#{@days[6]}";
-  var target_day6 = "#{@target_day6}";
-  
+  var target_report_percentage = "#{@target_report.total_percentage}";
+  var target_report_percentage1 = "#{@prev_report1.total_percentage}";
+  var target_report_percentage2 = "#{@prev_report2.total_percentage}";
+  var target_report_percentage3 = "#{@prev_report3.total_percentage}";
+  var target_report_percentage4 = "#{@prev_report4.total_percentage}";
+  var target_report_percentage5 = "#{@prev_report5.total_percentage}";
+  var target_report_percentage6 = "#{@prev_report6.total_percentage}";
   var ctx = document.getElementById('myChart');
-  
   var myChart = new Chart(ctx, {
       type: 'bar',
       data: {
-          labels: ['#{(@days[0]).strftime("%m/%d")} (#{@target_day})', '#{(@days[1]).strftime("%m/%d")} (#{@target_day1})', '#{(@days[2]).strftime("%m/%d")} (#{@target_day2})', '#{(@days[3]).strftime("%m/%d")} (#{@target_day3})', '#{(@days[4]).strftime("%m/%d")} (#{@target_day4})', '#{(@days[5]).strftime("%m/%d")} (#{@target_day5})', '#{(@days[6]).strftime("%m/%d")} (#{@target_day6})'],
+          labels: ['#{@prev_day6.strftime("%m/%d")} (#{@prev_day6.strftime("%a")})', '#{@prev_day5.strftime("%m/%d")} (#{@prev_day5.strftime("%a")})', '#{@prev_day4.strftime("%m/%d")} (#{@prev_day4.strftime("%a")})', '#{@prev_day3.strftime("%m/%d")} (#{@prev_day3.strftime("%a")})', '#{@prev_day2.strftime("%m/%d")} (#{@prev_day2.strftime("%a")})', '#{@prev_day1.strftime("%m/%d")} (#{@prev_day1.strftime("%a")})', '#{@target_day.strftime("%m/%d")} (#{@target_day.strftime("%a")})'],
           datasets: [{
               label: '#{@challenge.title}',
-              data: [target_report, target_report1, target_report2, target_report3, target_report4, target_report5, target_report6],
+              data: [target_report_percentage6, target_report_percentage5, target_report_percentage4, target_report_percentage3, target_report_percentage2, target_report_percentage1, target_report_percentage],
               backgroundColor: [
                   'rgba(255, 99, 132, 0.2)',
                   'rgba(54, 162, 235, 0.2)',
@@ -63,37 +53,36 @@ br
 - if current_user.id == @challenge.author_id && @challenge.progress == "awaiting"
   = link_to "#{@day_name}" + t('activerecord.attributes.item.create'), new_item_path(challenge_id: @challenge.id, days: @days, day: Date.today.wday), class:"btn btn-info btn-sm button-margin pull-right" 
 
+
 br
-- day_of_week = ["日曜日", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日"]
-h3 = @challenge.title
+h2 = @challenge.title
 - 7.times do |i|
-  = day_of_week[@days[i].wday] 
+  h4 = Date.today.since(i.days).strftime("%m/%d (%a)")
   div class="card card-body"
     table class="table table-default table-striped"
-        thead
+      thead
         - if @challenge.progress == "ongoing"
-            th = t('activerecord.attributes.item.complete_status')
+          th colspan="2" style="background-color: #33b5b7; color:white;" = t('activerecord.attributes.item.complete_status')
         - if current_user.id == @challenge.author_id && @challenge.progress == "awaiting"
-            th = t('activerecord.attributes.item.percentage')
-            th
-        tbody
-          - @items.joins(:day_frame).where(day_frame: { day: @days[i].wday }).each_with_index do |item, n|
+          th = t('activerecord.attributes.item.percentage')
+      tbody
+        - @items.each do |item, n|
+          - if item.day == @days[i].wday
             tr
               td
                 a data-toggle="collapse" href="#item#{item.id}" role="button" aria-expanded="false" aria-controls="item" = item.name
                 div class="collapse" id="item#{item.id}"
                   div class="card card-body"
                     = simple_format(item.note)
-              - if @challenge.progress == "ongoing" && Date.today.wday == @days[i].wday
+              - if @challenge.progress == "ongoing" && item.day == @target_day.wday
                 td
-                  - day_frame_id = DayFrame.where(id: item.day_frame_id).pluck(:id)
-                  - if Report.where(day_frame_id: @challenge.day_frames.pluck(:id)).where(user_id: current_user.id).last.completed_item.map(&:to_i).include?(item.id)
-                    button type="button" class="btn btn-primary disabled" 
-                    = "◯"
+                  - if @challenge.reports.where(user_id: current_user.id).where(day: @target_day.wday).first.completed_item.map(&:to_i).include?(item.id)
+                    button type="button" class="btn btn-primary disabled"
+                      = "◯"
                   - else 
                     = link_to "❌", report_update_items_path(item_id: item.id, challenge_id: item.challenge.id, status: @challenge.status), method: :post, data:{alert:"dfdsfdsfds"}, class:"btn btn-warning"
                     = " ( " + "#{item.percentage}" + "% )"
-
+  br
 
 br
 = link_to t('activerecord.attributes.button.back'), challenges_path(status: "seven_days"), class:"btn btn-secondary button-margin"

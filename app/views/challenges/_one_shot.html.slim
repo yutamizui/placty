@@ -27,8 +27,7 @@ table class="table table-default table-striped"
 
         - if @challenge.progress == "ongoing"
           td
-            - day_frame_id = DayFrame.where(id: i.day_frame_id).pluck(:id)
-            - if Report.where(day_frame_id: @challenge.day_frames.pluck(:id)).where(user_id: current_user.id).last.completed_item.map(&:to_i).include?(i.id)
+            - if Report.where(day: 7).where(user_id: current_user.id).last.completed_item.map(&:to_i).include?(i.id)
               button type="button" class="btn btn-primary disabled" 
                 = "◯"
             - else 
@@ -56,15 +55,15 @@ br
       td style="width:30%" = current_user.translated_name
       td style="width:50%"
         div class="progress" style="height: 30px; width:100%;"
-          div class="progress-bar" role="progressbar" style="width: #{ Report.where(day_frame_id: @challenge.day_frames.pluck(:id)).where(user_id: current_user.id).last.completed_percentage }%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"
-            span = "#{ Report.where(day_frame_id: @challenge.day_frames.pluck(:id)).where(user_id: current_user.id).last.completed_percentage.round(0)}%" 
+          div class="progress-bar" role="progressbar" style="width: #{ @challenge.reports.where(user_id: current_user.id).last.total_percentage}%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"
+            span = "#{ @challenge.reports.where(user_id: current_user.id).last.total_percentage.round(0)}%" 
     - @users.where.not(id: current_user.id).each do |u|
       tr
         td style="width:30%" = u.translated_name
         td style="width:50%"
           div class="progress" style="height: 30px; width:100%;"
-            div class="progress-bar" role="progressbar" style="width: #{ @challenge.reports.where(user_id: u.id).last.completed_percentage }%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"
-              span = "#{@challenge.reports.where(user_id: u.id).last.completed_percentage.round(0)}%" 
+            div class="progress-bar" role="progressbar" style="width: #{ @challenge.reports.where(user_id: u.id).last.total_percentage }%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"
+              span = "#{@challenge.reports.where(user_id: u.id).last.total_percentage.round(0)}%" 
 
 
 - if current_user.id == @challenge.author_id && @challenge.progress == "awaiting"
