@@ -1,5 +1,5 @@
 
-- if @challenge.status == "seven_days"
+- if @challenge.status == "seven_days" && controller.action_name == "new"
   ul class="nav nav-tabs" id="day-button"
     - @days.each_with_index do |d,i|
       li class="nav-item"
@@ -14,7 +14,7 @@ div.form-group
   = f.text_area :note, class:"form-control"
   = f.hidden_field :challenge_id, value: @challenge.id
   = f.hidden_field :day_frame_id, value: params[:day]
-  = f.hidden_field :item_id, value: @item.id
+  = f.hidden_field :id, value: @item.id
   = f.hidden_field :day, value: params[:day]
 
 

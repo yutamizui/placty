@@ -29,7 +29,7 @@ class ItemsController < ApplicationController
       report_id: report_id
     )
     if @item.save
-      redirect_to new_item_path(id: @challenge.id, status: @challenge.status, day: params[:item][:day], challenge_id: @challenge.id), notice: t('activerecord.attributes.notification.created')
+      redirect_to new_item_path(challenge_id: @challenge.id, id: @item.id, status: @challenge.status, day: params[:item][:day]), notice: t('activerecord.attributes.notification.created')
     else
       flash.now[:alert] = t('activerecord.attributes.notification.failed_to_create')
       render 'new'
@@ -37,16 +37,17 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    @item = Item.find(params[:item_id])
+    @item = Item.find(params[:id])
     @challenge = Challenge.find(params[:challenge_id])
   end
 
   def update
     day = params[:item][:day]
-    @item = Item.find(params[:item][:item_id])
+    
+    @item = Item.find(params[:item][:id])
     @challenge = Challenge.find(params[:item][:challenge_id])
     @item.update(item_params)
-    redirect_to new_item_path(challenge_id: @challenge.id, status: @challenge.status, day: day)
+    redirect_to new_item_path(id: @item.id, challenge_id: @challenge.id, status: @challenge.status, day: day)
   end
 
   def destroy

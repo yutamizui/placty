@@ -41,14 +41,14 @@ div.col-md-12
                 = form_for(i, url: {controller: 'items', action: 'update', id: i.id}) do |f|
                   span style="display:inline-flex"
                     = f.number_field :percentage, value: i.percentage, class:"form-control"
-                    = f.hidden_field :item_id, value: i.id
+                    = f.hidden_field :id, value: i.id
                     = f.hidden_field :challenge_id, value: @challenge.id
                     = f.hidden_field :day, value: params[:day]
 
                     | &nbsp;
                     = f.submit  t('activerecord.attributes.button.update_title'), class:"btn btn-info btn-sm"
               td style="width:30%;"
-                = link_to t('activerecord.attributes.button.edit'), edit_item_path(id: i.id, challenge_id: @challenge.id), class:"btn btn-warning btn-sm button-margin"
+                = link_to t('activerecord.attributes.button.edit'), edit_item_path(id: i.id, challenge_id: @challenge.id, day: params[:day]), class:"btn btn-warning btn-sm button-margin"
                 = link_to t('activerecord.attributes.button.delete'), item_path(id: i.id, challenge_id: @challenge.id, day: params[:day]), method: :delete, class:"btn btn-danger btn-sm button-margin"
   br
     tbody
