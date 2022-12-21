@@ -7,7 +7,7 @@ class ItemsController < ApplicationController
     @day = params[:day].to_i
     @item = Item.new
     
-    @items = Item.where(day: params[:day])
+    @items = @challenge.items.where(day: params[:day])
   
     @days = ["日曜日", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日"]
   end
