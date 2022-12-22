@@ -17,12 +17,6 @@ namespace :challenges do
             total_percentage: 0.0,
             target_date: Time.current,
           )
-
-          target_report.items.each do |i|
-            Item.update(
-              percentage: 0.0,
-            )
-          end
         end
       end
     end
