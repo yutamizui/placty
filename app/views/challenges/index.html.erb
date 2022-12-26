@@ -39,7 +39,11 @@
         <% end %>
         <td style="width:50%">
           <div class="progress" style="height: 30px;">
-            <% @total_average = c.reports.pluck(:total_percentage).sum.round(0) %>
+            <% if params[:status] == "one_shot" %>
+              <% @total_average = c.reports.pluck(:total_percentage).sum.round(0) %>
+            <% else %>
+              <% @total_average = c.reports.pluck(:total_percentage).sum.round(0)/7 %>
+            <% end %>
             <div class="progress-bar" role="progressbar" style='width: <%=  @total_average %>%;' aria-valuenow="4" aria-valuemin="0" aria-valuemax="100"><%=  @total_average %>%</div>
           </div>
         </td>
