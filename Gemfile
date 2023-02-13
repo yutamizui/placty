@@ -59,7 +59,7 @@ gem 'fastimage'
 gem 'pg'
 gem 'rubyzip'
 gem 'axlsx'
-gem 'axlsx_rails'
+gem 'caxlsx_rails'
 gem 'webpacker'
 gem 'sendgrid-ruby'
 
