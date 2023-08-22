@@ -1,24 +1,22 @@
-# README
+# Placty
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## 概要
 
-Things you may want to cover:
+このシステムはイベント開催用のシステムです。
 
-* Ruby version
+### 起動方法
+```Ruby
+# GemのInstall
+bundle install
 
-* System dependencies
+# DB作成
+bin/rails db:create
 
-* Configuration
+# マイグレーション
+bin/rails db:migrate
 
-* Database creation
+# railsの起動
+bin/rails s
 
-* Database initialization
+```
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
